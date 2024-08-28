@@ -1,0 +1,97 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: beam under tension.\n**   Test objective: C3D6 wedge element.\n**\n*HEADING\ntest C3D6 node load\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the heading for the simulation, indicating that the structure is a beam under tension and the objective is to test the C3D6 wedge element."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=GLOBAL\n       1,          0.,         0.5,          0.\n       2,          0.,          0.,          0.\n       3,         0.5,          0.,          0.\n       4,          1.,          0.,          0.\n       5,         1.5,          0.,          0.\n       6,         1.5,         0.5,          0.\n       7,          1.,         0.5,          0.\n       8,         0.5,         0.5,          0.\n       9,          0.,         0.5,         0.5\n      10,          0.,          0.,         0.5\n      11,         0.5,          0.,         0.5\n      12,          1.,          0.,         0.5\n      13,         1.5,          0.,         0.5\n      14,         1.5,         0.5,         0.5\n      15,          1.,         0.5,         0.5\n      16,         0.5,         0.5,         0.5\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model and assigns them to the global node set. Each node is specified with its coordinates in the 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D6, ELSET=P2\n      7,      1,      3,      8,      9,     11,     16\n      8,      1,      2,      3,      9,     10,     11\n      9,      8,      3,      7,     16,     11,     15\n     10,      3,      4,      7,     11,     12,     15\n     11,      7,      5,      6,     15,     13,     14\n     12,      7,      4,      5,     15,     12,     13\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using the C3D6 wedge element type and assigns them to the element set P2. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*ELSET, ELSET=OUT_CONT\n7,8,9,10,11,12\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates an element set named OUT_CONT, which includes specific elements from the model."
+    },
+    "Step 5": {
+        "Code": "*MEMBRANE, ELSET=P1, MATERIAL=M1\n        0.\n",
+        "Keywords": [
+            "MEMBRANE",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*MEMBRANE",
+        "Description": "This step defines a membrane section for the element set P1 and assigns it the material M1."
+    },
+    "Step 6": {
+        "Code": "*ORIENTATION, NAME=S0, DEFINITION=COORDINATES, SYSTEM=RECTANGULAR\n        1.,        0.,        0.,        0.,        1.,        0.\n",
+        "Keywords": [
+            "ORIENTATION",
+            "NAME",
+            "DEFINITION",
+            "SYSTEM"
+        ],
+        "Start": "*ORIENTATION",
+        "Description": "This step defines the orientation for the material properties using a rectangular coordinate system and assigns it the name S0."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL, NAME=M1\n*ELASTIC, TYPE=ISOTROPIC\n 29000000.,      0.32,       70.\n*EXPANSION, TYPE=ISO\n    6.6E-6,       70.\n*DENSITY\n0.00073315\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "EXPANSION",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for material M1, including its elastic, thermal expansion, and density properties."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION, ELSET=P2, MATERIAL=M1, ORIENTATION=S0\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "ORIENTATION"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the solid section properties to the element set P2, using material M1 and orientation S0."
+    },
+    "Step 9": {
+        "Code": "*STEP, INC=100\n*STATIC\n*NODE PRINT, NSET=GLOBAL\n   U,RF\n*EL PRINT, ELSET=OUT_CONT,GLOBAL=YES\n    S\n*BOUNDARY, OP=NEW\n    1,    1,3\n    2,    1\n    9,    1,2\n   10,    1\n*CLOAD, OP=NEW\n    5,    1,      6.25\n    6,    1,      6.25\n   13,    1,      6.25\n   14,    1,      6.25\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "STATIC",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET",
+            "GLOBAL",
+            "BOUNDARY",
+            "OP",
+            "CLOAD"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis step with a static procedure and specifies the output requests for node displacements, reaction forces, and element stresses. It also defines boundary conditions and applies concentrated loads to specific nodes."
+    }
+}

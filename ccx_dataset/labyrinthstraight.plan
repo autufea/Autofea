@@ -1,0 +1,100 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 straight labyrinth flow element  \n**   Test Objective: test of a straight labyrinth computation\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the initial heading and description for the simulation model, indicating that it involves a straight labyrinth flow element and aims to test its computation."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, assigning coordinates to each node and grouping them into a set named 'NALL'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n*ELEMENT, TYPE=D,ELSET=EIO\n1, 0, 1, 2\n3, 4, 5, 0\t\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their type and the nodes they connect. Two element sets, 'EGAS' and 'EIO', are created."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas, specifically its thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287E6\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material named 'GAS'."
+    },
+    "Step 6": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step defines the density of the gas material."
+    },
+    "Step 7": {
+        "Code": "*FLUID CONSTANTS\n1.002353938E9,3.69124E-11,819.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step sets additional fluid constants for the gas material, including viscosity and other properties."
+    },
+    "Step 8": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step repeats the definition of the gas density, possibly to ensure it is correctly set."
+    },
+    "Step 9": {
+        "Code": "*FLUID SECTION,ELSET=EGAS,TYPE=LABYRINTHSTRAIGHT,MATERIAL=GAS\n12.2,0.55,,534,2,0.5,3.4,0,\n0.,0.0,0,0\n*FLUID SECTION,ELSET=EIO,TYPE=INOUT,MATERIAL=GAS\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for the element sets 'EGAS' and 'EIO', specifying the type of flow and associating them with the gas material."
+    },
+    "Step 10": {
+        "Code": "*BOUNDARY\n2,0,0,819\n2,2,2,0.5443\n4,0,0,819\n4,2,2,0.4663\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to specific nodes, setting constraints and values for certain degrees of freedom."
+    },
+    "Step 11": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step initiates the simulation step, specifying the type of analysis (steady-state heat transfer) and the output requests for node displacements and temperatures."
+    }
+}

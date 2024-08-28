@@ -1,0 +1,79 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: box beam general section.\n**\n*heading \nBalken\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever beam and sets the test objective to analyze a box beam general section. The heading 'Balken' is also specified."
+    },
+    "Step 2": {
+        "Code": "*node, nset=nall\n 1, 0.0, 0.0,   0.0\n 2, 0.0, 0.0, 100.0\n 3, 0.0, 0.0, 200.0\n 4, 0.0, 0.0, 300.0\n 5, 0.0, 0.0, 400.0\n 6, 0.0, 0.0, 500.0\n 7, 0.0, 0.0, 600.0\n 8, 0.0, 0.0, 700.0\n 9, 0.0, 0.0, 800.0\n10, 0.0, 0.0, 900.0\n11, 0.0, 0.0,1000.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure with their coordinates. A total of 11 nodes are specified, each with coordinates along the z-axis."
+    },
+    "Step 3": {
+        "Code": "*element, type=B32R, elset=elall\n1,  1,2,3\n2,  3,4,5\n3,  5,6,7\n4,  7,8,9\n5,  9,10,11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure using the B32R element type and assigns them to the element set 'elall'. Each element connects three nodes."
+    },
+    "Step 4": {
+        "Code": "*beam section, section=box, elset=elall, material=steel\n70.0, 50.0, 3.00, 3.00, 3.00, 3.00\n1.0, 0.0, 0.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Specifies the beam section properties for the elements in 'elall'. The section is defined as a box with given dimensions and material properties."
+    },
+    "Step 5": {
+        "Code": "*material, name=steel\n*elastic, type=iso\n70000.0, 0.3 \n*density\n7.85e-09\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for 'steel', including its elastic properties and density."
+    },
+    "Step 6": {
+        "Code": "*boundary\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to node 1, constraining all six degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*step\n*static \n*cload\n11, 2, -100.0\n*node file\nu\n*el file\ns,noe\n*end step\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step. A concentrated load is applied to node 11 in the negative y-direction. The displacements and stresses are requested as output."
+    },
+    "Step 8": {
+        "Code": "*step\n*frequency\n5\n*node file\nu\n*el file\n*end step\n",
+        "Keywords": [
+            "FREQUENCY",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a frequency analysis step. The first five natural frequencies are requested, along with the displacements and element file outputs."
+    }
+}

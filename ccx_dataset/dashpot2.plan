@@ -1,0 +1,118 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring + mass + dashpot.\n**   Test objective: steady state dynamics calculation of a \n**                   spring-mass-dashpot system\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, describing the structure (spring, mass, dashpot) and the objective, which is to perform a steady-state dynamics calculation."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,-.1,.1\n4,1.2,-.1,.1\n5,1.2,-.1,-.1\n6,1.,-.1,-.1\n7,1.,.1,.1\n8,1.2,.1,.1\n9,1.2,.1,-.1\n10,1.,.1,-.1\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the model and assigns them to the node set 'NALL'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRINGA,ELSET=ESPRING\n1,1,2\n*ELEMENT,TYPE=C3D8,ELSET=EMASSA\n2,3,4,5,6,7,8,9,10\n*ELEMENT,TYPE=DASHPOTA,ELSET=EDASH\n3,1,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model. A spring element (ESPRING) is defined between nodes 1 and 2, a mass element (EMASSA) is defined using nodes 3 to 10, and a dashpot element (EDASH) is defined between nodes 1 and 2."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes. Node 1 is fixed in all three directions, and node 2 is fixed in the Y and Z directions."
+    },
+    "Step 5": {
+        "Code": "*NSET,NSET=NMASSA,GENERATE\n3,10\n*NSET,NSET=N1\n1\n*NSET,NSET=N2\n2\n",
+        "Keywords": [
+            "NSET",
+            "GENERATE"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets for the mass element (NMASSA) and individual nodes (N1 and N2). The NMASSA set includes nodes 3 to 10."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\nNMASSA,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the NMASSA node set, fixing it in the Y and Z directions."
+    },
+    "Step 7": {
+        "Code": "*SPRING,ELSET=ESPRING\n\n10.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET"
+        ],
+        "Start": "*SPRING",
+        "Description": "Defines the spring constant for the spring element set (ESPRING) with a value of 10."
+    },
+    "Step 8": {
+        "Code": "*DASHPOT,ELSET=EDASH\n\n1.e-7\n",
+        "Keywords": [
+            "DASHPOT",
+            "ELSET"
+        ],
+        "Start": "*DASHPOT",
+        "Description": "Defines the damping coefficient for the dashpot element set (EDASH) with a value of 1.e-7."
+    },
+    "Step 9": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the mass element. The material 'EL' has an elastic modulus of 210000, a Poisson's ratio of 0.3, and a density of 7.8E-9."
+    },
+    "Step 10": {
+        "Code": "*SOLID SECTION,ELSET=EMASSA,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the solid section of the mass element set (EMASSA)."
+    },
+    "Step 11": {
+        "Code": "*EQUATION\n5\n2,1,1.,3,1,-.25,6,1,-.25,7,1,-.25,\n10,1,-.25\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "Defines a multi-point constraint equation involving nodes 2, 3, 6, 7, and 10. The equation specifies the relationship between the displacements of these nodes."
+    },
+    "Step 12": {
+        "Code": "*STEP\n*FREQUENCY,STORAGE=YES\n1\n*END STEP\n",
+        "Keywords": [
+            "FREQUENCY",
+            "STORAGE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a step for frequency analysis with storage enabled. The frequency range is set to 1."
+    },
+    "Step 13": {
+        "Code": "*STEP\n*STEADY STATE DYNAMICS\n63000,64000\n*CLOAD\n4,1,1.E-2\n5,1,1.E-2\n8,1,1.E-2\n9,1,1.E-2\n*NODE PRINT,NSET=N2\nU\n*NODE PRINT,NSET=N1\nRF\n*END STEP\n",
+        "Keywords": [
+            "STEADY STATE DYNAMICS",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a step for steady-state dynamics analysis over the frequency range 63000 to 64000. Loads are applied to nodes 4, 5, 8, and 9. The displacements (U) and reaction forces (RF) are printed for node sets N2 and N1, respectively."
+    }
+}

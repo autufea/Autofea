@@ -1,0 +1,83 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube;\n**   Test objective: *MOHR COULOMB\n**                   displacement driven\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cube and sets the test objective to Mohr-Coulomb with displacement-driven analysis."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n       9,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      11,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n      12,  1.00000e+00,  1.00000e+00,  5.00000e-01 \n      13,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      14,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n      16,  5.00000e-01,  1.00000e+00,  1.00000e+00 \n      17,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      18,  0.00000e+00,  0.00000e+00,  5.00000e-01 \n      19,  0.00000e+00,  5.00000e-01,  1.00000e+00 \n      20,  0.00000e+00,  1.00000e+00,  5.00000e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes of the model with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using 8-node brick elements (C3D8) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n5,6,7,8,17,18,19,20\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Specifies the nodes that are fixed in the simulation by assigning them to the node set 'FIX'."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=MC\n*ELASTIC\n210000.,.0\n*MOHR COULOMB\n20.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "MOHR COULOMB"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the Mohr-Coulomb material model, including elastic properties and Mohr-Coulomb parameters."
+    },
+    "Step 6": {
+        "Code": "*MOHR COULOMB HARDENING\n0.,0.\n0.,1.\n",
+        "Keywords": [
+            "MOHR COULOMB HARDENING"
+        ],
+        "Start": "*MOHR COULOMB HARDENING",
+        "Description": "Specifies the hardening behavior for the Mohr-Coulomb material model."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=MC\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'MC' to the element set 'Eall' and defines it as a solid section."
+    },
+    "Step 8": {
+        "Code": "*NSET,NSET=DOWN\n1,2,5,6,9,13,14,17\n*NSET,NSET=UP\n3,4,7,8,11,15,16,19\n**\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines additional node sets 'DOWN' and 'UP' for applying boundary conditions."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*STATIC\n1.,1.\n*BOUNDARY\nDOWN,1,3,0.\nUP,2,3,0.\nUP,1,1,.01\n*NODE FILE\nU\n*EL FILE\nS,PEEQ,NOE\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "STATIC",
+            "BOUNDARY",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Sets up the analysis step with static analysis, specifies boundary conditions, and requests output for nodal displacements and element stresses."
+    }
+}

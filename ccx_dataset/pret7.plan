@@ -1,0 +1,110 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two shell elements.\n**   Test objective: pre-tension force.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two shell elements and states the test objective, which is to apply a pre-tension force."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e-01,2.000000000000e+00,0.000000000000e+00\n       2,1.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n       3,1.100000000000e+00,1.000000000000e+00,0.000000000000e+00\n       4,1.100000000000e+00,2.000000000000e+00,0.000000000000e+00\n       5,1.000000000000e-01,1.500000000000e+00,0.000000000000e+00\n       6,6.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n       7,1.100000000000e+00,1.500000000000e+00,0.000000000000e+00\n       8,6.000000000000e-01,2.000000000000e+00,0.000000000000e+00\n       9,1.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      10,1.100000000000e+00,0.000000000000e+00,0.000000000000e+00\n      11,1.000000000000e-01,5.000000000000e-01,0.000000000000e+00\n      12,6.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      13,1.100000000000e+00,5.000000000000e-01,0.000000000000e+00\n14,0.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      2,      9,     10,      3,     11,     12,     13,      6\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements using the S8 element type and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties with the name 'EL', specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 5": {
+        "Code": "*SHELL SECTION,ELSET=Eall,MATERIAL=EL\n.1\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "Defines the shell section properties, associating the element set 'Eall' with the material 'EL' and specifying the shell thickness."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=Nfix \n1, \n4, \n8, \n9, \n10, \n12, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'Nfix' and lists the nodes that belong to this set."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\n1,1,2\n8,2,2\n4,2,2\n9,1,2\n12,2,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'Nfix' set, constraining specific degrees of freedom."
+    },
+    "Step 8": {
+        "Code": "*SURFACE,NAME=S1\n1,S4\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines a surface named 'S1' using the element face 'S4' of element 1."
+    },
+    "Step 9": {
+        "Code": "*PRE-TENSION SECTION,SURFACE=S1,NODE=14\n**0.,-1.,0.\n",
+        "Keywords": [
+            "PRE-TENSION SECTION",
+            "SURFACE",
+            "NODE"
+        ],
+        "Start": "*PRE-TENSION SECTION",
+        "Description": "Defines a pre-tension section on the surface 'S1' and associates it with node 14."
+    },
+    "Step 10": {
+        "Code": "*NSET,NSET=N1\n14\n*NSET,NSET=Nfixz\n1,4,8,9,10,12\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets 'N1' and 'Nfixz', listing the nodes that belong to these sets."
+    },
+    "Step 11": {
+        "Code": "*BOUNDARY\nNfixz,3\nNfixz,4\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the 'Nfixz' node set, constraining the third and fourth degrees of freedom."
+    },
+    "Step 12": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY\n14,1,1,.01\n*NODE PRINT,NSET=N1\nu\n*EL PRINT,ELSET=Eall\ns\n*END STEP\n\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step, applies a boundary condition to node 14, and specifies output requests for node displacements and element stresses."
+    }
+}

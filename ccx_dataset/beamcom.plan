@@ -1,0 +1,78 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: B32 elements, composite beam.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a cantilever beam and the test objective is to analyze B32 elements in a composite beam."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -1.49012e-08,  0.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n       4,  2.00000e+00,  0.00000e+00,  0.00000e+00 \n       5,  1.50000e+00,  0.00000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates in a 3D space and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=Eall\n     1,      1,      3,      2\n     2,      2,      5,      4\n     3,      1,      3,      2\n     4,      2,      5,      4\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying the type as B32 and grouping them into an element set named 'Eall'. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing all degrees of freedom for node 1."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL1\n*ELASTIC\n210000.,.3\n*MATERIAL,NAME=EL2\n*ELASTIC\n110000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines two different materials, EL1 and EL2, each with their respective elastic properties (Young's modulus and Poisson's ratio)."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=SET1\n1,2\n*ELSET,ELSET=SET2\n3,4\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step groups elements into two different element sets, SET1 and SET2, for further specification of material properties and sections."
+    },
+    "Step 7": {
+        "Code": "*BEAM SECTION,ELSET=SET1,MATERIAL=EL1,SECTION=RECT,OFFSET2=-.5\n0.05, 0.08\n0.d0,1.d0,0.d0\n*BEAM SECTION,ELSET=SET2,MATERIAL=EL2,SECTION=RECT,OFFSET2=.5\n0.05, 0.08\n0.d0,1.d0,0.d0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION",
+            "OFFSET2"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam sections for the element sets. SET1 uses material EL1 with a rectangular section and an offset, while SET2 uses material EL2 with a different offset."
+    },
+    "Step 8": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n4,1,0.1\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure, specifying a static analysis with geometric nonlinearity. It applies a concentrated load to node 4 and requests output for nodal displacements and element stresses."
+    }
+}

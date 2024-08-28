@@ -1,0 +1,68 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: disk segment.\n**   Test objective: CAX8R elements.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a disk segment and the test objective is to analyze CAX8R elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e-01,  1.00000e-01,  0.00000e+00 \n       2,  1.00000e-01, -4.65661e-10,  0.00000e+00 \n       3,  5.50000e-01, -4.65661e-10,  0.00000e+00 \n       4,  5.50000e-01,  1.00000e-01,  0.00000e+00 \n       5,  1.00000e-01,  5.00000e-02,  0.00000e+00 \n       6,  3.25000e-01, -4.65661e-10,  0.00000e+00 \n       7,  5.50000e-01,  5.00000e-02,  0.00000e+00 \n       8,  3.25000e-01,  1.00000e-01,  0.00000e+00 \n       9,  1.00000e+00, -4.65661e-10,  0.00000e+00 \n      10,  1.00000e+00,  1.00000e-01,  0.00000e+00 \n      11,  7.75000e-01, -4.65661e-10,  0.00000e+00 \n      12,  1.00000e+00,  5.00000e-02,  0.00000e+00 \n      13,  7.75000e-01,  1.00000e-01,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CAX8R and grouping them into an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, constraining the degrees of freedom for node 1 in the second direction."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, including elastic modulus, Poisson's ratio, and density, under the material name 'EL'."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n1.57d0\n**\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material properties to the elements in the element set 'Eall' and specifies the section properties."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\nEall,CENTRIF,1.e10,0.,0.,0.,0.,1.,0.\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure, specifying a static step, applying a centrifugal load, and requesting output for nodal displacements and element stresses."
+    }
+}

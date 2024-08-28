@@ -1,0 +1,132 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: change contact type to massless.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to change the contact type to massless."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00, -1.49012e-08 \n       2,  1.00000e+00,  0.00000e+00, -1.49012e-08 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5, -7.45058e-09,  1.00000e+00, -1.49012e-08 \n       6, -7.45058e-09,  0.00000e+00, -1.49012e-08 \n       7, -7.45058e-09,  0.00000e+00,  1.00000e+00 \n       8, -7.45058e-09,  1.00000e+00,  1.00000e+00 \n       9,  5.00000e-01,  6.41421e-01,  1.00000e+00 \n      10,  6.41421e-01,  5.00000e-01,  1.00000e+00 \n      11,  6.41421e-01,  5.00000e-01,  1.20000e+00 \n      12,  5.00000e-01,  6.41421e-01,  1.20000e+00 \n      13,  3.58579e-01,  5.00000e-01,  1.00000e+00 \n      14,  5.00000e-01,  3.58579e-01,  1.00000e+00 \n      15,  5.00000e-01,  3.58579e-01,  1.20000e+00 \n      16,  3.58579e-01,  5.00000e-01,  1.20000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     9,    10,    11,    12,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure using 8-node brick elements (C3D8) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n1,2,5,6\n*NSET,NSET=Nfixxy\n11,12,15,16\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets 'Nfix' and 'Nfixxy' for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,1,3\nNfixxy,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node sets 'Nfix' and 'Nfixxy'."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.0\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements, including elasticity and density."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' using a solid section."
+    },
+    "Step 8": {
+        "Code": "*SURFACE,NAME=Sslav\n2,S3\n*SURFACE,NAME=SMAST\n1,S5\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines surfaces 'Sslav' and 'SMAST' for contact interaction."
+    },
+    "Step 9": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=SURFACE TO SURFACE\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair between the surfaces 'Sslav' and 'SMAST' with the interaction 'SI1'."
+    },
+    "Step 10": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction 'SI1'."
+    },
+    "Step 11": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.e7,3.\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior for the contact interaction, including pressure-overclosure behavior."
+    },
+    "Step 12": {
+        "Code": "*FRICTION\n0.2,1.E5\n",
+        "Keywords": [
+            "FRICTION"
+        ],
+        "Start": "*FRICTION",
+        "Description": "Defines the friction properties for the contact interaction."
+    },
+    "Step 13": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.E-20,1.E-20\n*CLOAD\n11,3,-1.\n12,3,-1.\n15,3,-1.\n16,3,-1.\n*NODE FILE\nU\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static step with non-linear geometry and applies concentrated loads to specific nodes. Requests output of nodal displacements."
+    },
+    "Step 14": {
+        "Code": "*STEP,NLGEOM,INC=1000000\n*DYNAMIC,EXPLICIT\n,8.E-7\n*CHANGE CONTACT TYPE,TO MASSLESS\n*CLOAD\n11,3,-2.\n12,3,-2.\n15,3,-2.\n16,3,-2.\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "INC",
+            "DYNAMIC",
+            "EXPLICIT",
+            "CHANGE CONTACT TYPE",
+            "TO MASSLESS",
+            "CLOAD"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a dynamic explicit step with a large number of increments and changes the contact type to massless. Applies additional concentrated loads to specific nodes."
+    }
+}

@@ -1,0 +1,109 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: heating wire above plane\n**   Test objective: radiation with beam elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, describing the structure as a heating wire above a plane and stating the test objective, which is to analyze radiation using beam elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       2,  8.00000e-01,  0.00000e+00,  0.00000e+00 \n       3,  8.00000e-01,  2.00000e-01,  0.00000e+00 \n       4,  1.00000e+00,  2.00000e-01,  0.00000e+00 \n       5,  9.00000e-01,  0.00000e+00,  0.00000e+00 \n       6,  8.00000e-01,  1.00000e-01,  0.00000e+00 \n       7,  9.00000e-01,  2.00000e-01,  0.00000e+00 \n       8,  1.00000e+00,  1.00000e-01,  0.00000e+00 \n       9,  8.00000e-01,  4.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  4.00000e-01,  0.00000e+00 \n      11,  8.00000e-01,  3.00000e-01,  0.00000e+00 \n      12,  9.00000e-01,  4.00000e-01,  0.00000e+00 \n      13,  1.00000e+00,  3.00000e-01,  0.00000e+00 \n      14,  8.00000e-01,  6.00000e-01,  0.00000e+00 \n      15,  1.00000e+00,  6.00000e-01,  0.00000e+00 \n      16,  8.00000e-01,  5.00000e-01,  0.00000e+00 \n      17,  9.00000e-01,  6.00000e-01,  0.00000e+00 \n      18,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      19,  8.00000e-01,  8.00000e-01,  0.00000e+00 \n      20,  1.00000e+00,  8.00000e-01,  0.00000e+00 \n      21,  8.00000e-01,  7.00000e-01,  0.00000e+00 \n      22,  9.00000e-01,  8.00000e-01,  0.00000e+00 \n      23,  1.00000e+00,  7.00000e-01,  0.00000e+00 \n      24,  8.00000e-01,  1.00000e+00,  0.00000e+00 \n      25,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      26,  8.00000e-01,  9.00000e-01,  0.00000e+00 \n      27,  9.00000e-01,  1.00000e+00,  0.00000e+00 \n      28,  1.00000e+00,  9.00000e-01,  0.00000e+00 \n      29,  6.00000e-01,  0.00000e+00,  0.00000e+00 \n      30,  6.00000e-01,  2.00000e-01,  0.00000e+00 \n      31,  7.00000e-01,  0.00000e+00,  0.00000e+00 \n      32,  6.00000e-01,  1.00000e-01,  0.00000e+00 \n      33,  7.00000e-01,  2.00000e-01,  0.00000e+00 \n      34,  6.00000e-01,  4.00000e-01,  0.00000e+00 \n      35,  6.00000e-01,  3.00000e-01,  0.00000e+00 \n      36,  7.00000e-01,  4.00000e-01,  0.00000e+00 \n      37,  6.00000e-01,  6.00000e-01,  0.00000e+00 \n      38,  6.00000e-01,  5.00000e-01,  0.00000e+00 \n      39,  7.00000e-01,  6.00000e-01,  0.00000e+00 \n      40,  6.00000e-01,  8.00000e-01,  0.00000e+00 \n      41,  6.00000e-01,  7.00000e-01,  0.00000e+00 \n      42,  7.00000e-01,  8.00000e-01,  0.00000e+00 \n      43,  6.00000e-01,  1.00000e+00,  0.00000e+00 \n      44,  6.00000e-01,  9.00000e-01,  0.00000e+00 \n      45,  7.00000e-01,  1.00000e+00,  0.00000e+00 \n      46,  4.00000e-01,  0.00000e+00,  0.00000e+00 \n      47,  4.00000e-01,  2.00000e-01,  0.00000e+00 \n      48,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      49,  4.00000e-01,  1.00000e-01,  0.00000e+00 \n      50,  5.00000e-01,  2.00000e-01,  0.00000e+00 \n      51,  4.00000e-01,  4.00000e-01,  0.00000e+00 \n      52,  4.00000e-01,  3.00000e-01,  0.00000e+00 \n      53,  5.00000e-01,  4.00000e-01,  0.00000e+00 \n      54,  4.00000e-01,  6.00000e-01,  0.00000e+00 \n      55,  4.00000e-01,  5.00000e-01,  0.00000e+00 \n      56,  5.00000e-01,  6.00000e-01,  0.00000e+00 \n      57,  4.00000e-01,  8.00000e-01,  0.00000e+00 \n      58,  4.00000e-01,  7.00000e-01,  0.00000e+00 \n      59,  5.00000e-01,  8.00000e-01,  0.00000e+00 \n      60,  4.00000e-01,  1.00000e+00,  0.00000e+00 \n      61,  4.00000e-01,  9.00000e-01,  0.00000e+00 \n      62,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      63,  2.00000e-01,  0.00000e+00,  0.00000e+00 \n      64,  2.00000e-01,  2.00000e-01,  0.00000e+00 \n      65,  3.00000e-01,  0.00000e+00,  0.00000e+00 \n      66,  2.00000e-01,  1.00000e-01,  0.00000e+00 \n      67,  3.00000e-01,  2.00000e-01,  0.00000e+00 \n      68,  2.00000e-01,  4.00000e-01,  0.00000e+00 \n      69,  2.00000e-01,  3.00000e-01,  0.00000e+00 \n      70,  3.00000e-01,  4.00000e-01,  0.00000e+00 \n      71,  2.00000e-01,  6.00000e-01,  0.00000e+00 \n      72,  2.00000e-01,  5.00000e-01,  0.00000e+00 \n      73,  3.00000e-01,  6.00000e-01,  0.00000e+00 \n      74,  2.00000e-01,  8.00000e-01,  0.00000e+00 \n      75,  2.00000e-01,  7.00000e-01,  0.00000e+00 \n      76,  3.00000e-01,  8.00000e-01,  0.00000e+00 \n      77,  2.00000e-01,  1.00000e+00,  0.00000e+00 \n      78,  2.00000e-01,  9.00000e-01,  0.00000e+00 \n      79,  3.00000e-01,  1.00000e+00,  0.00000e+00 \n      80,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n      81,  0.00000e+00,  2.00000e-01,  0.00000e+00 \n      82,  1.00000e-01,  0.00000e+00,  0.00000e+00 \n      83,  0.00000e+00,  1.00000e-01,  0.00000e+00 \n      84,  1.00000e-01,  2.00000e-01,  0.00000e+00 \n      85,  0.00000e+00,  4.00000e-01,  0.00000e+00 \n      86,  0.00000e+00,  3.00000e-01,  0.00000e+00 \n      87,  1.00000e-01,  4.00000e-01,  0.00000e+00 \n      88,  0.00000e+00,  6.00000e-01,  0.00000e+00 \n      89,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      90,  1.00000e-01,  6.00000e-01,  0.00000e+00 \n      91,  0.00000e+00,  8.00000e-01,  0.00000e+00 \n      92,  0.00000e+00,  7.00000e-01,  0.00000e+00 \n      93,  1.00000e-01,  8.00000e-01,  0.00000e+00 \n      94,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n      95,  0.00000e+00,  9.00000e-01,  0.00000e+00 \n      96,  1.00000e-01,  1.00000e+00,  0.00000e+00 \n      97,  0.00000e+00,  5.00000e-01,  1.00000e-01 \n      98,  2.00000e-01,  5.00000e-01,  1.00000e-01 \n      99,  1.00000e-01,  5.00000e-01,  1.00000e-01 \n     100,  4.00000e-01,  5.00000e-01,  1.00000e-01 \n     101,  3.00000e-01,  5.00000e-01,  1.00000e-01 \n     102,  6.00000e-01,  5.00000e-01,  1.00000e-01 \n     103,  5.00000e-01,  5.00000e-01,  1.00000e-01 \n     104,  8.00000e-01,  5.00000e-01,  1.00000e-01 \n     105,  7.00000e-01,  5.00000e-01,  1.00000e-01 \n     106,  1.00000e+00,  5.00000e-01,  1.00000e-01 \n     107,  9.00000e-01,  5.00000e-01,  1.00000e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, assigning coordinates to each node and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=Eall\n     1,     97,     99,     98\n     2,     98,    101,    100\n     3,    100,    103,    102\n     4,    102,    105,    104\n     5,    104,    107,    106\n*ELEMENT, TYPE=S8, ELSET=Eall\n     6,      1,      2,      3,      4,      5,      6,      7,      8\n     7,      4,      3,      9,     10,      7,     11,     12,     13\n     8,     10,      9,     14,     15,     12,     16,     17,     18\n     9,     15,     14,     19,     20,     17,     21,     22,     23\n    10,     20,     19,     24,     25,     22,     26,     27,     28\n    11,      2,     29,     30,      3,     31,     32,     33,      6\n    12,      3,     30,     34,      9,     33,     35,     36,     11\n    13,      9,     34,     37,     14,     36,     38,     39,     16\n    14,     14,     37,     40,     19,     39,     41,     42,     21\n    15,     19,     40,     43,     24,     42,     44,     45,     26\n    16,     29,     46,     47,     30,     48,     49,     50,     32\n    17,     30,     47,     51,     34,     50,     52,     53,     35\n    18,     34,     51,     54,     37,     53,     55,     56,     38\n    19,     37,     54,     57,     40,     56,     58,     59,     41\n    20,     40,     57,     60,     43,     59,     61,     62,     44\n    21,     46,     63,     64,     47,     65,     66,     67,     49\n    22,     47,     64,     68,     51,     67,     69,     70,     52\n    23,     51,     68,     71,     54,     70,     72,     73,     55\n    24,     54,     71,     74,     57,     73,     75,     76,     58\n    25,     57,     74,     77,     60,     76,     78,     79,     61\n    26,     63,     80,     81,     64,     82,     83,     84,     66\n    27,     64,     81,     85,     68,     84,     86,     87,     69\n    28,     68,     85,     88,     71,     87,     89,     90,     72\n    29,     71,     88,     91,     74,     90,     92,     93,     75\n    30,     74,     91,     94,     77,     93,     95,     96,     78\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model. Beam elements (TYPE=B32) are assigned to the set 'Eall' for the wire, and shell elements (TYPE=S8) are assigned to the set 'Eall' for the plate."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nwire \n97, \n98, \n99, \n100, \n101, \n102, \n103, \n104, \n105, \n106, \n107, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'Nwire' that includes specific nodes associated with the heating wire."
+    },
+    "Step 5": {
+        "Code": "*ELSET,ELSET=Ewire \n1, \n2, \n3, \n4, \n5, \n*ELSET,ELSET=Eplate,GENERATE\n6,30\n",
+        "Keywords": [
+            "ELSET",
+            "GENERATE"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates element sets: 'Ewire' for the beam elements representing the wire and 'Eplate' for the shell elements representing the plate, with the latter being generated over a range."
+    },
+    "Step 6": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=0.,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the absolute zero temperature and the Stefan-Boltzmann constant for radiation calculations."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=STEEL\n*DENSITY\n7800.\n*CONDUCTIVITY\n50.\n*SPECIFIC HEAT\n446.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY",
+            "CONDUCTIVITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for steel, including density, thermal conductivity, and specific heat."
+    },
+    "Step 8": {
+        "Code": "*BEAM SECTION,ELSET=Ewire,MATERIAL=STEEL,SECTION=RECT\n0.01,0.01\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties for the wire elements, specifying the material as steel and the cross-sectional dimensions."
+    },
+    "Step 9": {
+        "Code": "*SHELL SECTION,ELSET=Eplate,MATERIAL=STEEL\n0.01\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "This step defines the shell section properties for the plate elements, specifying the material as steel and the thickness of the shell."
+    },
+    "Step 10": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,300.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for all nodes in the model to 300 units."
+    },
+    "Step 11": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*BOUNDARY\nNwire,11,11,1000.\n*RADIATE\n1,R1CR,300.,1.\n2,R1CR,300.,1.\n3,R1CR,300.,1.\n4,R1CR,300.,1.\n5,R1CR,300.,1.\n1,R2CR,300.,1.\n2,R2CR,300.,1.\n3,R2CR,300.,1.\n4,R2CR,300.,1.\n5,R2CR,300.,1.\n1,R3CR,300.,1.\n2,R3CR,300.,1.\n3,R3CR,300.,1.\n4,R3CR,300.,1.\n5,R3CR,300.,1.\n1,R5CR,300.,1.\n2,R5CR,300.,1.\n3,R5CR,300.,1.\n4,R5CR,300.,1.\n5,R5CR,300.,1.\n6, R1CR, 300.000000, 8.000000e-01\n7, R1CR, 300.000000, 8.000000e-01\n8, R1CR, 300.000000, 8.000000e-01\n9, R1CR, 300.000000, 8.000000e-01\n10, R1CR, 300.000000, 8.000000e-01\n11, R1CR, 300.000000, 8.000000e-01\n12, R1CR, 300.000000, 8.000000e-01\n13, R1CR, 300.000000, 8.000000e-01\n14, R1CR, 300.000000, 8.000000e-01\n15, R1CR, 300.000000, 8.000000e-01\n16, R1CR, 300.000000, 8.000000e-01\n17, R1CR, 300.000000, 8.000000e-01\n18, R1CR, 300.000000, 8.000000e-01\n19, R1CR, 300.000000, 8.000000e-01\n20, R1CR, 300.000000, 8.000000e-01\n21, R1CR, 300.000000, 8.000000e-01\n22, R1CR, 300.000000, 8.000000e-01\n23, R1CR, 300.000000, 8.000000e-01\n24, R1CR, 300.000000, 8.000000e-01\n25, R1CR, 300.000000, 8.000000e-01\n26, R1CR, 300.000000, 8.000000e-01\n27, R1CR, 300.000000, 8.000000e-01\n28, R1CR, 300.000000, 8.000000e-01\n29, R1CR, 300.000000, 8.000000e-01\n30, R1CR, 300.000000, 8.000000e-01\n6, R2CR, 300.000000, 8.000000e-01\n7, R2CR, 300.000000, 8.000000e-01\n8, R2CR, 300.000000, 8.000000e-01\n9, R2CR, 300.000000, 8.000000e-01\n10, R2CR, 300.000000, 8.000000e-01\n11, R2CR, 300.000000, 8.000000e-01\n12, R2CR, 300.000000, 8.000000e-01\n13, R2CR, 300.000000, 8.000000e-01\n14, R2CR, 300.000000, 8.000000e-01\n15, R2CR, 300.000000, 8.000000e-01\n16, R2CR, 300.000000, 8.000000e-01\n17, R2CR, 300.000000, 8.000000e-01\n18, R2CR, 300.000000, 8.000000e-01\n19, R2CR, 300.000000, 8.000000e-01\n20, R2CR, 300.000000, 8.000000e-01\n21, R2CR, 300.000000, 8.000000e-01\n22, R2CR, 300.000000, 8.000000e-01\n23, R2CR, 300.000000, 8.000000e-01\n24, R2CR, 300.000000, 8.000000e-01\n25, R2CR, 300.000000, 8.000000e-01\n26, R2CR, 300.000000, 8.000000e-01\n27, R2CR, 300.000000, 8.000000e-01\n28, R2CR, 300.000000, 8.000000e-01\n29, R2CR, 300.000000, 8.000000e-01\n30, R2CR, 300.000000, 8.000000e-01\n*EL PRINT,ELSET=Eall,GLOBAL=YES\nHFL\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "RADIATE",
+            "EL PRINT",
+            "ELSET",
+            "GLOBAL"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation step for a steady-state heat transfer analysis, including boundary conditions for the wire nodes, radiation properties, and output requests for heat flux."
+    }
+}

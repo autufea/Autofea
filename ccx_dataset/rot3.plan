@@ -1,0 +1,79 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: New moments in second step\n**                   nonlinear geometric calculation\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a cantilever beam and the objective is to calculate new moments in the second step using nonlinear geometric calculations."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=NS_ALL\n10, 0.0, 0.0, 0.0\n20, 0.2, 0.0, 0.0\n30, 0.4, 0.0, 0.0\n4,  0.6, 0.0, 0.0\n5,  0.8, 0.0, 0.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model and assigns them to a node set named NS_ALL. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=ES_ALL\n3, 10, 20, 30\n5, 30, 4,  5\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model, specifying that they are of type B32 (3-node beam elements) and assigns them to an element set named ES_ALL. The connectivity of each element is also provided."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL, NAME=M_EL\n*ELASTIC\n210000.0, 0.3\n*DENSITY\n7850.0\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the beam. The material is named M_EL and its elastic properties (Young's modulus and Poisson's ratio) and density are specified."
+    },
+    "Step 5": {
+        "Code": "*BEAM SECTION, MATERIAL=M_EL, ELSET=ES_ALL, SECTION=RECT\n0.03, 0.015\n0.0, 0.0, 1.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "MATERIAL",
+            "ELSET",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Defines the beam section properties for the elements in the set ES_ALL. The section is rectangular with specified dimensions and orientation."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n10, 1, 6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the model. Node 10 is fully constrained in all six degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n5,6,1.e-3\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the first analysis step with nonlinear geometric effects. A static load is applied to node 5 in the sixth degree of freedom, and the displacements of all nodes are printed."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n30,6,-1.e-3\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the second analysis step. A static load is applied to node 30 in the sixth degree of freedom in the opposite direction, and the displacements of all nodes are printed twice."
+    }
+}

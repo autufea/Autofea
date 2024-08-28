@@ -1,0 +1,69 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: B32 elements, application of torque.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever beam and sets the test objective to evaluate B32 elements under the application of torque."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -1.49012e-08,  0.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n       4,  2.00000e+00,  0.00000e+00,  0.00000e+00 \n       5,  1.50000e+00,  0.00000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes of the model, assigning coordinates to each node and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=Eall\n     1,      1,      3,      2\n     2,      2,      5,      4\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using B32 element type and groups them into a set named 'Eall'. Each element connects specific nodes."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to node 1, constraining all six degrees of freedom (translations and rotations)."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the beam, naming the material 'EL' and specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 6": {
+        "Code": "*BEAM SECTION,ELSET=Eall,MATERIAL=EL,SECTION=RECT\n0.05, 0.08\n0.d0,1.d0,0.d0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Defines the beam section properties for the elements in 'Eall', specifying a rectangular cross-section with given dimensions and orientation."
+    },
+    "Step 7": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n4,4,.005\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Sets up the analysis step with nonlinear geometry considerations, applies a static load to node 4, and specifies output requests for nodal displacements and element stresses."
+    }
+}

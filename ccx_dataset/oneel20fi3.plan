@@ -1,0 +1,97 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube with convection boundary condition;\n**   Test objective: AMPLITUDE=RAMP with forced convection\n**                   film conditions\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cube with convection boundary conditions and sets the test objective to use an AMPLITUDE=RAMP with forced convection film conditions."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n       9,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      11,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n      12,  1.00000e+00,  1.00000e+00,  5.00000e-01 \n      13,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      14,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n      16,  5.00000e-01,  1.00000e+00,  1.00000e+00 \n      17,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      18,  0.00000e+00,  0.00000e+00,  5.00000e-01 \n      19,  0.00000e+00,  5.00000e-01,  1.00000e+00 \n      20,  0.00000e+00,  1.00000e+00,  5.00000e-01\n      21,0.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes of the model and assigns them to the node set 'Nall'. Each node is defined by its coordinates in the 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,     9,    10,\n          11,    12,    17,    18,    19,    20,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using the C3D20R element type and assigns them to the element set 'Eall'. Each element is defined by its connecting nodes."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n5,6,7,8,17,18,19,20\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'FIX' that includes specific nodes which will be used for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,5.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the 'Nall' set to 5 degrees."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*CONDUCTIVITY\n50.,0.\n*DENSITY\n7.8E-9\n*SPECIFIC HEAT\n446.E6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY",
+            "DENSITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', including thermal conductivity, density, and specific heat."
+    },
+    "Step 7": {
+        "Code": "*\n",
+        "Keywords": [
+            ""
+        ],
+        "Start": "*",
+        "Description": "An empty step, possibly a placeholder or separator."
+    },
+    "Step 8": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=-273.15,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "Defines physical constants such as absolute zero temperature and the Stefan-Boltzmann constant for thermal radiation calculations."
+    },
+    "Step 9": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n**\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' using a solid section definition."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100,AMPLITUDE=RAMP,THERMAL NETWORK\n*HEAT TRANSFER\n.01,1000.\n*BOUNDARY\nFIX,11,11,5.\n21,11,11,-12.\n*FILM\n1,F1FC,21,10.e10\n*NODE PRINT,NSET=Nall\nNT\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "AMPLITUDE",
+            "THERMAL NETWORK",
+            "HEAT TRANSFER",
+            "BOUNDARY",
+            "FILM",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with 100 increments and a RAMP amplitude for thermal network analysis. Specifies heat transfer parameters, boundary conditions, film conditions, and output requests for nodal temperatures."
+    }
+}

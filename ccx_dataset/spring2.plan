@@ -1,0 +1,56 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring.\n**   Test objective: static calculation of a nonlinear spring.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, specifying that it involves a static calculation of a nonlinear spring."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model. Node 1 is at coordinates (0,0,0) and Node 2 is at coordinates (1,0,0)."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRINGA,ELSET=EALL\n1,1,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element type and connectivity. A spring element (TYPE=SPRINGA) is created between Node 1 and Node 2."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions. Node 1 is fixed in all three directions, and Node 2 is fixed in the Y and Z directions."
+    },
+    "Step 5": {
+        "Code": "*SPRING,ELSET=EALL,NONLINEAR\n\n0.,0.\n10.,1.\n100.,20.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET",
+            "NONLINEAR"
+        ],
+        "Start": "*SPRING",
+        "Description": "This step defines the nonlinear spring properties. The spring force-displacement relationship is specified with three data points."
+    },
+    "Step 6": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n2,1,11.\n*NODE PRINT,NSET=NALL\nU\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure. A static analysis with nonlinear geometry is performed, applying a load of 11 units in the X direction to Node 2. The displacements of all nodes are printed twice."
+    }
+}

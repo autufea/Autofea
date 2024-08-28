@@ -1,0 +1,85 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes.\n**   Test objective: Newton gravity force.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, describing the structure as two cubes and stating the test objective to analyze the Newton gravity force."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n       9,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      11,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n      12,  1.00000e+00,  1.00000e+00,  5.00000e-01 \n      13,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      14,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n      16,  5.00000e-01,  1.00000e+00,  1.00000e+00 \n      17,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      18,  0.00000e+00,  0.00000e+00,  5.00000e-01 \n      19,  0.00000e+00,  5.00000e-01,  1.00000e+00 \n      20,  0.00000e+00,  1.00000e+00,  5.00000e-01 \n      21,  1.00000e+00,  1.00000e+00,  2.00000e+00 \n      22,  1.00000e+00,  0.00000e+00,  2.00000e+00 \n      23,  1.00000e+00,  0.00000e+00,  3.00000e+00 \n      24,  1.00000e+00,  1.00000e+00,  3.00000e+00 \n      25,  0.00000e+00,  1.00000e+00,  2.00000e+00 \n      26,  0.00000e+00,  0.00000e+00,  2.00000e+00 \n      27,  0.00000e+00,  0.00000e+00,  3.00000e+00 \n      28,  0.00000e+00,  1.00000e+00,  3.00000e+00 \n      29,  1.00000e+00,  5.00000e-01,  2.00000e+00 \n      30,  1.00000e+00,  0.00000e+00,  2.50000e+00 \n      31,  1.00000e+00,  5.00000e-01,  3.00000e+00 \n      32,  1.00000e+00,  1.00000e+00,  2.50000e+00 \n      33,  5.00000e-01,  1.00000e+00,  2.00000e+00 \n      34,  5.00000e-01,  0.00000e+00,  2.00000e+00 \n      35,  5.00000e-01,  0.00000e+00,  3.00000e+00 \n      36,  5.00000e-01,  1.00000e+00,  3.00000e+00 \n      37,  0.00000e+00,  5.00000e-01,  2.00000e+00 \n      38,  0.00000e+00,  0.00000e+00,  2.50000e+00 \n      39,  0.00000e+00,  5.00000e-01,  3.00000e+00 \n      40,  0.00000e+00,  1.00000e+00,  2.50000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,     9,    10,\n          11,    12,    17,    18,    19,    20,    13,    14,    15,    16\n     2,    21,    22,    23,    24,    25,    26,    27,    28,    29,    30,\n          31,    32,    37,    38,    39,    40,    33,    34,    35,    36\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying their type as C3D20R (20-node brick elements) and grouping them into a set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=NN1 \n1, \n2, \n3, \n4, \n5, \n6, \n7, \n8, \n9, \n10, \n11, \n12, \n13, \n14, \n15, \n16, \n17, \n18, \n19, \n20, \n*NSET,NSET=NN2 \n21, \n22, \n23, \n24, \n25, \n26, \n27, \n28, \n29, \n30, \n31, \n32, \n33, \n34, \n35, \n36, \n37, \n38, \n39, \n40, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates two node sets, 'NN1' and 'NN2', by listing the node numbers that belong to each set."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, specifying the elastic modulus, Poisson's ratio, and density."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material defined in Step 5 to the element set 'Eall' and specifies that it is a solid section."
+    },
+    "Step 7": {
+        "Code": "*PHYSICAL CONSTANTS,NEWTON GRAVITY=66.7\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "NEWTON GRAVITY"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the Newton gravity constant."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=VELOCITY\nNN2,1,0.\n**\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step initializes the velocity conditions for the node set 'NN2', setting the velocity in the first direction to zero."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*DYNAMIC\n1.e-4,1.e-2\n*DLOAD\nEall,NEWTON\n*NODE PRINT,NSET=Nall,FREQUENCY=5\nU\n*EL FILE,NSET=Nall\nENER\n*END STEP\n\n",
+        "Keywords": [
+            "DYNAMIC",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure as a dynamic step, specifies the time increments, applies the Newton gravity load to the element set 'Eall', and sets up output requests for node displacements and element energy."
+    }
+}

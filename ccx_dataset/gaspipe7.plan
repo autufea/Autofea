@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: linear gas network\n**   Test objective: Test of negative subcritical flow \n**   in a single adiabatic pipe (kg,m,s,K)\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the initial comments and heading for the simulation model, describing the structure as a linear gas network and the test objective as testing negative subcritical flow in a single adiabatic pipe."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, assigning coordinates to each node and grouping them into a node set named 'NALL'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n*ELEMENT, TYPE=D,ELSET=EIO\n1, 0, 1, 2\n3, 4, 5, 0\t\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their type and grouping them into element sets 'EGAS' and 'EIO'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step begins the definition of the material properties, naming the material 'GAS'."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287.\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material 'GAS'."
+    },
+    "Step 6": {
+        "Code": "*FLUID CONSTANTS\n1.0022E3,1.69532E-05,270\n1.0045E3,1.84135E-05,300\n1.0131E3,2.28232E-05,400\n1.0292E3,2.66931E-05,500\n1.0506E3,3.01677E-05,600\n1.0745E3,3.33396E-05,700\n1.0982E3,3.62717E-05,800\n1.1204E3,3.90084E-05,900\n1.1405E3,4.15824E-05,1000\n1.1583E3,4.40182E-05,1100\n1.1739E3,4.63352E-05,1200\n1.1976E3,4.85486E-05,1300\n1.1997E3,5.06708E-05,1400\n1.2104E3,5.27117E-05,1500\n1.2199E3,5.46798E-05,1600\n1.2284E3,5.65822E-05,1700\n1.2361E3,5.84249E-05,1800\n1.2431E3,6.02131E-05,1900\n1.2495E3,6.19512E-05,2000\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step provides the fluid constants for the gas at various temperatures, including specific heat capacity, dynamic viscosity, and temperature."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=EGAS,TYPE=GAS PIPE FANNO ADIABATIC\n706.8583E-6,30E-3,50E-3,0,1,0,0\n*FLUID SECTION,MATERIAL=GAS,ELSET=EIO,TYPE=GAS PIPE FANNO ADIABATIC\n706.8583E-6,30E-3,50E-3,0,1,0,0\n***FLUID SECTION,MATERIAL=GAS,ELSET=EIO,TYPE=INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for the elements, specifying the material, element set, and type of gas pipe (Fanno adiabatic) along with geometric and flow parameters."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\n2,819\n4,819\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for specific nodes in the model."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n4,0,0,819\n4,2,2,0.5443E6\n2,2,2,0.54e6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to specific nodes, including temperature and pressure constraints."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL,FREQUENCY=100\nU,NT,MF,PN\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis step, specifying the type of analysis (steady-state heat transfer), the number of increments, and the output requests for node data."
+    }
+}

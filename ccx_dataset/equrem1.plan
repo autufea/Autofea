@@ -1,0 +1,105 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other\n**   Test objective: removal of all MPC's in the second step\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation structure, which consists of two cubes stacked on top of each other. The test objective is to remove all MPCs (Multi-Point Constraints) in the second step."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,1.000000000000e+00,-1.490120005165e-08\n       2,1.000000000000e+00,0.000000000000e+00,-1.490120005165e-08\n       3,1.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       5,-7.450579986301e-09,1.000000000000e+00,-1.490120005165e-08\n       6,-7.450579986301e-09,0.000000000000e+00,-1.490120005165e-08\n       7,-7.450579986301e-09,0.000000000000e+00,1.000000000000e+00\n       8,-7.450579986301e-09,1.000000000000e+00,1.000000000000e+00\n       9,5.000000000000e-01,6.414210000000e-01,1.000000000000e+00\n      10,6.414210000000e-01,5.000000000000e-01,1.000000000000e+00\n      11,6.414210000000e-01,5.000000000000e-01,1.200000000000e+00\n      12,5.000000000000e-01,6.414210000000e-01,1.200000000000e+00\n      13,3.585790000000e-01,5.000000000000e-01,1.000000000000e+00\n      14,5.000000000000e-01,3.585790000000e-01,1.000000000000e+00\n      15,5.000000000000e-01,3.585790000000e-01,1.200000000000e+00\n      16,3.585790000000e-01,5.000000000000e-01,1.200000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model and assigns them to a node set named 'Nall'. Each node is specified with its coordinates in the 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     9,    10,    11,    12,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using the C3D8 element type and assigns them to an element set named 'Eall'. Each element is defined by the nodes that form it."
+    },
+    "Step 4": {
+        "Code": "*EQUATION\n5\n9,3,-1.000000000000\n3,3,0.179289489250\n4,3,0.320710510750\n8,3,0.320710510750\n7,3,0.179289489250\n*EQUATION\n5\n10,3,-1.000000000000\n3,3,0.320710510750\n4,3,0.320710510750\n8,3,0.179289489250\n7,3,0.179289489250\n*EQUATION\n5\n13,3,-1.000000000000\n3,3,0.179289514250\n4,3,0.179289514250\n8,3,0.320710485750\n7,3,0.320710485750\n*EQUATION\n5\n14,3,-1.000000000000\n3,3,0.320710510750\n4,3,0.179289489250\n8,3,0.179289489250\n7,3,0.320710510750\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "This step defines multiple equations (MPCs) that impose constraints on the nodes. Each equation specifies a relationship between the degrees of freedom of different nodes."
+    },
+    "Step 5": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set named 'Nfix' which includes specific nodes that will be subjected to boundary conditions."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\nNfix,3,3\n6,1,2\n2,2,2\n13,1,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes in the 'Nfix' set, constraining their degrees of freedom. Additional boundary conditions are applied to specific nodes."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model. The material named 'EL' is assigned elastic properties and density."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the elements in the 'Eall' set, defining them as solid sections."
+    },
+    "Step 9": {
+        "Code": "*NSET,NSET=N1\n9,10\n*NSET,NSET=N2\n15\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines two additional node sets, 'N1' and 'N2', which include specific nodes for further analysis or output requests."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*DYNAMIC,DIRECT\n1.E-8,2.E-7\n*DLOAD\n2, P5, -1.000000\n*NODE PRINT,NSET=N2\nU\n*EL FILE,NSET=N2\nENER\n*END STEP\n",
+        "Keywords": [
+            "DYNAMIC",
+            "DIRECT",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step initiates the first dynamic analysis step. It specifies the time parameters for the analysis, applies a dynamic load to element 2, and requests output for the displacements and energy at nodes in the 'N2' set."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*DYNAMIC,DIRECT\n1.E-8,2.E-7\n*EQUATION,REMOVE ALL\n*NODE PRINT,NSET=N2\nU\n*END STEP\n",
+        "Keywords": [
+            "DYNAMIC",
+            "DIRECT",
+            "EQUATION",
+            "REMOVE ALL",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step initiates the second dynamic analysis step. It specifies the time parameters for the analysis, removes all previously defined equations (MPCs), and requests output for the displacements at nodes in the 'N2' set."
+    }
+}

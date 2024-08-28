@@ -1,0 +1,76 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 4 membranes.\n**   Test objective: M3D8 elements, *MEMBRANE SECTION\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure with 4 membranes and sets the test objective to use M3D8 elements with a *MEMBRANE SECTION."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,1.,0.\n4,0.,1.,0.\n5,-1.,1.,0.\n6,-1.,0.,0.\n7,-1.,-1.,0.\n8,0.,-1.,0.\n9,1.,-1.,0.\n10,.5,-1.,0.\n11,1.,-0.5,0.\n12,1.,0.5,0.\n13,0.5,1.,0.\n14,-0.5,1.,0.\n15,-1.,0.5,0.\n16,-1.,-0.5,0.\n17,-0.5,-1.,0.\n18,0.,-0.5,0.\n19,0.5,0.,0.\n20,0.,0.5,0.\n21,-0.5,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes with their coordinates and assigns them to the node set Nall."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=M3D8, ELSET=Eall\n1,1,2,3,4,19,12,13,20\n2,1,4,5,6,20,14,15,21\n3,1,6,7,8,21,16,17,18\n4,1,8,9,2,18,10,11,19\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements using the M3D8 type and assigns them to the element set Eall."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set Nfix that includes specific nodes for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,1,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the Nfix set, fixing them in all three directions."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named EL, specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 7": {
+        "Code": "*MEMBRANE SECTION,ELSET=Eall,MATERIAL=EL,OFFSET=0.\n0.01\n",
+        "Keywords": [
+            "MEMBRANE SECTION",
+            "ELSET",
+            "MATERIAL",
+            "OFFSET"
+        ],
+        "Start": "*MEMBRANE SECTION",
+        "Description": "Defines the membrane section properties for the elements in the Eall set, using the material EL and specifying an offset and thickness."
+    },
+    "Step 8": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n1,3,-1.e-3\n*NODE FILE,OUTPUT=3D\nU,NT,RF\n*EL FILE\nS,NOE\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Sets up a static analysis step with non-linear geometry, applies a concentrated load, and specifies the output requests for nodal and element results."
+    }
+}

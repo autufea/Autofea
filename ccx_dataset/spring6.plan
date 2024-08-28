@@ -1,0 +1,55 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring.\n**   Test objective: SPRING1-element.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, indicating that it involves a spring structure and aims to test the SPRING1 element."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model. Two nodes are created with coordinates (0,0,0) and (1,0,0), and they are assigned to the node set 'NALL'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRING1,ELSET=EALL\n1,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the spring element of type SPRING1 and assigns it to the element set 'EALL'. The element connects node 1 and node 2."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions. Node 1 is fixed in all three directions, and node 2 is fixed in the Y and Z directions."
+    },
+    "Step 5": {
+        "Code": "*SPRING,ELSET=EALL\n1\n10.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET"
+        ],
+        "Start": "*SPRING",
+        "Description": "This step defines the spring constant for the element set 'EALL'. The spring constant is set to 10 units."
+    },
+    "Step 6": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n2,1,1.\n*NODE PRINT,NSET=NALL\nU\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis. It specifies a static analysis with nonlinear geometry considerations, applies a load of 1 unit in the X direction to node 2, and requests the displacement results for all nodes."
+    }
+}

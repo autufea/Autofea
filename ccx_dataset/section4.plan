@@ -1,0 +1,69 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam\n**   Test objective: section forces for large deformations\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a cantilever beam and the objective is to analyze section forces for large deformations."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       2,  1.00000e-01,  0.00000e+00,  0.00000e+00 \n       3,  5.00000e-02,  0.00000e+00,  0.00000e+00 \n       4,  2.00000e-01,  0.00000e+00,  0.00000e+00 \n       5,  1.50000e-01,  0.00000e+00,  0.00000e+00 \n       6,  3.00000e-01,  0.00000e+00,  0.00000e+00 \n       7,  2.50000e-01,  0.00000e+00,  0.00000e+00 \n       8,  4.00000e-01,  0.00000e+00,  0.00000e+00 \n       9,  3.50000e-01,  0.00000e+00,  0.00000e+00 \n      10,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      11,  4.50000e-01,  0.00000e+00,  0.00000e+00 \n      12,  6.00000e-01,  0.00000e+00,  0.00000e+00 \n      13,  5.50000e-01,  0.00000e+00,  0.00000e+00 \n      14,  7.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  6.50000e-01,  0.00000e+00,  0.00000e+00 \n      16,  8.00000e-01,  0.00000e+00,  0.00000e+00 \n      17,  7.50000e-01,  0.00000e+00,  0.00000e+00 \n      18,  9.00000e-01,  0.00000e+00,  0.00000e+00 \n      19,  8.50000e-01,  0.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n      21,  9.50000e-01,  0.00000e+00,  0.00000e+00 \n      22,  1.10000e+00,  0.00000e+00,  0.00000e+00 \n      23,  1.05000e+00,  0.00000e+00,  0.00000e+00 \n      24,  1.20000e+00,  0.00000e+00,  0.00000e+00 \n      25,  1.15000e+00,  0.00000e+00,  0.00000e+00 \n      26,  1.30000e+00,  0.00000e+00,  0.00000e+00 \n      27,  1.25000e+00,  0.00000e+00,  0.00000e+00 \n      28,  1.40000e+00,  0.00000e+00,  0.00000e+00 \n      29,  1.35000e+00,  0.00000e+00,  0.00000e+00 \n      30,  1.50000e+00,  0.00000e+00,  0.00000e+00 \n      31,  1.45000e+00,  0.00000e+00,  0.00000e+00 \n      32,  1.60000e+00,  0.00000e+00,  0.00000e+00 \n      33,  1.55000e+00,  0.00000e+00,  0.00000e+00 \n      34,  1.70000e+00,  0.00000e+00,  0.00000e+00 \n      35,  1.65000e+00,  0.00000e+00,  0.00000e+00 \n      36,  1.80000e+00,  0.00000e+00,  0.00000e+00 \n      37,  1.75000e+00,  0.00000e+00,  0.00000e+00 \n      38,  1.90000e+00,  0.00000e+00,  0.00000e+00 \n      39,  1.85000e+00,  0.00000e+00,  0.00000e+00 \n      40,  2.00000e+00,  0.00000e+00,  0.00000e+00 \n      41,  1.95000e+00,  0.00000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=Eall\n     1,      1,      3,      2\n     2,      2,      5,      4\n     3,      4,      7,      6\n     4,      6,      9,      8\n     5,      8,     11,     10\n     6,     10,     13,     12\n     7,     12,     15,     14\n     8,     14,     17,     16\n     9,     16,     19,     18\n    10,     18,     21,     20\n    11,     20,     23,     22\n    12,     22,     25,     24\n    13,     24,     27,     26\n    14,     26,     29,     28\n    15,     28,     31,     30\n    16,     30,     33,     32\n    17,     32,     35,     34\n    18,     34,     37,     36\n    19,     36,     39,     38\n    20,     38,     41,     40\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying their type (B32) and the nodes that form each element, and groups them into an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing all degrees of freedom (1 to 6) at node 1."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, naming the material 'EL' and specifying its elastic properties (Young's modulus and Poisson's ratio)."
+    },
+    "Step 6": {
+        "Code": "*BEAM SECTION,ELSET=Eall,MATERIAL=EL,SECTION=CIRC\n0.01\n0.d0,1.d0,0.d0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties, associating the element set 'Eall' with the material 'EL' and specifying a circular cross-section with a radius of 0.01."
+    },
+    "Step 7": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n40,1,10.\n*NODE PRINT,NSET=NALL\nU\n*EL PRINT,ELSET=EALL\nS\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure, enabling large deformation effects (NLGEOM), specifying a static analysis, applying a concentrated load at node 40, and requesting output for nodal displacements and element stresses."
+    }
+}

@@ -1,0 +1,93 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: linear gas network\n**   Test objective: Test of subcritical centripetal flow \n**   in a single rotating adiabatic pipe (kg,m,s,K)\n**   cf. rotpipe3.inp\n**  NOT REALLY CORRECT, SINCE IN THE ABSOLUTE SYSTEM\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the initial comments and heading for the simulation. It describes the structure as a linear gas network and mentions the test objective of subcritical centripetal flow in a rotating adiabatic pipe."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to the node set NALL. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EINOUT\n1, 0, 1, 2\n3, 4, 5, 0\t\n*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model. Elements are assigned to element sets EINOUT and EGAS, with their respective node connectivity."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step begins the definition of the material properties for the gas used in the simulation."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287.\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material named GAS."
+    },
+    "Step 6": {
+        "Code": "*FLUID CONSTANTS\n1.E3,1.69532E-05\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step defines the fluid constants, including the dynamic viscosity and another fluid property."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=EINOUT,TYPE=INOUT\n*FLUID SECTION,MATERIAL=GAS,ELSET=EGAS,TYPE=ROTATING GAS PIPE\n706.8583E-6,706.8583E-6,50.E-3,0,1,,,60.E-3,10.E-3,10000.\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for the element sets EINOUT and EGAS, specifying the material as GAS and detailing the properties of the rotating gas pipe."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n4,.5E6\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial conditions for the total pressure at node 4."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY,MASS FLOW\n1,1,1,0.5033e-1\n*BOUNDARY\n2,0,0,994.\n2,2,2,0.1067E7\n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step defines boundary conditions, including mass flow at node 1 and other boundary conditions at node 2."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=10000\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL,FREQUENCY=100\nU,NT\n*END STEP\n\n\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation step, specifying the number of increments and the type of analysis (steady-state heat transfer). It also sets the frequency for printing node results."
+    }
+}

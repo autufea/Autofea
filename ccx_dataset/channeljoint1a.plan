@@ -1,0 +1,88 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two joining channels.\n**   Test objective: steep slope, frontwater curve\n**                   identical depth at joint;\n**                   thermal calculation included.\n**                   cf. channeljoint1, but now the coordinates\n**                   are such that the model is easier visualized\n**                   in CalculiX GraphiX (unit element length).\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation structure and objectives, including the type of channels, the test objectives such as steep slope and frontwater curve, and the inclusion of thermal calculations."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,0.,0.,0.\n3,0.5,0.,0.\n4,1.,0.,0.\n5,1.5,0.,\n6,2.,0.,\n7,2.5,0.,\n8,3.,0.,\n9,3.,-3.5,0.\n10,3.,-3.,0.\n11,3.,-2.5,0.\n12,3.,-2.,0.\n13,3.,-1.5,0.\n14,3.,-1.,0.\n15,3.,-0.5,0.\n16,3.5,0.,0.\n17,4.,0.,0.\n18,4.5,0.,0.\n19,5.,0.,0.\n20,5.5,0.,0.\n21,6.0,0.,0.\n22,6.5,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the simulation, assigning coordinates to each node and grouping them into a set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=EALL\n1,0,1,2\n2,2,3,4\n3,4,5,6\n4,6,7,8\n5,0,9,10\n6,10,11,12\n7,12,13,14\n8,14,15,8\n9,8,16,17\n10,17,18,19\n11,19,20,21\n12,21,22,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the simulation, specifying the type of elements, their connectivity, and grouping them into a set named EALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1000.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for water, specifically its density."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n4217.,1750.E-6,273.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step specifies the fluid constants, including specific heat, thermal expansion coefficient, and reference temperature."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n1,5,12\n*ELSET,ELSET=E2\n2,6\n*ELSET,ELSET=E3\n4,8\n*ELSET,ELSET=E4\n3,7\n*ELSET,ELSET=E5\n11\n*ELSET,ELSET=E6\n9\n*ELSET,ELSET=E7\n10\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates element sets (E1 to E7) by grouping specific elements together."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,ELSET=E1,TYPE=CHANNEL INOUT,MATERIAL=WATER\n*FLUID SECTION,ELSET=E2,TYPE=CHANNEL SLUICE GATE,MANNING,MATERIAL=WATER\n5.,0.,0.1,0.005,0.01,0.8\n*FLUID SECTION,ELSET=E3,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E4,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.,0.,24.9,0.005,0.01\n*FLUID SECTION,ELSET=E5,TYPE=CHANNEL RESERVOIR,MANNING,MATERIAL=WATER\n10.,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E6,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n10.,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E7,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n10.,0.,24.9,0.005,0.01\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "MANNING"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for each element set, specifying the type of channel, material, and other parameters such as Manning's coefficient."
+    },
+    "Step 8": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=-273.15,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the absolute zero temperature and the Stefan-Boltzmann constant."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*HEAT TRANSFER,STEADY STATE\n*BOUNDARY\n2,0,0,20\n10,0,0,80\n21,2,2,0.5\n*BOUNDARY,MASS FLOW\n1,1,1,30000.\n9,1,1,30000.\n*DLOAD\nEALL,GRAV,9.81,0.,0.,-1.\n*NODE PRINT,NSET=NALL\nU,MF,PN,NT\n*NODE FILE,NSET=NALL\nMF,DEPTH,NT\n*END STEP\n\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "MASS FLOW",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation steps, including heat transfer analysis, boundary conditions, mass flow boundaries, gravitational load, and output requests for node data."
+    }
+}

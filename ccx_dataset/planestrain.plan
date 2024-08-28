@@ -1,0 +1,71 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: CPE4 elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an introductory comment about the structure and test objective, indicating that the structure is a plate and the test will use CPE4 elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       2,0.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       3,0.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model and assigns them to a node set named 'Nall'. Four nodes are specified with their respective coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPE4, ELSET=Eall\n     1,      1,      4,      3,      2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using CPE4 element type and assigns them to an element set named 'Eall'. One element is defined by connecting four nodes."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,2\n2,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. Node 1 is constrained in the first and second degrees of freedom, and Node 2 is constrained in the second degree of freedom."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model. A material named 'EL' is created with an elastic modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL,OFFSET=0.\n0.01\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "OFFSET"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step defines a solid section for the elements in the set 'Eall' using the material 'EL' and specifies an offset of 0. The thickness of the section is set to 0.01."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n3,2,0.5\n4,2,0.5\n*NODE FILE,OUTPUT=3D\nU,RF\n*EL FILE\nS,NOE\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nE,S\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure. A static analysis step is defined, and concentrated loads are applied to nodes 3 and 4 in the second degree of freedom. Output requests are specified for nodal displacements, reaction forces, and element stresses."
+    }
+}

@@ -1,0 +1,119 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: Mortar hard contact.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to evaluate mortar hard contact."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       2,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       3,1.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       5,0.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       6,0.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       7,0.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       8,0.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       9,1.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      10,1.000000000000e+00,0.000000000000e+00,5.000000000000e-01\n      11,1.000000000000e+00,5.000000000000e-01,1.000000000000e+00\n      12,1.000000000000e+00,1.000000000000e+00,5.000000000000e-01\n      13,5.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n      14,5.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      15,5.000000000000e-01,0.000000000000e+00,1.000000000000e+00\n      16,5.000000000000e-01,1.000000000000e+00,1.000000000000e+00\n      17,0.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      18,0.000000000000e+00,0.000000000000e+00,5.000000000000e-01\n      19,0.000000000000e+00,5.000000000000e-01,1.000000000000e+00\n      20,0.000000000000e+00,1.000000000000e+00,5.000000000000e-01\n      21,7.500000000000e-01,7.500000000000e-01,1.000000000000e+00\n      22,7.500000000000e-01,2.500000000000e-01,1.000000000000e+00\n      23,7.500000000000e-01,2.500000000000e-01,1.500000000000e+00\n      24,7.500000000000e-01,7.500000000000e-01,1.500000000000e+00\n      25,2.500000000000e-01,7.500000000000e-01,1.000000000000e+00\n      26,2.500000000000e-01,2.500000000000e-01,1.000000000000e+00\n      27,2.500000000000e-01,2.500000000000e-01,1.500000000000e+00\n      28,2.500000000000e-01,7.500000000000e-01,1.500000000000e+00\n      29,7.500000000000e-01,5.000000000000e-01,1.000000000000e+00\n      30,7.500000000000e-01,2.500000000000e-01,1.250000000000e+00\n      31,7.500000000000e-01,5.000000000000e-01,1.500000000000e+00\n      32,7.500000000000e-01,7.500000000000e-01,1.250000000000e+00\n      33,5.000000000000e-01,7.500000000000e-01,1.000000000000e+00\n      34,5.000000000000e-01,2.500000000000e-01,1.000000000000e+00\n      35,5.000000000000e-01,2.500000000000e-01,1.500000000000e+00\n      36,5.000000000000e-01,7.500000000000e-01,1.500000000000e+00\n      37,2.500000000000e-01,5.000000000000e-01,1.000000000000e+00\n      38,2.500000000000e-01,2.500000000000e-01,1.250000000000e+00\n      39,2.500000000000e-01,5.000000000000e-01,1.500000000000e+00\n      40,2.500000000000e-01,7.500000000000e-01,1.250000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes of the model with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,\n     2,    21,    22,    23,    24,    25,    26,    27,    28,\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using 8-node brick elements (C3D8) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'Nfix' containing specific nodes that will be constrained."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,3,3\n1,1,2\n2,1,1\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in 'Nfix', constraining their movement in specified directions."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=Nfix2 \n23, \n24, \n27, \n28, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates another node set 'Nfix2' containing different nodes that will also be constrained."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\nNfix2,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in 'Nfix2', constraining their movement in specified directions."
+    },
+    "Step 8": {
+        "Code": "*SURFACE,NAME=Sslav\n2, S3 \n*SURFACE,NAME=Smast\n1, S5\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces, 'Sslav' and 'Smast', which will be used in the contact pair definition."
+    },
+    "Step 9": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=MORTAR\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair interaction named 'SI1' using the mortar method between the surfaces 'Sslav' and 'Smast'."
+    },
+    "Step 10": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction properties and names it 'SI1'."
+    },
+    "Step 11": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.0\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the model, naming the material 'EL' and specifying its elastic properties."
+    },
+    "Step 12": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' using a solid section definition."
+    },
+    "Step 13": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.,1.\n*DLOAD\n2, P5, 100.000000 \n*NODE FILE,NSET=Nall,FREQUENCY=10\nU\n*EL FILE\nS\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "NSET",
+            "FREQUENCY",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with nonlinear geometry, specifies a static analysis, applies a distributed load, and sets output requests for nodal displacements and element stresses."
+    }
+}

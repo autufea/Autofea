@@ -1,0 +1,156 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: fluid flow between two cylinders.\n**   Test objective: compressible Couette flow with fixed\n**                   wall temperature: cyclic boundary conditions\n**                   pressure at the outside: theoretically 53.\n**                   numerically after 150000 iterations: 168.\n**                   max temperature: 1.5\n**                   \n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure and test objective for the simulation, which involves compressible Couette flow between two cylinders with fixed wall temperature and cyclic boundary conditions."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,0.000000000000e+00,-1.000000000000e+00\n       2,8.750000000000e-01,0.000000000000e+00,-1.000000000000e+00\n       3,8.581871203528e-01,-1.707040317641e-01,-1.000000000000e+00\n       4,9.807852804032e-01,-1.950903220161e-01,-1.000000000000e+00\n       5,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       6,8.750000000000e-01,0.000000000000e+00,0.000000000000e+00\n       7,8.581871203528e-01,-1.707040317641e-01,0.000000000000e+00\n       8,9.807852804032e-01,-1.950903220161e-01,0.000000000000e+00\n       9,8.083945909474e-01,-3.348480033195e-01,-1.000000000000e+00\n      10,9.238795325113e-01,-3.826834323651e-01,-1.000000000000e+00\n      11,8.083945909474e-01,-3.348480033195e-01,0.000000000000e+00\n      12,9.238795325113e-01,-3.826834323651e-01,0.000000000000e+00\n      13,7.275359107647e-01,-4.861239538922e-01,-1.000000000000e+00\n      14,8.314696123025e-01,-5.555702330196e-01,-1.000000000000e+00\n      15,7.275359107647e-01,-4.861239538922e-01,0.000000000000e+00\n      16,8.314696123025e-01,-5.555702330196e-01,0.000000000000e+00\n      17,7.500000000000e-01,0.000000000000e+00,-1.000000000000e+00\n      18,7.355889603024e-01,-1.463177415121e-01,-1.000000000000e+00\n      19,7.500000000000e-01,0.000000000000e+00,0.000000000000e+00\n      20,7.355889603024e-01,-1.463177415121e-01,0.000000000000e+00\n      21,6.929096493835e-01,-2.870125742738e-01,-1.000000000000e+00\n      22,6.929096493835e-01,-2.870125742738e-01,0.000000000000e+00\n      23,6.236022092269e-01,-4.166776747647e-01,-1.000000000000e+00\n      24,6.236022092269e-01,-4.166776747647e-01,0.000000000000e+00\n      25,6.250000000000e-01,0.000000000000e+00,-1.000000000000e+00\n      26,6.129908002520e-01,-1.219314512601e-01,-1.000000000000e+00\n      27,6.250000000000e-01,0.000000000000e+00,0.000000000000e+00\n      28,6.129908002520e-01,-1.219314512601e-01,0.000000000000e+00\n      29,5.774247078196e-01,-2.391771452282e-01,-1.000000000000e+00\n      30,5.774247078196e-01,-2.391771452282e-01,0.000000000000e+00\n      31,5.196685076891e-01,-3.472313956373e-01,-1.000000000000e+00\n      32,5.196685076891e-01,-3.472313956373e-01,0.000000000000e+00\n      33,5.000000000000e-01,0.000000000000e+00,-1.000000000000e+00\n      34,4.903926402016e-01,-9.754516100806e-02,-1.000000000000e+00\n      35,5.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      36,4.903926402016e-01,-9.754516100806e-02,0.000000000000e+00\n      37,4.619397662556e-01,-1.913417161825e-01,-1.000000000000e+00\n      38,4.619397662556e-01,-1.913417161825e-01,0.000000000000e+00\n      39,4.157348061513e-01,-2.777851165098e-01,-1.000000000000e+00\n      40,4.157348061513e-01,-2.777851165098e-01,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model, including their coordinates and assigns them to a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=F3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     4,     3,     9,    10,     8,     7,    11,    12\n     3,    10,     9,    13,    14,    12,    11,    15,    16\n     4,     2,    17,    18,     3,     6,    19,    20,     7\n     5,     3,    18,    21,     9,     7,    20,    22,    11\n     6,     9,    21,    23,    13,    11,    22,    24,    15\n     7,    17,    25,    26,    18,    19,    27,    28,    20\n     8,    18,    26,    29,    21,    20,    28,    30,    22\n     9,    21,    29,    31,    23,    22,    30,    32,    24\n    10,    25,    33,    34,    26,    27,    35,    36,    28\n    11,    26,    34,    37,    29,    28,    36,    38,    30\n    12,    29,    37,    39,    31,    30,    38,    40,    32\n** Names based on in\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model, specifying the type of element (F3D8) and the nodes that make up each element, and assigns them to an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nin \n33, \n34, \n35, \n36, \n37, \n38, \n** Names based on out\n*NSET,NSET=Nout \n1, \n4, \n5, \n8, \n10, \n12, \n** Names based on dep\n*NSET,NSET=Ndep \n13, \n14, \n15, \n16, \n23, \n24, \n31, \n32, \n39, \n40, \n** Names based on ind\n*NSET,NSET=Nind \n1, \n2, \n5, \n6, \n17, \n19, \n25, \n27, \n33, \n35, \n** Names based on fixz\n*NSET,NSET=Nfixz \n1, \n2, \n3, \n4, \n5, \n6, \n7, \n8, \n9, \n10, \n11, \n12, \n17, \n18, \n19, \n20, \n21, \n22, \n25, \n26, \n27, \n28, \n29, \n30, \n33, \n34, \n35, \n36, \n37, \n38, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates various node sets based on different criteria such as 'Nin', 'Nout', 'Ndep', 'Nind', and 'Nfixz' for further use in the simulation."
+    },
+    "Step 5": {
+        "Code": "*SURFACE,NAME=left,TYPE=NODE\nNdep\n*SURFACE,NAME=right,TYPE=NODE\nNind\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines surfaces named 'left' and 'right' using the node sets 'Ndep' and 'Nind' respectively."
+    },
+    "Step 6": {
+        "Code": "*TIE,CYCLIC SYMMETRY,POSITION TOLERANCE=1.,NAME=T1\nleft,right\n",
+        "Keywords": [
+            "TIE",
+            "CYCLIC SYMMETRY",
+            "POSITION TOLERANCE",
+            "NAME"
+        ],
+        "Start": "*TIE",
+        "Description": "Applies a tie constraint with cyclic symmetry between the 'left' and 'right' surfaces, with a specified position tolerance."
+    },
+    "Step 7": {
+        "Code": "*CYCLIC SYMMETRY MODEL,N=10.66666666,NGRAPH=1\n0.,0.,0.,0.,0.,1.\n",
+        "Keywords": [
+            "CYCLIC SYMMETRY MODEL",
+            "N",
+            "NGRAPH"
+        ],
+        "Start": "*CYCLIC SYMMETRY MODEL",
+        "Description": "Defines the cyclic symmetry model parameters, including the number of sectors (N) and graphical output settings (NGRAPH)."
+    },
+    "Step 8": {
+        "Code": "*MATERIAL,NAME=AIR\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for 'AIR'."
+    },
+    "Step 9": {
+        "Code": "*FLUID CONSTANTS\n1.,1.,1.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Specifies the fluid constants for the material 'AIR'."
+    },
+    "Step 10": {
+        "Code": "*CONDUCTIVITY\n1.\n",
+        "Keywords": [
+            "CONDUCTIVITY"
+        ],
+        "Start": "*CONDUCTIVITY",
+        "Description": "Defines the thermal conductivity for the material 'AIR'."
+    },
+    "Step 11": {
+        "Code": "*SPECIFIC GAS CONSTANT\n0.285714286d0\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Specifies the specific gas constant for the material 'AIR'."
+    },
+    "Step 12": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=AIR\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'AIR' to the element set 'Eall' as a solid section."
+    },
+    "Step 13": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=0.\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "Defines the physical constants, including the absolute zero temperature."
+    },
+    "Step 14": {
+        "Code": "*INITIAL CONDITIONS,TYPE=PRESSURE\nNall,1.\n*INITIAL CONDITIONS,TYPE=FLUID VELOCITY\nNall,1,0.\nNall,2,0.\nNall,3,0.\n*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,1.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial conditions for pressure, fluid velocity, and temperature for all nodes in the node set 'Nall'."
+    },
+    "Step 15": {
+        "Code": "*TRANSFORM,TYPE=C,NSET=Nin\n0.,0.,0.,0.,0.,1.\n*TRANSFORM,TYPE=C,NSET=Nout\n0.,0.,0.,0.,0.,1.\n",
+        "Keywords": [
+            "TRANSFORM",
+            "NSET"
+        ],
+        "Start": "*TRANSFORM",
+        "Description": "Applies coordinate transformations to the node sets 'Nin' and 'Nout'."
+    },
+    "Step 16": {
+        "Code": "*NSET,NSET=Nrad\n36,28,20,7,8\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set named 'Nrad' with specified nodes."
+    },
+    "Step 17": {
+        "Code": "*STEP,INCF=5000,SHOCK SMOOTHING=0.003\n*CFD,STEADY STATE,COMPRESSIBLE\n1.,1.,,,1.,\n*BOUNDARY\nNfixz,3,3,0.\nNin,1,1,0.\nNin,2,2,2.\nNout,1,1,0.\nNout,2,2,1.\nNout,11,11,1.\nNin,8,8,1.\nNin,11,11,1.\n*NODE FILE,FREQUENCYF=5000\nVF,PSF,TSF\n*END STEP\n",
+        "Keywords": [
+            "INCF",
+            "SHOCK SMOOTHING",
+            "CFD",
+            "STEADY STATE",
+            "COMPRESSIBLE",
+            "BOUNDARY",
+            "NODE FILE",
+            "FREQUENCYF"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step with parameters for steady-state compressible CFD analysis, boundary conditions, and output settings."
+    }
+}

@@ -1,0 +1,79 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: New rotational constraints in second step\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever beam and states the test objective of introducing new rotational constraints in the second step."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=NS_ALL\n10, 0.0, 0.0, 0.0\n20, 0.2, 0.0, 0.0\n30, 0.4, 0.0, 0.0\n4,  0.6, 0.0, 0.0\n5,  0.8, 0.0, 0.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model and assigns them to the node set NS_ALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=ES_ALL\n3, 10, 20, 30\n5, 30, 4,  5\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the beam elements of type B32 and assigns them to the element set ES_ALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL, NAME=M_EL\n*ELASTIC\n210000.0, 0.3\n*DENSITY\n7850.0\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties with an elastic modulus of 210000.0, Poisson's ratio of 0.3, and density of 7850.0."
+    },
+    "Step 5": {
+        "Code": "*BEAM SECTION, MATERIAL=M_EL, ELSET=ES_ALL, SECTION=RECT\n0.03, 0.015\n0.0, 0.0, 1.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "MATERIAL",
+            "ELSET",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Defines the beam section properties with a rectangular cross-section of dimensions 0.03 by 0.015 and orientation vector (0.0, 0.0, 1.0)."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n10, 1, 6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to node 10, constraining all six degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n5,6,1.e-3\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the first static analysis step, applies a concentrated load of 1.e-3 in the sixth degree of freedom at node 5, and requests nodal displacements for all nodes."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY,OP=NEW\n30,1,6\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "OP",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the second static analysis step, introduces new boundary conditions for node 30, constraining all six degrees of freedom, and requests nodal displacements for all nodes twice."
+    }
+}

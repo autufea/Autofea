@@ -1,0 +1,131 @@
+{
+    "Step 1": {
+        "Code": "**\n**    Structure: two concentric rings.\n**    Test objective: contact due to thermal expansion.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two concentric rings and sets the test objective to study contact due to thermal expansion."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,9.500000000000e-01,1.000000000000e-01,0.000000000000e+00\n       2,9.500000000000e-01,0.000000000000e+00,0.000000000000e+00\n       3,1.050000000000e+00,0.000000000000e+00,0.000000000000e+00\n       4,1.050000000000e+00,1.000000000000e-01,0.000000000000e+00\n       5,9.500000000000e-01,5.000000000000e-02,0.000000000000e+00\n       6,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       7,1.050000000000e+00,5.000000000000e-02,0.000000000000e+00\n       8,1.000000000000e+00,1.000000000000e-01,0.000000000000e+00\n       9,1.050000000000e+00,1.000000000000e-01,0.000000000000e+00\n      10,1.050000000000e+00,0.000000000000e+00,0.000000000000e+00\n      11,1.150000000000e+00,0.000000000000e+00,0.000000000000e+00\n      12,1.150000000000e+00,1.000000000000e-01,0.000000000000e+00\n      13,1.050000000000e+00,5.000000000000e-02,0.000000000000e+00\n      14,1.100000000000e+00,0.000000000000e+00,0.000000000000e+00\n      15,1.150000000000e+00,5.000000000000e-02,0.000000000000e+00\n      16,1.100000000000e+00,1.000000000000e-01,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8, ELSET=Eall\n     1,1,2,3,4,5,6,7,8\n     2,9,10,11,12,13,14,15,16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using 8-node axisymmetric elements (CAX8) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=STEEL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n*EXPANSION\n12.E-6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY",
+            "EXPANSION"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for steel, including its elastic modulus, Poisson's ratio, density, and thermal expansion coefficient."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=STEEL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'STEEL' to the element set 'Eall' in a solid section."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=UP\n9,10\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines a node set 'UP' containing nodes 9 and 10."
+    },
+    "Step 7": {
+        "Code": "*SURFACE,NAME=slave\n2,S1\n*SURFACE,NAME=master\n1,S3\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces named 'slave' and 'master' for contact analysis."
+    },
+    "Step 8": {
+        "Code": "*CONTACT PAIR,INTERACTION=I1,TYPE=SURFACE TO SURFACE\nslave,master\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair interaction 'I1' between the 'slave' and 'master' surfaces using surface-to-surface contact."
+    },
+    "Step 9": {
+        "Code": "*SURFACE INTERACTION,NAME=I1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction properties and names it 'I1'."
+    },
+    "Step 10": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.E7,3.\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior for the contact interaction, including pressure-overclosure behavior."
+    },
+    "Step 11": {
+        "Code": "*NSET,NSET=N1\n1,2,3,4,5,6,7,8\n*NSET,NSET=N2\n9,10,11,12,13,14,15,16\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines two node sets 'N1' and 'N2' for different temperature conditions."
+    },
+    "Step 12": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,273.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature condition for all nodes in 'Nall' to 273 K."
+    },
+    "Step 13": {
+        "Code": "*BOUNDARY\n5,2,2\n15,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to restrict movement in the y-direction for nodes 5 and 15."
+    },
+    "Step 14": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*TEMPERATURE\nN1,1000.\nN2,273.\n*NODE PRINT,NSET=Nall,FREQUENCY=10\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "TEMPERATURE",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step with nonlinear geometry. Applies different temperature conditions to node sets 'N1' and 'N2', and specifies output requests for nodal displacements and element stresses."
+    }
+}

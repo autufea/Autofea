@@ -1,0 +1,94 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 2d plate in plane stress.\n**   Test objective: sensitivity of mass, displacements and energy.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that it involves a 2D plate in plane stress and aims to analyze the sensitivity of mass, displacements, and energy."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1,0.,1.,0.\n2,1.,1.,0.\n3,1.,.5,0.\n4,0.,.5,0.\n5,.5,1.,0.\n6,1.,.75,0.\n7,.5,.5,0.\n8,0.,.75,0.\n9,1.,0.,0.\n10,0.,0.,0.\n11,1.,.25,0.\n12,.5,0.,0.\n13,0.,.25,0.\n14,2.,1.,0.\n15,2.,.5,0.\n16,1.5,1.,0.\n17,2.,.75,0.\n18,1.5,.5,0.\n19,2.,0.,0.\n20,2.,.25,0.\n21,1.5,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model and assigns them to a node set named 'Nall'. Each node is specified with its coordinates in a 2D plane."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CPS8R,ELSET=Eall\n1,1,4,3,2,8,7,6,5\n2,4,10,9,3,13,12,11,7\n3,2,3,15,14,6,18,17,16\n4,3,9,19,15,11,21,20,18\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CPS8R (8-node plane stress elements) and assigns them to an element set named 'Eall'. The connectivity of each element is also provided."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, including the elastic modulus, Poisson's ratio, and density. The material is named 'EL'."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n.2\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies the thickness of the elements as 0.2 units."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n1,1\n4,1\n8,1\n10,1\n13,1\n4,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing certain nodes in the specified directions to constrain the movement of the structure."
+    },
+    "Step 7": {
+        "Code": "*NSET,NSET=DESIGNNODES\n9,10,12,19,21\n*NSET,NSET=N1\n14\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines node sets for design purposes. 'DESIGNNODES' includes nodes that will be used as design variables, and 'N1' is a specific node for displacement analysis."
+    },
+    "Step 8": {
+        "Code": "*DESIGNVARIABLES,TYPE=COORDINATE\nDESIGNNODES\n",
+        "Keywords": [
+            "DESIGNVARIABLES"
+        ],
+        "Start": "*DESIGNVARIABLES",
+        "Description": "This step specifies that the coordinates of the nodes in the 'DESIGNNODES' set will be used as design variables in the sensitivity analysis."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\n1,P4,100.\n3,P4,100.\n*NODE FILE\nU\n*EL FILE\nS,ENER\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines a static analysis step, applies distributed loads to certain elements, and specifies that the displacements and strain energy should be written to the output files."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*SENSITIVITY,WRITE\n*DESIGN RESPONSE,NAME=MASS_OBJ\nMASS,Eall\n*DESIGN RESPONSE,NAME=DISP_OBJ\nY-DISP,N1\n*DESIGN RESPONSE,NAME=ENER_OBJ\nSTRAIN ENERGY,Eall\n*NODE FILE\nSEN\n*END STEP\n",
+        "Keywords": [
+            "SENSITIVITY",
+            "WRITE",
+            "DESIGN RESPONSE",
+            "NAME",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines a sensitivity analysis step, specifying design responses for mass, displacement at node 'N1', and strain energy. The sensitivity results are written to the output files."
+    }
+}

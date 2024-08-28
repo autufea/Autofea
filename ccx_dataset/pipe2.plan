@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: pipe with gate valve.\n**   Test objective: geometric unknowns in networks.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a pipe with a gate valve and sets the test objective to determine geometric unknowns in networks."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n2,-.5,0.,0.\n3,0.,0.,0.\n4,50.,0.,0.\n5,100.,0.,0.\n6,100.5,0.,0.\n7,101.,0.,0.,\n8,151.,0.,0.,\n9,201.,0.,0.,\n10,201.5,0.,0.,\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model, assigning coordinates to each node and grouping them into a set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=EALL\n1,0,2,3\n2,3,4,5\n3,5,6,7\n4,7,8,9\n5,9,10,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model, specifying the type and connectivity of each element, and groups them into a set named EALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1000.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n4217.,1750.E-6,273.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Specifies fluid constants such as specific heat, viscosity, and reference temperature."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n2,4\n*ELSET,ELSET=E2\n1,5\n*ELSET,ELSET=E3\n3\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets E1, E2, and E3, grouping specific elements into these sets."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,ELSET=E1,TYPE=PIPE WHITE-COLEBROOK,MATERIAL=WATER\n0.031416,0.2,0.,0.005e-3,1.\n*FLUID SECTION,ELSET=E2,MATERIAL=WATER,TYPE=PIPE INOUT\n*FLUID SECTION,ELSET=E3,TYPE=PIPE GATE VALVE,MATERIAL=WATER\n0.031416,0.\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for the element sets, specifying the type of pipe and material properties for each section."
+    },
+    "Step 8": {
+        "Code": "*BOUNDARY\n3,2,2,1.1E5\n9,2,2,1.E5\n*BOUNDARY,MASS FLOW\n6,1,1,33.5\t\t  \n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions, including pressure at specific nodes and mass flow rate at another node."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*HEAT TRANSFER,STEADY STATE\n*DLOAD\nEALL,GRAV,9.81,0.,0.,-1.\n*NODE PRINT,NSET=NALL\nMF,PN\n*NODE FILE\nMF,PT\n*END STEP\n\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step for steady-state heat transfer, applies gravitational load, and specifies output requests for mass flow and pressure at nodes."
+    }
+}

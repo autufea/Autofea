@@ -1,0 +1,55 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring.\n**   Test objective: SPRING2-element.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, indicating that it involves a spring structure and aims to test the SPRING2 element."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model. Two nodes are created with IDs 1 and 2, and their coordinates are specified."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRING2,ELSET=EALL\n1,1,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element in the model. A SPRING2 element is created between nodes 1 and 2, and it is assigned to the element set EALL."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,3,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes. Node 1 is fixed in all three directions, and node 2 is fixed in the third direction."
+    },
+    "Step 5": {
+        "Code": "*SPRING,ELSET=EALL\n1,1\n10.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET"
+        ],
+        "Start": "*SPRING",
+        "Description": "This step defines the spring properties. The spring constant is set to 10 units for the element in the set EALL."
+    },
+    "Step 6": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*BOUNDARY\n2,1,1,2.\n2,2,2,3.\n*NODE PRINT,NSET=NALL\nRF\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis. A static analysis with nonlinear geometry is specified, additional boundary conditions are applied to node 2, and reaction forces are requested to be printed for all nodes."
+    }
+}

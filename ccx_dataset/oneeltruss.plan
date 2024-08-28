@@ -1,0 +1,66 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 CPE8 element und 2 T2D2 elements.\n**   Test objective: truss in combination with a plane\n**                   structure\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure consisting of one CPE8 element and two T2D2 elements. The objective is to test a truss in combination with a plane structure."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,1.,0.\n4,0.,1.,0.\n5,.5,0.,0.\n6,1.,.5,0.\n7,.5,1.,0.\n8,0.,.5,0.\n9,.5,1.5,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes and their coordinates, and assigns them to the node set NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CPE8,ELSET=ECPE8\n1,1,2,3,4,5,6,7,8\n*ELEMENT,TYPE=T2D2,ELSET=ET2D2\n3,3,9\n4,4,9\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements and their connectivity. CPE8 elements are assigned to the set ECPE8, and T2D2 elements are assigned to the set ET2D2."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties with the name EL, specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=ECPE8,MATERIAL=EL\n*SOLID SECTION,ELSET=ET2D2,MATERIAL=EL\n.01\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material EL to the element sets ECPE8 and ET2D2, and specifies the section properties."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n1,2\n2,2\n5,2\n1,1\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to specific nodes, restricting their degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n9,2,1.\n*NODE FILE,OUTPUT=3D\nU,RF\n*EL FILE\nS,NOE\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step as static, applies a load to node 9, and specifies the output requests for nodal displacements, reaction forces, and element stresses."
+    }
+}

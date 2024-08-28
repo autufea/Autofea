@@ -1,0 +1,75 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: CPS8R elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a plate and the test objective is to use CPS8R elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -7.45058e-09, -7.45058e-09,  0.00000e+00 \n       2,  5.00000e-01, -7.45058e-09,  0.00000e+00 \n       3,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n       4, -7.45058e-09,  5.00000e-01,  0.00000e+00 \n       5,  2.50000e-01, -7.45058e-09,  0.00000e+00 \n       6,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n       7,  2.50000e-01,  5.00000e-01,  0.00000e+00 \n       8, -7.45058e-09,  2.50000e-01,  0.00000e+00 \n       9,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      10, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      11,  5.00000e-01,  7.50000e-01,  0.00000e+00 \n      12,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      13, -7.45058e-09,  7.50000e-01,  0.00000e+00 \n      14,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n      15,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      16,  7.50000e-01, -7.45058e-09,  0.00000e+00 \n      17,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      18,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n      19,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      21,  7.50000e-01,  1.00000e+00,  ,0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPS8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CPS8R and grouping them into an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'Nfixx' which includes specific nodes that will be used for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,1\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes in the 'Nfixx' set, constraining them in the specified degrees of freedom."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the simulation, specifying the material name as 'EL' and providing its elastic properties."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n0.01\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the elements in the 'Eall' set and specifies the thickness of the plate."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\n3,P2,-100.\n4,P2,-100.\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the static analysis, applies distributed loads to specific elements, and specifies the output requests for nodal displacements and element stresses."
+    }
+}

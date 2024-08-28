@@ -1,0 +1,140 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure:  two aligned plates.\n**   Test objective: contact in plane stress conditions.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure and test objective. The structure consists of two aligned plates, and the objective is to test contact in plane stress conditions."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.812250000000e+02,4.000000000000e+00,0.000000000000e+00\n       2,1.812250000000e+02,0.000000000000e+00,0.000000000000e+00\n       3,1.850500000000e+02,0.000000000000e+00,0.000000000000e+00\n       4,1.850500000000e+02,4.000000000000e+00,0.000000000000e+00\n       5,1.812250000000e+02,2.000000000000e+00,0.000000000000e+00\n       6,1.831375000000e+02,0.000000000000e+00,0.000000000000e+00\n       7,1.850500000000e+02,2.000000000000e+00,0.000000000000e+00\n       8,1.831375000000e+02,4.000000000000e+00,0.000000000000e+00\n       9,1.812250000000e+02,0.000000000000e+00,0.000000000000e+00\n      10,1.812250000000e+02,-4.000000000000e+00,0.000000000000e+00\n      11,1.850500000000e+02,-4.000000000000e+00,0.000000000000e+00\n      12,1.850500000000e+02,0.000000000000e+00,0.000000000000e+00\n      13,1.812250000000e+02,-2.000000000000e+00,0.000000000000e+00\n      14,1.831375000000e+02,-4.000000000000e+00,0.000000000000e+00\n      15,1.850500000000e+02,-2.000000000000e+00,0.000000000000e+00\n      16,1.831375000000e+02,0.000000000000e+00,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model and assigns them to the node set 'Nall'. Each node is specified with its coordinates in the 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPS8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      9,     10,     11,     12,     13,     14,     15,     16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model using 8-node plane stress elements (CPS8R) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nleft\n9,12,16\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines a node set 'Nleft' containing specific nodes (9, 12, 16)."
+    },
+    "Step 5": {
+        "Code": "*ELSET,ELSET=CONUP\n1\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Defines an element set 'CONUP' containing element 1."
+    },
+    "Step 6": {
+        "Code": "*SURFACE,TYPE=ELEMENT,NAME=LOWER\n2,S4\n*SURFACE,TYPE=ELEMENT,NAME=UPPER\nCONUP,S2\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces, 'LOWER' and 'UPPER', using elements. 'LOWER' is defined using element 2, and 'UPPER' is defined using the element set 'CONUP'."
+    },
+    "Step 7": {
+        "Code": "*NSET,NSET=Nnoben\n10,11,14\n*NSET,NSET=Nnunten\n1,4,8\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines two node sets, 'Nnoben' and 'Nnunten', containing specific nodes. 'Nnoben' includes nodes 10, 11, and 14, while 'Nnunten' includes nodes 1, 4, and 8."
+    },
+    "Step 8": {
+        "Code": "*MATERIAL,NAME=STEEL\n*ELASTIC\n210000,0.3\n*DENSITY\n8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for 'STEEL'. The material is specified with its elastic modulus, Poisson's ratio, and density."
+    },
+    "Step 9": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=STEEL\n1.\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'STEEL' to the element set 'Eall' and defines the section properties."
+    },
+    "Step 10": {
+        "Code": "*CONTACT PAIR,INTERACTION=IN1,SMALL SLIDING,TYPE=SURFACE TO SURFACE\nUPPER,LOWER\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION",
+            "SMALL SLIDING"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair interaction 'IN1' between the 'UPPER' and 'LOWER' surfaces with small sliding and surface-to-surface contact type."
+    },
+    "Step 11": {
+        "Code": "*SURFACE INTERACTION,NAME=IN1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines a surface interaction named 'IN1'."
+    },
+    "Step 12": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.E8,3.\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior for the interaction 'IN1', defining a linear pressure-overclosure relationship."
+    },
+    "Step 13": {
+        "Code": "*BOUNDARY\nNnoben,1,2,0\nNnunten,1,1,0\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node sets 'Nnoben' and 'Nnunten'. Nodes in 'Nnoben' are fixed in the first and second directions, while nodes in 'Nnunten' are fixed in the first direction."
+    },
+    "Step 14": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNALL,293\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the set 'NALL' to 293 K."
+    },
+    "Step 15": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.e-4,1.\n*TEMPERATURE\nNALL,293\n*CLOAD\n1,2,-16.6666666667\n8,2,-66.6666666666\n4,2,-16.6666666667\n*NODE PRINT,NSET=Nall,FREQUENCY=100\nu\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "TEMPERATURE",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step with non-linear geometry. It includes temperature conditions, concentrated loads on specific nodes, and requests for output of nodal displacements and element stresses."
+    }
+}

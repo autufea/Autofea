@@ -1,0 +1,81 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube;\n**   Test objective: *INITIAL CONDITIONS,TYPE=PLASTIC STRAIN\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cube and sets the test objective to initialize plastic strain conditions."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n       9,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      11,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n      12,  1.00000e+00,  1.00000e+00,  5.00000e-01 \n      13,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      14,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n      16,  5.00000e-01,  1.00000e+00,  1.00000e+00 \n      17,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      18,  0.00000e+00,  0.00000e+00,  5.00000e-01 \n      19,  0.00000e+00,  5.00000e-01,  1.00000e+00 \n      20,  0.00000e+00,  1.00000e+00,  5.00000e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes of the model with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,     9,    10,\n          11,    12,    17,    18,    19,    20,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model, specifying the element type as C3D20R and assigning them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n5,6,7,8,17,18,19,20\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'FIX' that includes specific nodes to be constrained."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nFIX,1,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'FIX' set, constraining them in all three spatial directions."
+    },
+    "Step 6": {
+        "Code": "*INITIAL CONDITIONS,TYPE=PLASTIC STRAIN\n1,1,.01,.0,.0,0.,0.,0.\n1,2,.01,.0,.0,0.,0.,0.\n1,3,.01,.0,.0,0.,0.,0.\n1,4,.01,.0,.0,0.,0.,0.\n1,5,.01,.0,.0,0.,0.,0.\n1,6,.01,.0,.0,0.,0.,0.\n1,7,.01,.0,.0,0.,0.,0.\n1,8,.01,.0,.0,0.,0.,0.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Initializes plastic strain conditions for specified nodes, setting initial plastic strain values."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n**\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' and defines it as a solid section."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*STATIC\n1.,1.\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "STATIC",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with a static procedure, sets the load increments, and specifies output requests for stress in the element set 'Eall'."
+    }
+}

@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam under pressure.\n**   Test objective: C3D10 elements: smoothing of\n**                   mesh perturbation\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever beam under pressure and sets the test objective to use C3D10 elements for mesh perturbation smoothing."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n       1,            1.,            0.\n       2,            0.,            0.\n       3,            1.,            1.\n       4,           0.5,            0.\n       5,           0.5,           0.5\n       6,            1.,           0.5\n       7,            0.,            1.\n       8,            0.,           0.5\n       9,           0.5,            1.\n      10,            1.,            0.,            8.\n      11,            1.,            1.,            8.\n      12,            0.,            0.,            8.\n      13,            1.,           0.5,            8.\n      14,           0.5,           0.5,            8.\n      15,           0.5,            0.,            8.\n      16,            0.,            1.,            8.\n      17,           0.5,            1.,            8.\n      18,            0.,           0.5,            8.\n      19,            1.,            0.,            2.\n      20,            1.,            0.,            1.\n      21,           0.5,            0.,            1.\n      22,            0.,            0.,            2.\n      23,           0.5,            0.,            2.\n      24,            0.,            0.,            1.\n      25,            1.,            0.,            4.\n      26,            1.,            0.,            3.\n      27,           0.5,            0.,            3.\n      28,            0.,            0.,            4.\n      29,           0.5,            0.,            4.\n      30,            0.,            0.,            3.\n      31,            1.,            0.,            6.\n      32,            1.,            0.,            5.\n      33,           0.5,            0.,            5.\n      34,            0.,            0.,            6.\n      35,           0.5,            0.,            6.\n      36,            0.,            0.,            5.\n      37,            1.,            0.,            7.\n      38,           0.5,            0.,            7.\n      39,            0.,            0.,            7.\n      40,            0.,            1.,            2.\n      41,            0.,           0.5,            1.\n      42,            0.,            1.,            1.\n      43,            0.,           0.5,            2.\n      44,            0.,            1.,            4.\n      45,            0.,           0.5,            3.\n      46,            0.,            1.,            3.\n      47,            0.,           0.5,            4.\n      48,            0.,            1.,            6.\n      49,            0.,           0.5,            5.\n      50,            0.,            1.,            5.\n      51,            0.,           0.5,            6.\n      52,            0.,           0.5,            7.\n      53,            0.,            1.,            7.\n      54,            1.,            1.,            2.\n      55,           0.5,            1.,            1.\n      56,            1.,            1.,            1.\n      57,           0.5,            1.,            2.\n      58,            1.,            1.,            3.8\n      59,           0.5,            1.,            3.\n      60,            1.,            1.,            3.\n      61,           0.5,            1.,            4.\n      62,            1.,            1.,            6.\n      63,           0.5,            1.,            5.\n      64,            1.,            1.,            5.\n      65,           0.5,            1.,            6.\n      66,           0.5,            1.,            7.\n      67,            1.,            1.,            7.\n      68,            1.,           0.5,            1.\n      69,            1.,           0.5,            2.\n      70,            1.,           0.5,            3.\n      71,            1.,           0.5,            4.\n      72,            1.,           0.5,            5.\n      73,            1.,           0.5,            6.\n      74,            1.,           0.5,            7.\n     149,      0.499871,      0.499871,       3.99987\n     150,           0.5,           0.5,            2.\n     151,           0.5,           0.5,            1.\n     152,      0.249935,      0.249935,       2.99994\n     153,      0.249935,      0.749935,       3.99994\n     154,      0.249935,      0.249935,       3.99994\n     155,      0.249935,      0.749935,       4.99994\n     156,      0.249935,      0.249935,       4.99994\n     157,      0.749935,      0.749935,       3.99994\n     158,      0.249935,      0.749935,       2.99994\n     159,      0.749935,      0.749935,       4.99994\n     160,           0.5,           0.5,            7.\n     161,           0.5,           0.5,            6.\n     162,      0.749935,      0.249935,       2.99994\n     163,      0.749935,      0.249935,       3.99994\n     164,      0.749935,      0.249935,       4.99994\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes of the model and assigns them to the node set 'NALL'. Each node is defined by its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D10, ELSET=EALL\n      37,       2,      22,      19,      40,      24,      23,      21,\n      41,      43,     150\n      38,       2,       3,      54,       1,       5,      56,     151,\n       4,       6,      68\n      39,      22,      44,      28,     149,      45,      47,      30,\n     152,     153,     154\n      40,      28,      34,     149,      48,      36,     156,     154,\n      49,      51,     155\n      41,      40,       7,      54,       2,      42,      55,      57,\n      41,       8,     151\n      42,      54,       2,      19,      40,     151,      21,      69,\n      57,      41,     150\n      43,      40,      44,     149,      58,      46,     153,     158,\n      59,      61,     157\n      44,      44,      48,     149,      62,      50,     155,     153,\n      63,      65,     159\n      45,      34,      16,      11,      48,      52,      17,     160,\n      51,      53,      66\n      46,      11,      62,      31,      34,      67,      73,      74,\n     160,     161,      35\n      47,      12,      11,      34,      16,      14,     160,      39,\n      18,      17,      52\n      48,      22,      19,      40,     149,      23,     150,      43,\n     152,     162,     158\n      49,       7,       3,      54,       2,       9,      56,      55,\n       8,       5,     151\n      50,      22,      28,      25,     149,      30,      29,      27,\n     152,     154,     163\n      51,       1,       2,      19,      54,       4,      21,      20,\n      68,     151,      69\n      52,      58,      19,      40,      54,      70,     150,      59,\n      60,      69,      57\n      53,      28,      25,     149,      31,      29,     163,     154,\n      33,      32,     164\n      54,      62,      48,      34,      11,      65,      51,     161,\n      67,      66,     160\n      55,     149,      48,      34,      62,     155,      51,     156,\n     159,      65,     161\n      56,      34,      11,      10,      31,     160,      13,      38,\n      35,      74,      37\n      57,      10,      11,      34,      12,      13,     160,      38,\n      15,      14,      39\n      58,      58,      25,      62,     149,      71,      72,      64,\n     157,     163,     159\n      59,      19,      25,      58,     149,      26,      71,      70,\n     162,     163,     157\n      60,      22,      19,     149,      25,      23,     162,     152,\n      27,      26,     163\n      61,      25,      62,     149,      31,      72,     159,     163,\n      32,      73,     164\n      62,      28,      48,     149,      44,      49,     155,     154,\n      47,      50,     153\n      63,      28,      34,      31,     149,      36,      35,      33,\n     154,     156,     164\n      64,      34,      62,      31,     149,     161,      73,      35,\n     156,     159,     164\n      65,      22,     149,      40,      44,     152,     158,      43,\n      45,     153,      46\n      66,      44,      62,     149,      58,      63,     159,     153,\n      61,      64,     157\n      67,     149,      58,      19,      40,     157,      70,     162,\n     158,      59,     150\n** Names based on e1\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of type C3D10 and assigns them to the element set 'EALL'. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*ELSET,ELSET=E1\n37, \n38, \n39, \n40, \n41, \n42, \n43, \n44, \n48, \n49, \n50, \n51, \n52, \n53, \n55, \n58, \n59, \n60, \n61, \n62, \n63, \n64, \n65, \n66, \n67, \n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates an element set 'E1' and lists the elements that belong to this set."
+    },
+    "Step 5": {
+        "Code": "*NSET,NSET=FIX\n1,4,2,6,5,8,3,9,7\n*NSET,NSET=LOAD\n10,15,12,13,14,18,11,17,16\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines two node sets: 'FIX' for fixed nodes and 'LOAD' for nodes where loads will be applied."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n1,1,2\n3,1,1\nFIX,3,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes. Node 1 is constrained in the first and second directions, node 3 in the first direction, and the 'FIX' set in the third direction."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=EALL,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'EALL' and defines it as a solid section."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\n47,P2,-100.\n57,P2,-100.\n*NODE FILE\nU\n*EL FILE\nS\n*REFINE MESH,LIMIT=10000.,ELSET=E1\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "EL FILE",
+            "REFINE MESH",
+            "LIMIT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step as static, applies distributed loads to specific elements, and specifies output requests for nodal displacements and element stresses. Additionally, it includes mesh refinement instructions for the element set 'E1'."
+    }
+}

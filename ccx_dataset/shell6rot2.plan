@@ -1,0 +1,74 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever shell.\n**   Test objective: rotational boundaries on a rotated structure\n**                   cf. shell6\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, describing the structure as a cantilever shell and the test objective as examining rotational boundaries on a rotated structure."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,-2.500000089936e-01,1.464466041384e-01,-2.499999984569e-01\n       2,1.035533868680e-01,1.464466041384e-01,-6.035533943185e-01\n       3,3.535533905933e-01,5.000000000000e-01,-3.535533905933e-01\n       4,-5.268355640631e-09,5.000000000000e-01,5.268355592834e-09\n       5,-7.322330842863e-02,1.464466041384e-01,-4.267766990219e-01\n       6,2.285533905933e-01,3.232233047034e-01,-4.785533905932e-01\n       7,1.767766952966e-01,5.000000000000e-01,-1.767766952966e-01\n       8,-1.250000052683e-01,3.232233047034e-01,-1.249999947316e-01\n       9,6.035533905933e-01,8.535533905933e-01,-1.035533905933e-01\n      10,2.499999947317e-01,8.535533905933e-01,2.500000052684e-01\n      11,4.785533905932e-01,6.767766952966e-01,-2.285533905933e-01\n      12,4.267766952967e-01,8.535533905933e-01,7.322330470338e-02\n      13,1.249999947316e-01,6.767766952966e-01,1.250000052683e-01\n      14,4.571067774613e-01,1.464466041384e-01,-9.571067849118e-01\n      15,7.071067811865e-01,5.000000000000e-01,-7.071067811865e-01\n      16,2.803300821646e-01,1.464466041384e-01,-7.803300896152e-01\n      17,5.821067811866e-01,3.232233047034e-01,-8.321067811865e-01\n      18,5.303300858899e-01,5.000000000000e-01,-5.303300858899e-01\n      19,9.571067811866e-01,8.535533905933e-01,-4.571067811865e-01\n      20,8.321067811865e-01,6.767766952966e-01,-5.821067811866e-01\n      21,7.803300858899e-01,8.535533905933e-01,-2.803300858899e-01\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the structure, assigning coordinates to each node and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the structure, specifying the type of element (S8R) and the nodes that make up each element, grouping them into a set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'Nfixx' and includes specific nodes (1, 4, 8, 10, 13) in this set."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,6\nNfixx,3,6\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the node set 'Nfixx', constraining degrees of freedom 1 to 6, and also applies specific constraints to node 4."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n*EXPANSION\n12.E-6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "EXPANSION"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the simulation, specifying the material name 'EL', its elastic properties (Young's modulus and Poisson's ratio), and its thermal expansion coefficient."
+    },
+    "Step 7": {
+        "Code": "*SHELL SECTION,ELSET=Eall,MATERIAL=EL\n0.01\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "This step defines the shell section properties, associating the element set 'Eall' with the material 'EL' and specifying a thickness of 0.01 units."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY\n15,4,4,0.0070711\n15,6,6,-0.0070711\n*NODE FILE,OUTPUT=2D\nU\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "NODE FILE",
+            "OUTPUT"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis step, specifying a static analysis, additional boundary conditions for node 15, and output requests for nodal displacements."
+    }
+}

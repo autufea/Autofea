@@ -1,0 +1,89 @@
+{
+    "Step 1": {
+        "Code": "",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step initializes the input file with a newline character, which is often used to ensure proper formatting."
+    },
+    "Step 2": {
+        "Code": "*node\n1,0.5,0.,0.\n2,1.,0.,0.\n3,1.5,0.,0.\n4,2.,0.,0.\n5,2.5,0.,0.\n6,3.,0.,0.\n7,3.5,0.,0.\n8,4.,0.,0.\n9,4.5,0.,0.\n10,5.,0.,0.\n11,5.5,0.,0.\n12,6.,0.,0.\n13,6.5,0.,0.\n",
+        "Keywords": [
+            "NODE"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model with their respective coordinates. Each node is specified by an ID and its x, y, z coordinates."
+    },
+    "Step 3": {
+        "Code": "*element,type=d,elset=inlet1\n1,0,1,2\n*element,type=d,elset=orifice1\n2,2,3,4\n*element,type=d,elset=vortex1\n3,4,5,6\n*element,type=d,elset=characteristic1\n4,6,7,8\n*element,type=d,elset=vortex2\n5,8,9,10\n*element,type=d,elset=restrictor2\n6,10,11,12\n*element,type=d,elset=outlet1\n7,12,13,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Specifies the elements of the model and assigns them to different element sets. Each element is defined by its type, element set, and the nodes that form the element."
+    },
+    "Step 4": {
+        "Code": "*material,name=gas\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the simulation. In this case, the material is named 'gas'."
+    },
+    "Step 5": {
+        "Code": "*specific gas constant\n287.\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Specifies the specific gas constant for the material defined in the previous step."
+    },
+    "Step 6": {
+        "Code": "*fluid constants\n 0.1002353938D+4, 0.1711000000D-04, 0.27315D+03\n 0.1002353938D+4, 0.1949281697D-04, 0.32315D+03\n 0.1002353938D+4, 0.2169996934D-04, 0.37315D+03\n 0.1002353938D+4, 0.2376071192D-04, 0.42315D+03\n 0.1002353938D+4, 0.2569766947D-04, 0.47315D+03\n 0.1002353938D+4, 0.2752859550D-04, 0.52315D+03\n 0.1002353938D+4, 0.2926763423D-04, 0.57315D+03\n 0.1002353938D+4, 0.3092621879D-04, 0.62315D+03\n 0.1002353938D+4, 0.3251371525D-04, 0.67315D+03\n 0.1002353938D+4, 0.3403789021D-04, 0.72315D+03\n 0.1002353938D+4, 0.3550525531D-04, 0.77315D+03\n 0.1002353938D+4, 0.3692132461D-04, 0.82315D+03\n 0.1002353938D+4, 0.3829080968D-04, 0.87315D+03\n 0.1002353938D+4, 0.3961776952D-04, 0.92315D+03\n 0.1002353938D+4, 0.4090572698D-04, 0.97315D+03\n 0.1002353938D+4, 0.4215776043D-04, 0.10231D+04\n 0.1002353938D+4, 0.4337657658D-04, 0.10732D+04\n 0.1002353938D+4, 0.4456456897D-04, 0.11232D+04\n 0.1002353938D+4, 0.4572386531D-04, 0.11732D+04\n 0.1002353938D+4, 0.4685636617D-04, 0.12232D+04\n**1002.353938\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines the fluid constants for the gas material at various temperatures. Each line provides the constants for a specific temperature."
+    },
+    "Step 7": {
+        "Code": "*initial conditions,type=temperature\n2,293.\n4,293.\n6,293.\n8,1198.\n10,1198.\n12,1198.\n*initial conditions,type=total pressure\n2,100000.\n4,9.971387e4\n6,5.573126e6\n12,100000.\n*initial conditions,type=massflow\n5,2.604687\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial conditions for the simulation, including temperature, total pressure, and mass flow at specific nodes."
+    },
+    "Step 8": {
+        "Code": "*fluid sections,material=gas,elset=inlet1,type=inout\n*fluid sections,material=gas,elset=orifice1,type=orifice\n1.e-1,3.5682e-1,0\n*fluid sections,material=gas,elset=vortex1,type=vortex forced\n4.34e-2,2.17e-2,1.,1.,1.1519e4,0.\n*fluid sections,material=gas,elset=characteristic1,type=characteristic\n1.,,,,1.e-2,8.e-6,1.,1.e-4\n*fluid sections,material=gas,elset=vortex2,type=vortex forced\n2.566e-2,4.04e-2,1.,1.,1.1519e4,0.\n*fluid sections,material=gas,elset=restrictor2,type=restrictor user\n2.463e-3,1.e-2,7.34e-2,1.,0.,0\n*fluid sections,material=gas,elset=outlet1,type=inout\n",
+        "Keywords": [
+            "FLUID SECTIONS",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTIONS",
+        "Description": "Defines the fluid sections for different element sets, specifying the material, element set, and type of each section along with additional parameters."
+    },
+    "Step 9": {
+        "Code": "*boundary,pressure\n2,2,2,100000.\n12,2,2,100000.\n*boundary,temperature\n2,0,0,293.\n8,0,0,1198.\n",
+        "Keywords": [
+            "BOUNDARY",
+            "PRESSURE",
+            "TEMPERATURE"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions for pressure and temperature at specific nodes."
+    },
+    "Step 10": {
+        "Code": "*step,inc=100\n*heat transfer,steady state\n1.,1.\n*node file\nmf,pt,tt\n*end step\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step, specifying the number of increments and the type of analysis (steady-state heat transfer). It also specifies the output files for mass flow, total pressure, and temperature."
+    }
+}

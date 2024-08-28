@@ -1,0 +1,76 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam, one element\n**   Test objective: B31 elements.\n**                   Use of *NODAL THICKNESS\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that it involves a cantilever beam with one element and aims to test B31 elements and the use of *NODAL THICKNESS."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1, 0, 0, 0\n2, 0, 0, 1\n3, 0, 0, 2\n4, 0, 0, 3\n5, 0, 0, 4\n6, 0, 0, 5\n7, 0, 0, 6\n8, 0, 0, 7\n9, 0, 0, 8\n10, 0, 0, 9\n11, 0, 0,10\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, assigning coordinates to each node and grouping them into a set named Nall."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=B31,ELSET=EAll\n1,1,2\n2,2,3\n3,3,4\n4,4,5\n5,5,6\n6,6,7\n7,7,8\n8,8,9\n9,9,10\n*ELEMENT,TYPE=B31,ELSET=E1\n10,10,11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type B31 and grouping them into sets named EAll and E1."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing all degrees of freedom for node 1."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=ALUM\n*ELASTIC\n1E7,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, specifying the material as aluminum with an elastic modulus of 1E7 and a Poisson's ratio of 0.3."
+    },
+    "Step 6": {
+        "Code": "*BEAM SECTION,ELSET=EAll,MATERIAL=ALUM,SECTION=RECT\n.25,.25\n1.d0,0.d0,0.d0\n*BEAM SECTION,ELSET=E1,MATERIAL=ALUM,SECTION=RECT,NODAL THICKNESS\n.25,.25\n1.d0,0.d0,0.d0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION",
+            "NODAL THICKNESS"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam sections for the elements, specifying rectangular sections for both element sets EAll and E1, with nodal thickness applied to E1."
+    },
+    "Step 7": {
+        "Code": "*NODAL THICKNESS\n10,.3,.5\n11,.4,.3\n",
+        "Keywords": [
+            "NODAL THICKNESS"
+        ],
+        "Start": "*NODAL THICKNESS",
+        "Description": "This step specifies the nodal thickness for nodes 10 and 11, providing different thickness values for each node."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n11,1,1.\n*EL PRINT,ELSET=Eall,FREQUENCY=100\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "EL PRINT",
+            "ELSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the static analysis, applies a load to node 11, and specifies the output of stress results for the element set EAll."
+    }
+}

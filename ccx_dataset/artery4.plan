@@ -1,0 +1,115 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: hollow tube.\n**   Test objective: network pressure MPC; the dependent node\n**                   also belongs to a convective film condition\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a hollow tube and sets the test objective to network pressure MPC. It also mentions that the dependent node belongs to a convective film condition."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1,2.,10.,0.\n2,2.,0.,0.\n3,2.3,0.,0.\n4,2.3,10.,0.\n5,2.,5.,0.\n6,2.15,0.,0.\n7,2.3,5.,0.\n8,2.15,10.,0.\n9,0.,11.,0.\n10,0.,10.,0.\n11,0.,5.,0.\n12,0.,0.,0.\n13,0.,-1.,0.\n14,3.,5.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes and their coordinates, assigning them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CAX8,ELSET=Etube\n1,1,2,3,4,5,6,7,8\n*ELEMENT,TYPE=D,ELSET=Ewater\n3,10,11,12\n*ELEMENT,TYPE=D,ELSET=EIO\n2,0,9,10\n4,12,13,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements and their connectivity. Different element types and sets are specified for the tube, water, and input/output."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n*CONDUCTIVITY\n50.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', including its elastic modulus, Poisson's ratio, density, and thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Etube,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Etube' for the solid section."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 7": {
+        "Code": "*FLUID CONSTANTS\n4217.E6,1750.E-12\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines fluid constants, including bulk modulus and compressibility."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,ELSET=Ewater,MATERIAL=WATER,TYPE=PIPE MANNING\n12.566e-1,.3162,0.015\n*FLUID SECTION,ELSET=EIO,MATERIAL=WATER,TYPE=PIPE INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for the element sets 'Ewater' and 'EIO', specifying the material as water and the type of fluid section."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n1,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to node 1, constraining it in the second degree of freedom."
+    },
+    "Step 10": {
+        "Code": "*EQUATION\n2\n14,2,1.,12,2,-1.\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "Defines an equation constraint between nodes 14 and 12, linking their second degrees of freedom."
+    },
+    "Step 11": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n12,0.1287\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets initial conditions for total pressure at node 12."
+    },
+    "Step 12": {
+        "Code": "*STEP,NLGEOM\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*BOUNDARY\n1,11,11,273.\n10,2,2,0.13\n10,11,11,1000.\n*FILM\n1,F1FC,12,10.\n1,F3FC,14,10.\n*BOUNDARY,MASS FLOW\n9,1,1,5.e-7\n*DLOAD\nEwater,GRAV,9.81E3,-1.,0.,0.\n*NODE FILE\nPT,TT,MF,NT\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "FILM",
+            "MASS FLOW",
+            "DLOAD",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a step for a steady-state heat transfer analysis with nonlinear geometry. It includes boundary conditions, film conditions, mass flow boundary conditions, and loads. It also specifies output requests for node file data."
+    }
+}

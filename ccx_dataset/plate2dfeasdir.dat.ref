@@ -1,0 +1,25 @@
+
+                        S T E P       2
+
+
+   ##############################################################################################################
+   D E S I G N   R E S P O N S E                    I N F O R M A T I O N
+
+   FUNCTION        FUNCTION VALUE    LENGTH GRADIENT   NAME                                                        
+   ##############################################################################################################
+
+   EQPLASTICSTRAIN  0.6464193E+01      0.4223683E+03   PEEQ_RESP                                                                       
+   MASS             0.3120000E-08      0.3488266E-07   MASS_RESP                                                                       
+
+                        S T E P       3
+
+
+
+   ##############################################################################################################
+   A S S E M B L Y   O F   B A R R I E R   F U N C T I O N
+
+   NUMBER OF    CONSTRAINT      LE/     FUNCTION         FUNCTION         FUNCTION        ACTIVE/    NAME OF
+   CONSTRAINT   FUNCTION        GE      VALUE            BOUND            VALUE NORM.     INACTIVE   CONSTRAINT
+   ##############################################################################################################
+
+    1           MASS            LE      0.3120000E-08    0.3120000E-08   -0.1000000E-09   ACTIVE     MASS_RESP                                                                       

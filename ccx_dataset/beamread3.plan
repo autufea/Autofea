@@ -1,0 +1,28 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: restart capability (*DYNAMIC, reading part).\n**   Before running this example, please run example beamwrite3\n**   and copy beamwrite3.rout to beamread3.rin\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step sets up the structure as a cantilever beam and specifies the test objective, which is to test the restart capability using dynamic analysis. It also instructs the user to run a previous example (beamwrite3) and copy its output file for use in this simulation."
+    },
+    "Step 2": {
+        "Code": "*RESTART,READ,STEP=1\n",
+        "Keywords": [
+            "RESTART",
+            "READ"
+        ],
+        "Start": "*RESTART",
+        "Description": "This step reads the restart data from the first step of a previous analysis. It uses the file generated from the beamwrite3 example to continue the simulation from where it left off."
+    },
+    "Step 3": {
+        "Code": "*STEP,NLGEOM,INC=100\n*DYNAMIC\n1.E-6,1.E-5\n*EL FILE\n*END STEP\n\n\n\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "INC",
+            "DYNAMIC",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step initiates a new analysis step with nonlinear geometry considerations and a maximum of 100 increments. It specifies a dynamic analysis with time increments ranging from 1.E-6 to 1.E-5 and requests element file output."
+    }
+}

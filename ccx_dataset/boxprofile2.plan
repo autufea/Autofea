@@ -1,0 +1,70 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: box beam section.\n**                   section forces\n**\n*heading \nBalken\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the initial comments and heading for the simulation. It describes the structure as a cantilever beam and specifies the test objective."
+    },
+    "Step 2": {
+        "Code": "*node, nset=nall\n 1, 0.0, 0.0,   0.0\n 2, 0.0, 0.0, 100.0\n 3, 0.0, 0.0, 200.0\n 4, 0.0, 0.0, 300.0\n 5, 0.0, 0.0, 400.0\n 6, 0.0, 0.0, 500.0\n 7, 0.0, 0.0, 600.0\n 8, 0.0, 0.0, 700.0\n 9, 0.0, 0.0, 800.0\n10, 0.0, 0.0, 900.0\n11, 0.0, 0.0,1000.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model. Each node is given a unique identifier and coordinates in a 3D space."
+    },
+    "Step 3": {
+        "Code": "*element, type=B32R, elset=elall\n1,  1,2,3\n2,  3,4,5\n3,  5,6,7\n4,  7,8,9\n5,  9,10,11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using the nodes specified in Step 2. The elements are of type B32R and are grouped into an element set named 'elall'."
+    },
+    "Step 4": {
+        "Code": "*beam section, section=box, elset=elall, material=steel\n50.0, 50.0, 3.00, 3.00, 3.00, 3.00\n1.0, 0.0, 0.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties. The section is specified as a box section with given dimensions and material properties."
+    },
+    "Step 5": {
+        "Code": "*material, name=steel\n*elastic, type=iso\n70000.0, 0.3 \n*density\n7.85e-09\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the beam. The material is named 'steel' and its elastic properties and density are specified."
+    },
+    "Step 6": {
+        "Code": "*boundary\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. Node 1 is constrained in all six degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*step\n*static \n*cload\n11, 2, -100.0\n*el file,section forces,output=2d\ns,noe\n*end step\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "EL FILE",
+            "SECTION FORCES",
+            "OUTPUT"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis step. It specifies a static analysis, applies a concentrated load at node 11, and requests output of section forces."
+    }
+}

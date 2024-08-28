@@ -1,0 +1,87 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cylindrical shell\n**   Test objective: cavity radiation for axisymmetric elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, specifying that the structure is a cylindrical shell and the test objective is to analyze cavity radiation for axisymmetric elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.05000e+00,  0.00000e+00,  0.00000e+00 \n       2,  1.05000e+00,  3.00000e-01,  0.00000e+00 \n       3,  1.00000e+00,  3.00000e-01,  0.00000e+00 \n       4,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       5,  1.05000e+00,  1.50000e-01,  0.00000e+00 \n       6,  1.02500e+00,  3.00000e-01,  0.00000e+00 \n       7,  1.00000e+00,  1.50000e-01,  0.00000e+00 \n       8,  1.02500e+00,  0.00000e+00,  0.00000e+00 \n       9,  1.05000e+00,  6.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  6.00000e-01,  0.00000e+00 \n      11,  1.05000e+00,  4.50000e-01,  0.00000e+00 \n      12,  1.02500e+00,  6.00000e-01,  0.00000e+00 \n      13,  1.00000e+00,  4.50000e-01,  0.00000e+00 \n      14,  1.05000e+00,  9.00000e-01,  0.00000e+00 \n      15,  1.00000e+00,  9.00000e-01,  0.00000e+00 \n      16,  1.05000e+00,  7.50000e-01,  0.00000e+00 \n      17,  1.02500e+00,  9.00000e-01,  0.00000e+00 \n      18,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      19,  1.05000e+00,  1.20000e+00,  0.00000e+00 \n      20,  1.00000e+00,  1.20000e+00,  0.00000e+00 \n      21,  1.05000e+00,  1.05000e+00,  0.00000e+00 \n      22,  1.02500e+00,  1.20000e+00,  0.00000e+00 \n      23,  1.00000e+00,  1.05000e+00,  0.00000e+00 \n      24,  1.05000e+00,  1.50000e+00,  0.00000e+00 \n      25,  1.00000e+00,  1.50000e+00,  0.00000e+00 \n      26,  1.05000e+00,  1.35000e+00,  0.00000e+00 \n      27,  1.02500e+00,  1.50000e+00,  0.00000e+00 \n      28,  1.00000e+00,  1.35000e+00,  0.00000e+00 \n      29,  1.05000e+00,  1.80000e+00,  0.00000e+00 \n      30,  1.00000e+00,  1.80000e+00,  0.00000e+00 \n      31,  1.05000e+00,  1.65000e+00,  0.00000e+00 \n      32,  1.02500e+00,  1.80000e+00,  0.00000e+00 \n      33,  1.00000e+00,  1.65000e+00,  0.00000e+00 \n      34,  1.05000e+00,  2.10000e+00,  0.00000e+00 \n      35,  1.00000e+00,  2.10000e+00,  0.00000e+00 \n      36,  1.05000e+00,  1.95000e+00,  0.00000e+00 \n      37,  1.02500e+00,  2.10000e+00,  0.00000e+00 \n      38,  1.00000e+00,  1.95000e+00,  0.00000e+00 \n      39,  1.05000e+00,  2.40000e+00,  0.00000e+00 \n      40,  1.00000e+00,  2.40000e+00,  0.00000e+00 \n      41,  1.05000e+00,  2.25000e+00,  0.00000e+00 \n      42,  1.02500e+00,  2.40000e+00,  0.00000e+00 \n      43,  1.00000e+00,  2.25000e+00,  0.00000e+00 \n      44,  1.05000e+00,  2.70000e+00,  0.00000e+00 \n      45,  1.00000e+00,  2.70000e+00,  0.00000e+00 \n      46,  1.05000e+00,  2.55000e+00,  0.00000e+00 \n      47,  1.02500e+00,  2.70000e+00,  0.00000e+00 \n      48,  1.00000e+00,  2.55000e+00,  0.00000e+00 \n      49,  1.05000e+00,  3.00000e+00,  0.00000e+00 \n      50,  1.00000e+00,  3.00000e+00,  0.00000e+00 \n      51,  1.05000e+00,  2.85000e+00,  0.00000e+00 \n      52,  1.02500e+00,  3.00000e+00,  0.00000e+00 \n      53,  1.00000e+00,  2.85000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      2,      9,     10,      3,     11,     12,     13,      6\n     3,      9,     14,     15,     10,     16,     17,     18,     12\n     4,     14,     19,     20,     15,     21,     22,     23,     17\n     5,     19,     24,     25,     20,     26,     27,     28,     22\n     6,     24,     29,     30,     25,     31,     32,     33,     27\n     7,     29,     34,     35,     30,     36,     37,     38,     32\n     8,     34,     39,     40,     35,     41,     42,     43,     37\n     9,     39,     44,     45,     40,     46,     47,     48,     42\n    10,     44,     49,     50,     45,     51,     52,     53,     47\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying their type (CAX8) and the nodes that form each element, and groups them into a set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix1 \n25, \n30, \n33, \n35, \n38, \n40, \n43, \n45, \n48, \n50, \n53, \n*NSET,NSET=Nfix2 \n3, \n4, \n7, \n10, \n13, \n15, \n18, \n20, \n23, \n28, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines two node sets, 'Nfix1' and 'Nfix2', which will be used later for applying boundary conditions or initial conditions."
+    },
+    "Step 5": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=0.,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the absolute zero temperature and the Stefan-Boltzmann constant for radiation calculations."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*DENSITY\n7800.\n*CONDUCTIVITY\n.05,0.\n*SPECIFIC HEAT\n446.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY",
+            "CONDUCTIVITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, including density, thermal conductivity, and specific heat, and names the material 'EL'."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n0.17453\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies the thickness of the elements."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNfix1,1000.\nNfix2,500.\n**\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for the node sets 'Nfix1' and 'Nfix2', assigning temperatures of 1000 and 500 degrees respectively."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER\n.1,1000.\n*RADIATE\nEall,R3CR,300.,.8\n*EL PRINT,ELSET=Eall,FREQUENCY=10\nHFL\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "RADIATE",
+            "EL PRINT",
+            "ELSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation step for heat transfer analysis, specifying the time increment and total time, and includes radiation effects, heat flux output, and print frequency for the element set 'Eall'."
+    }
+}

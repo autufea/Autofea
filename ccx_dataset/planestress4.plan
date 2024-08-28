@@ -1,0 +1,91 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever shell.\n**   Test objective: CPS8R elements, nodal thickness\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that it involves a cantilever shell structure and aims to test CPS8R elements with nodal thickness."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -7.45058e-09, -7.45058e-09,  0.00000e+00 \n       2,  5.00000e-01, -7.45058e-09,  0.00000e+00 \n       3,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n       4, -7.45058e-09,  5.00000e-01,  0.00000e+00 \n       5,  2.50000e-01, -7.45058e-09,  0.00000e+00 \n       6,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n       7,  2.50000e-01,  5.00000e-01,  0.00000e+00 \n       8, -7.45058e-09,  2.50000e-01,  0.00000e+00 \n       9,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      10, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      11,  5.00000e-01,  7.50000e-01,  0.00000e+00 \n      12,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      13, -7.45058e-09,  7.50000e-01,  0.00000e+00 \n      14,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n      15,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      16,  7.50000e-01, -7.45058e-09,  0.00000e+00 \n      17,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      18,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n      19,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      21,  7.50000e-01,  1.00000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPS8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CPS8R and grouping them into an element set named 'Eall'. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'Nfixx' which includes specific nodes that will be used for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,2\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes in the 'Nfixx' set, fixing them in the x and y directions. Additionally, node 4 is fixed in the y direction."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the simulation, naming the material 'EL' and specifying its elastic properties with a Young's modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL,NODAL THICKNESS\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "NODAL THICKNESS"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies that the elements will use nodal thickness."
+    },
+    "Step 8": {
+        "Code": "*NSET,NSET=Nsetm \n2, \n3, \n6, \n9, \n11,\n*NSET,NSET=Nsete \n14, \n15, \n17, \n19, \n20, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates two additional node sets, 'Nsetm' and 'Nsete', which include specific nodes that will be used for further analysis or boundary conditions."
+    },
+    "Step 9": {
+        "Code": "*NODAL THICKNESS\n1,0.01\n4,0.01\n8,0.01\n10,0.01\n13,0.01\nNsetm,0.03\nNsete,0.02\n5,0.02\n7,0.02\n12,0.02\n16,0.025\n18,0.025\n21,0.025\n",
+        "Keywords": [
+            "NODAL THICKNESS"
+        ],
+        "Start": "*NODAL THICKNESS",
+        "Description": "This step assigns thickness values to individual nodes, specifying different thicknesses for different nodes."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n15,1,1.\n*NODE FILE,OUTPUT=3D\nU\n*EL FILE\nS,NOE\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure, specifying a static analysis. It applies a concentrated load to node 15 and sets up the output requests for nodal displacements and element stresses."
+    }
+}

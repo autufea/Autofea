@@ -1,0 +1,88 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: disk segment\n**   Test objective: SPC's in cylindrical coordinates;\n**                   no cascading.\n**                   \n*HEADING\nModel: segment\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the model with a heading and specifies that the structure is a disk segment. The test objective is to analyze SPCs in cylindrical coordinates without cascading."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  5.50000e-01,  0.00000e+00 \n       3,  1.00000e+00,  5.31259e-01,  1.42350e-01 \n       4,  1.00000e+00,  9.65926e-01,  2.58819e-01 \n       5,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n       6,  5.00000e-01,  5.50000e-01,  0.00000e+00 \n       7,  5.00000e-01,  5.31259e-01,  1.42350e-01 \n       8,  5.00000e-01,  9.65926e-01,  2.58819e-01 \n       9,  1.00000e+00,  7.75000e-01,  0.00000e+00 \n      10,  1.00000e+00,  5.45295e-01,  7.17894e-02 \n      11,  1.00000e+00,  7.48592e-01,  2.00585e-01 \n      12,  1.00000e+00,  9.91445e-01,  1.30526e-01 \n      13,  7.50000e-01,  1.00000e+00,  0.00000e+00 \n      14,  7.50000e-01,  5.50000e-01,  0.00000e+00 \n      15,  7.50000e-01,  5.31259e-01,  1.42350e-01 \n      16,  7.50000e-01,  9.65926e-01,  2.58819e-01 \n      17,  5.00000e-01,  7.75000e-01,  0.00000e+00 \n      18,  5.00000e-01,  5.45295e-01,  7.17894e-02 \n      19,  5.00000e-01,  7.48592e-01,  2.00585e-01 \n      20,  5.00000e-01,  9.91445e-01,  1.30526e-01 \n      21,  1.00000e+00,  1.00000e-01,  0.00000e+00 \n      22,  1.00000e+00,  9.65926e-02,  2.58819e-02 \n      23,  5.00000e-01,  1.00000e-01,  0.00000e+00 \n      24,  5.00000e-01,  9.65926e-02,  2.58819e-02 \n      25,  1.00000e+00,  3.25000e-01,  0.00000e+00 \n      26,  1.00000e+00,  9.91445e-02,  1.30526e-02 \n      27,  1.00000e+00,  3.13926e-01,  8.41162e-02 \n      28,  7.50000e-01,  1.00000e-01,  0.00000e+00 \n      29,  7.50000e-01,  9.65926e-02,  2.58819e-02 \n      30,  5.00000e-01,  3.25000e-01,  0.00000e+00 \n      31,  5.00000e-01,  9.91445e-02,  1.30526e-02 \n      32,  5.00000e-01,  3.13926e-01,  8.41162e-02 \n      33, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      34, -7.45058e-09,  5.50000e-01,  0.00000e+00 \n      35, -7.45058e-09,  5.31259e-01,  1.42350e-01 \n      36, -7.45058e-09,  9.65926e-01,  2.58819e-01 \n      37,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      38,  2.50000e-01,  5.50000e-01,  0.00000e+00 \n      39,  2.50000e-01,  5.31259e-01,  1.42350e-01 \n      40,  2.50000e-01,  9.65926e-01,  2.58819e-01 \n      41, -7.45058e-09,  7.75000e-01,  0.00000e+00 \n      42, -7.45058e-09,  5.45295e-01,  7.17894e-02 \n      43, -7.45058e-09,  7.48592e-01,  2.00585e-01 \n      44, -7.45058e-09,  9.91445e-01,  1.30526e-01 \n      45, -7.45058e-09,  1.00000e-01,  0.00000e+00 \n      46, -7.45058e-09,  9.65926e-02,  2.58819e-02 \n      47,  2.50000e-01,  1.00000e-01,  0.00000e+00 \n      48,  2.50000e-01,  9.65926e-02,  2.58819e-02 \n      49, -7.45058e-09,  3.25000e-01,  0.00000e+00 \n      50, -7.45058e-09,  9.91445e-02,  1.30526e-02 \n      51, -7.45058e-09,  3.13926e-01,  8.41162e-02 \n      52,  1.00000e+00,  4.76314e-01,  2.75000e-01 \n      53,  1.00000e+00,  8.66025e-01,  5.00000e-01 \n      54,  5.00000e-01,  4.76314e-01,  2.75000e-01 \n      55,  5.00000e-01,  8.66025e-01,  5.00000e-01 \n      56,  1.00000e+00,  5.08134e-01,  2.10476e-01 \n      57,  1.00000e+00,  6.71170e-01,  3.87500e-01 \n      58,  1.00000e+00,  9.23880e-01,  3.82683e-01 \n      59,  7.50000e-01,  4.76314e-01,  2.75000e-01 \n      60,  7.50000e-01,  8.66025e-01,  5.00000e-01 \n      61,  5.00000e-01,  5.08134e-01,  2.10476e-01 \n      62,  5.00000e-01,  6.71170e-01,  3.87500e-01 \n      63,  5.00000e-01,  9.23880e-01,  3.82683e-01 \n      64,  1.00000e+00,  8.66025e-02,  5.00000e-02 \n      65,  5.00000e-01,  8.66025e-02,  5.00000e-02 \n      66,  1.00000e+00,  9.23880e-02,  3.82683e-02 \n      67,  1.00000e+00,  2.81458e-01,  1.62500e-01 \n      68,  7.50000e-01,  8.66025e-02,  5.00000e-02 \n      69,  5.00000e-01,  9.23880e-02,  3.82683e-02 \n      70,  5.00000e-01,  2.81458e-01,  1.62500e-01 \n      71, -7.45058e-09,  4.76314e-01,  2.75000e-01 \n      72, -7.45058e-09,  8.66025e-01,  5.00000e-01 \n      73,  2.50000e-01,  4.76314e-01,  2.75000e-01 \n      74,  2.50000e-01,  8.66025e-01,  5.00000e-01 \n      75, -7.45058e-09,  5.08134e-01,  2.10476e-01 \n      76, -7.45058e-09,  6.71170e-01,  3.87500e-01 \n      77, -7.45058e-09,  9.23880e-01,  3.82683e-01 \n      78, -7.45058e-09,  8.66025e-02,  5.00000e-02 \n      79,  2.50000e-01,  8.66025e-02,  5.00000e-02 \n      80, -7.45058e-09,  9.23880e-02,  3.82683e-02 \n      81, -7.45058e-09,  2.81458e-01,  1.62500e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model and assigns them to the node set 'Nall'. Each node is specified with its coordinates in the model space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,     9,    10,\n          11,    12,    17,    18,    19,    20,    13,    14,    15,    16\n     2,     2,    21,    22,     3,     6,    23,    24,     7,    25,    26,\n          27,    10,    30,    31,    32,    18,    14,    28,    29,    15\n     3,     5,     6,     7,     8,    33,    34,    35,    36,    17,    18,\n          19,    20,    41,    42,    43,    44,    37,    38,    39,    40\n     4,     6,    23,    24,     7,    34,    45,    46,    35,    30,    31,\n          32,    18,    49,    50,    51,    42,    38,    47,    48,    39\n     5,     4,     3,    52,    53,     8,     7,    54,    55,    11,    56,\n          57,    58,    19,    61,    62,    63,    16,    15,    59,    60\n     6,     3,    22,    64,    52,     7,    24,    65,    54,    27,    66,\n          67,    56,    32,    69,    70,    61,    15,    29,    68,    59\n     7,     8,     7,    54,    55,    36,    35,    71,    72,    19,    61,\n          62,    63,    43,    75,    76,    77,    40,    39,    73,    74\n     8,     7,    24,    65,    54,    35,    46,    78,    71,    32,    69,\n          70,    61,    51,    80,    81,    75,    39,    48,    79,    73\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using 20-node brick elements (C3D20R) and assigns them to the element set 'Eall'. Each element is defined by its connecting nodes."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model. The material named 'EL' is given elastic properties with a Young's modulus of 210000 and a Poisson's ratio of 0.3, along with a density of 7.8E-9."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the previously defined material 'EL' to the element set 'Eall' as a solid section."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=Nfixy \n1, \n2, \n5, \n6, \n9, \n13, \n14, \n17, \n21, \n23, \n25, \n28, \n30, \n33, \n34, \n37, \n38, \n41, \n45, \n47, \n49, \n53, \n55, \n60, \n72, \n74, \n57, \n62, \n76, \n52, \n54, \n59, \n71, \n73, \n67, \n70, \n81, \n64, \n65, \n68, \n78, \n79, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set 'Nfixy' which includes specific nodes that will be constrained in the model."
+    },
+    "Step 7": {
+        "Code": "*TRANSFORM,TYPE=C,NSET=Nfixy\n0.,0.,0.,1.,0.,0.\n",
+        "Keywords": [
+            "TRANSFORM",
+            "NSET"
+        ],
+        "Start": "*TRANSFORM",
+        "Description": "This step applies a cylindrical coordinate transformation to the node set 'Nfixy'. The transformation is defined with the origin at (0,0,0) and the axis along the x-direction."
+    },
+    "Step 8": {
+        "Code": "*BOUNDARY\nNfixy,2,2\n19,1,1\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. The node set 'Nfixy' is constrained in the radial direction (2nd degree of freedom), and node 19 is constrained in the axial direction (1st degree of freedom)."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\nEall,CENTRIF,1000000000.,0.,0.,0.,1.,0.,0.\n*NODE PRINT,NSET=Nall,GLOBAL=YES\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "GLOBAL",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure. A static analysis is performed with a centrifugal load applied to the element set 'Eall'. The results for nodal displacements and element stresses are printed for the node set 'Nall' and element set 'Eall', respectively."
+    }
+}

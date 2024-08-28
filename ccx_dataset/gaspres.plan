@@ -1,0 +1,105 @@
+{
+    "Step 1": {
+        "Code": "**\n**      Structure: gas pipe.\n**      Test objective: structure loaded by network pressure.\n**      (m,kg,s,K)\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a gas pipe and sets the test objective to analyze the structure under network pressure. The units used are meters, kilograms, seconds, and Kelvin."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1,0.,0.,0.\n2,0.,.5,0.\n3,0.,1.,0.\n4,.1,0.,0.\n5,.1,.5,0.\n6,.1,1.,0.\n7,.105,1.,0.\n8,.11,1.,0.\n9,.11,.5,0.\n10,.11,0.,0.\n11,.105,0.,0.\n12,0.,-0.5,0.\n13,0.,1.5,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and assigns them to a node set named 'Nall'. Each node is specified by its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CAX8,ELSET=WALL\n1,4,10,8,6,11,9,7,5\n*ELEMENT,TYPE=D,ELSET=FLUID\n2,1,2,3\n*ELEMENT,TYPE=D,ELSET=EIO\n3,0,12,1\n4,3,13,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure. The wall elements are defined with type CAX8 and assigned to the set 'WALL'. Fluid elements and inlet/outlet elements are also defined with type D and assigned to sets 'FLUID' and 'EIO' respectively."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.e6,.3\n*CONDUCTIVITY\n45.,0.\n*DENSITY\n7800.\n*MATERIAL,NAME=GAS\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "CONDUCTIVITY",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elastic material named 'EL', including its elasticity, conductivity, and density. Also introduces a material named 'GAS'."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n 0.1002353938D+4, 0.1711000000D-04, 0.27315D+03\n 0.1002353938D+4, 0.1949281697D-04, 0.32315D+03\n 0.1002353938D+4, 0.2169996934D-04, 0.37315D+03\n 0.1002353938D+4, 0.2376071192D-04, 0.42315D+03\n 0.1002353938D+4, 0.2569766947D-04, 0.47315D+03\n 0.1002353938D+4, 0.2752859550D-04, 0.52315D+03\n 0.1002353938D+4, 0.2926763423D-04, 0.57315D+03\n 0.1002353938D+4, 0.3092621879D-04, 0.62315D+03\n 0.1002353938D+4, 0.3251371525D-04, 0.67315D+03\n 0.1002353938D+4, 0.3403789021D-04, 0.72315D+03\n 0.1002353938D+4, 0.3550525531D-04, 0.77315D+03\n 0.1002353938D+4, 0.3692132461D-04, 0.82315D+03\n 0.1002353938D+4, 0.3829080968D-04, 0.87315D+03\n 0.1002353938D+4, 0.3961776952D-04, 0.92315D+03\n 0.1002353938D+4, 0.4090572698D-04, 0.97315D+03\n 0.1002353938D+4, 0.4215776043D-04, 0.10231D+04\n 0.1002353938D+4, 0.4337657658D-04, 0.10732D+04\n 0.1002353938D+4, 0.4456456897D-04, 0.11232D+04\n 0.1002353938D+4, 0.4572386531D-04, 0.11732D+04\n 0.1002353938D+4, 0.4685636617D-04, 0.12232D+04\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Specifies the fluid constants for the gas material at various temperatures and pressures."
+    },
+    "Step 6": {
+        "Code": "*SPECIFIC GAS CONSTANT\n286.9\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Defines the specific gas constant for the gas material."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=WALL,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Defines the solid section properties for the wall elements, associating them with the material 'EL'."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,ELSET=FLUID,MATERIAL=GAS,TYPE=GASPIPE FANNO ADIABATIC\n0.031416,0.2,1.,0.0001,1.,0.,0.\n*FLUID SECTION,ELSET=EIO,MATERIAL=GAS,TYPE=INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines the fluid section properties for the fluid elements, associating them with the material 'GAS' and specifying the type as 'GASPIPE FANNO ADIABATIC'. Also defines the inlet/outlet fluid section."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n4,2,2,0.\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the structure, fixing the displacement in the y-direction for node 4."
+    },
+    "Step 10": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,273\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the set 'Nall' to 273 Kelvin."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*COUPLED TEMPERATURE-DISPLACEMENT,STEADY STATE\n1.,1.\n*BOUNDARY\n1,2,2,3.e5\n3,2,2,2.9e5\n1,11,11,273.\n*DLOAD\n1,P4NP,3\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=WALL\nS\n*END STEP\n\n",
+        "Keywords": [
+            "COUPLED TEMPERATURE-DISPLACEMENT",
+            "STEADY STATE",
+            "BOUNDARY",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step as a coupled temperature-displacement steady-state analysis. Applies boundary conditions for pressure and temperature, specifies distributed loads, and sets output requests for nodal displacements and stresses in the wall elements."
+    }
+}

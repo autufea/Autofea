@@ -1,0 +1,88 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube with radiation boundary condition;\n**   Test objective: *RADIATE\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation setup, specifying that the structure is a cube with a radiation boundary condition and the test objective is to analyze radiation effects."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the cube structure, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the cube structure, specifying that they are 8-node brick elements (C3D8) and grouping them into an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n5,6,7,8\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'FIX' that includes nodes 5, 6, 7, and 8, which will be used for applying boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,0.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for all nodes in the 'Nall' set to 0 degrees."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines a material named 'EL' with a thermal conductivity of 50 units."
+    },
+    "Step 7": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=-273.15,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the absolute zero temperature and the Stefan-Boltzmann constant for radiation calculations."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n**\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and defines it as a solid section."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*BOUNDARY\nFIX,11,11,0.\n*RADIATE\n1,R1,-12.,1.\n*NODE PRINT,NSET=Nall\nNT,RFL\n*EL PRINT,ELSET=Eall\nHFL\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "RADIATE",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the simulation parameters, including the number of increments, the type of analysis (steady-state heat transfer), boundary conditions, radiation conditions, and output requests for node and element results."
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: one elements.\n**   Test objective: sensitivity: internal energy w.r.t. coordinates.\n**                   comparison with corresponding 2d-example (sens2d)\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, including the structure, test objective, and comparison with a corresponding 2D example."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=NALL\n         1,  100.0          ,  0.0            ,  100.0          \n         2,  0.0            ,  0.0            ,  100.0          \n         3,  0.0            ,  100.0          ,  100.0          \n         4,  100.0          ,  100.0          ,  100.0          \n         5,  100.0          ,  0.0            ,  0.0            \n         6,  100.0          ,  100.0          ,  0.0            \n         7,  0.0            ,  100.0          ,  0.0            \n         8,  0.0            ,  0.0            ,  0.0            \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and assigns them to the node set 'NALL'. Each node is specified with its coordinates in 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=C3D8,ELSET=EALL\n         1,         1,         2,         3,         4,         5,         8,         7,\n         6\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure, specifying the type as C3D8 (8-node brick element) and assigns them to the element set 'EALL'."
+    },
+    "Step 4": {
+        "Code": "*NSET, NSET=DESIGNNODES\n      1,4,5,6\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set named 'DESIGNNODES' that includes specific nodes (1, 4, 5, 6) which will be used as design variables."
+    },
+    "Step 5": {
+        "Code": "*DESIGNVARIABLES,TYPE=COORDINATE\nDESIGNNODES\n",
+        "Keywords": [
+            "DESIGNVARIABLES"
+        ],
+        "Start": "*DESIGNVARIABLES",
+        "Description": "Defines the design variables for the simulation, specifying that the coordinates of the nodes in 'DESIGNNODES' will be used as design variables."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.0\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements, including elastic modulus, Poisson's ratio, and density."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION, ELSET=EALL, MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'EALL' and specifies that it is a solid section."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS, TYPE=TEMPERATURE\nNALL, 293.15\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the node set 'NALL' to 293.15 K."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n2,1,3\n3,1,3\n7,1,3\n8,1,3\n1,1,1\n4,1,1\n5,1,1\n6,1,1\n1,3,3\n4,3,3\n5,3,3\n6,3,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to specific nodes, constraining their degrees of freedom as specified."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*STATIC\n*TEMPERATURE\nNALL, 293.15\n*DLOAD\nEALL,GRAV,1.e10,0.,-1.,0.\n***CLOAD\n**1,1,1.\n**2,1,1.\n**3,1,1.\n**4,1,1.\n*NODE FILE\nU\n*EL FILE\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "TEMPERATURE",
+            "DLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step, applies a temperature condition, a gravitational load, and specifies output requests for nodal displacements and element stresses."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*SENSITIVITY\n*DESIGN RESPONSE, NAME=ENER_OBJ\nSTRAIN ENERGY,EALL\n*NODE FILE\nSEN\n*END STEP\n",
+        "Keywords": [
+            "SENSITIVITY",
+            "DESIGN RESPONSE",
+            "NAME",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a sensitivity analysis step, specifying the design response as strain energy for the element set 'EALL' and requests sensitivity output for nodes."
+    }
+}

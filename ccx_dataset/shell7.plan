@@ -1,0 +1,74 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever shell.\n**   Test objective: rotational boundaries on a rotated structure\n**                   cf. shell7rot and shell7rot2\n**                   \n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever shell and sets the test objective to apply rotational boundaries on a rotated structure."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -7.45058e-09, -7.45058e-09,  0.00000e+00 \n       2,  5.00000e-01, -7.45058e-09,  0.00000e+00 \n       3,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n       4, -7.45058e-09,  5.00000e-01,  0.00000e+00 \n       5,  2.50000e-01, -7.45058e-09,  0.00000e+00 \n       6,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n       7,  2.50000e-01,  5.00000e-01,  0.00000e+00 \n       8, -7.45058e-09,  2.50000e-01,  0.00000e+00 \n       9,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      10, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      11,  5.00000e-01,  7.50000e-01,  0.00000e+00 \n      12,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      13, -7.45058e-09,  7.50000e-01,  0.00000e+00 \n      14,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n      15,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      16,  7.50000e-01, -7.45058e-09,  0.00000e+00 \n      17,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      18,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n      19,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      21,  7.50000e-01,  1.00000e+00,  ,0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure using the S8R element type and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines a node set 'Nfixx' which includes specific nodes that will be used for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,6\nNfixx,3,6\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'Nfixx' set, constraining certain degrees of freedom."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n*EXPANSION\n12.E-6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "EXPANSION"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the structure, including elastic modulus, Poisson's ratio, and thermal expansion coefficient."
+    },
+    "Step 7": {
+        "Code": "*SHELL SECTION,ELSET=Eall,MATERIAL=EL\n0.01\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "Defines the shell section properties for the elements in the 'Eall' set, specifying the material and thickness."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY\n15,4,4,.01\n15,5,5,.01\n*NODE FILE,OUTPUT=2D\nU\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "NODE FILE",
+            "OUTPUT"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step as a static analysis, applies additional boundary conditions, and specifies the output requests for nodal displacements."
+    }
+}

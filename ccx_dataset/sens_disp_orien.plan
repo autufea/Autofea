@@ -1,0 +1,108 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two elements.\n**   Test objective: sensitivity: displacement w.r.t. orientation.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure and test objective, focusing on the sensitivity of displacement with respect to orientation for a model with two elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=NALL\n         1,  100.0          ,  0.0            ,  0.0            \n         2,  0              ,  0.0            ,  0.0            \n         3,  0.0            ,  100.0          ,  0.0            \n         4,  100.0          ,  100.0          ,  0.0            \n         5,  200.0          ,  100.0          ,  0.0            \n         6,  200.0          ,  0.0            ,  0.0     \n\t 7,  100.0          ,  0.0            ,  -100.0         \n         8,  100.0          ,  100.0          ,  -100.0         \n         9,  0.0            ,  100.0          ,  -100.0         \n        10,  0.0            ,  0.0            ,  -100.0  \n        11,  200.0          ,  0.0            ,  -100.0         \n        12,  200.0          ,  100.0          ,  -100.0 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model, including their coordinates, and groups them into a node set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=C3D8,ELSET=EALL\n         1,         6,         1,         4,         5,        11,         7,         8,\n        12\n\t 2,         1,         2,         3,         4,         7,        10,         9,\n         8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model, specifying their type (C3D8) and the nodes that form each element, and groups them into an element set named EALL."
+    },
+    "Step 4": {
+        "Code": "*DESIGNVARIABLES, TYPE=ORIENTATION\n",
+        "Keywords": [
+            "DESIGNVARIABLES"
+        ],
+        "Start": "*DESIGNVARIABLES",
+        "Description": "Introduces design variables related to orientation, which will be used in the sensitivity analysis."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC,TYPE=ORTHOTROPIC\n500000.,157200.,400000.,157200.,157200.,300000.,126200.,126200.,\n126200.,294.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements, specifying an orthotropic elastic material named EL with given stiffness values."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n1\n*ELSET,ELSET=E2\n2\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets E1 and E2, each containing one of the two elements defined in the model."
+    },
+    "Step 7": {
+        "Code": "*ORIENTATION,NAME=OR1\n1.,0.,0.,0.,1.,0.\n",
+        "Keywords": [
+            "ORIENTATION",
+            "NAME"
+        ],
+        "Start": "*ORIENTATION",
+        "Description": "Defines an orientation named OR1 with specified direction vectors."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION, ELSET=E1, MATERIAL=EL,ORIENTATION=OR1\n*SOLID SECTION, ELSET=E2, MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "ORIENTATION"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material EL and orientation OR1 to element set E1, and assigns the material EL to element set E2 without specifying an orientation."
+    },
+    "Step 9": {
+        "Code": "*INITIAL CONDITIONS, TYPE=TEMPERATURE\nNALL, 293.15\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the model to 293.15 K."
+    },
+    "Step 10": {
+        "Code": "*BOUNDARY\n        2,1,3,0.0\n        3,1,3,0.0\n        9,1,3,0.0\n       10,1,3,0.0      \n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to specific nodes, fixing their displacements in all three directions."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*STATIC\n*TEMPERATURE\nNALL, 293.15\n*CLOAD\n        5,1,1000000.0            \n        6,1,1000000.0            \n       11,1,1000000.0            \n       12,1,1000000.0 \n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "TEMPERATURE",
+            "CLOAD"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step, applies a temperature condition to all nodes, and specifies concentrated loads on certain nodes."
+    },
+    "Step 12": {
+        "Code": "*STEP\n*SENSITIVITY\n*DESIGN RESPONSE\nALL-DISP\nMISESSTRESS\n*NODE FILE\nSEN\n*END STEP\n",
+        "Keywords": [
+            "SENSITIVITY",
+            "DESIGN RESPONSE",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a sensitivity analysis step, specifying design responses for displacement and von Mises stress, and requests sensitivity results to be written to a node file."
+    }
+}

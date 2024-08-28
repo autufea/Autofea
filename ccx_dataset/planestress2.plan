@@ -1,0 +1,81 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: CPS8R elements with different thicknesses\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a plate and the test objective is to analyze CPS8R elements with different thicknesses."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -7.45058e-09, -7.45058e-09,  0.00000e+00 \n       2,  5.00000e-01, -7.45058e-09,  0.00000e+00 \n       3,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n       4, -7.45058e-09,  5.00000e-01,  0.00000e+00 \n       5,  2.50000e-01, -7.45058e-09,  0.00000e+00 \n       6,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n       7,  2.50000e-01,  5.00000e-01,  0.00000e+00 \n       8, -7.45058e-09,  2.50000e-01,  0.00000e+00 \n       9,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      10, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      11,  5.00000e-01,  7.50000e-01,  0.00000e+00 \n      12,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      13, -7.45058e-09,  7.50000e-01,  0.00000e+00 \n      14,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n      15,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      16,  7.50000e-01, -7.45058e-09,  0.00000e+00 \n      17,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      18,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n      19,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      21,  7.50000e-01,  1.00000e+00,  ,0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPS8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CPS8R and grouping them into an element set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'Nfixx' that includes specific nodes which will be used for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,1\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes in the 'Nfixx' set, constraining them in the x-direction and also constraining node 4 in the y-direction."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, specifying the material name as 'EL' and providing its elastic properties (Young's modulus and Poisson's ratio)."
+    },
+    "Step 7": {
+        "Code": "*elset,elset=eall1\n1\n*elset,elset=eall2\n2\n*elset,elset=eall3\n3\n*elset,elset=eall4\n4\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates element sets named 'eall1', 'eall2', 'eall3', and 'eall4', each containing a single element."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall1,MATERIAL=EL\n0.01\n*SOLID SECTION,ELSET=Eall2,MATERIAL=EL\n0.02\n*SOLID SECTION,ELSET=Eall3,MATERIAL=EL\n0.03\n*SOLID SECTION,ELSET=Eall4,MATERIAL=EL\n0.04\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns solid sections to the element sets, specifying different thicknesses for each set and associating them with the material 'EL'."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\n3,P2,-100.\n4,P2,-100.\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure as a static step, applies distributed loads to elements 3 and 4, and specifies that stress results should be printed for the element set 'Eall'."
+    }
+}

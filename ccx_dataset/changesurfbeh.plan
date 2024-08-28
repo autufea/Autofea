@@ -1,0 +1,139 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: *CHANGE SURFACE BEHAVIOR\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to change surface behavior."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00, -1.49012e-08 \n       2,  1.00000e+00,  0.00000e+00, -1.49012e-08 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5, -7.45058e-09,  1.00000e+00, -1.49012e-08 \n       6, -7.45058e-09,  0.00000e+00, -1.49012e-08 \n       7, -7.45058e-09,  0.00000e+00,  1.00000e+00 \n       8, -7.45058e-09,  1.00000e+00,  1.00000e+00 \n       9,  5.00000e-01,  6.41421e-01,  1.00000e+00 \n      10,  6.41421e-01,  5.00000e-01,  1.00000e+00 \n      11,  6.41421e-01,  5.00000e-01,  1.20000e+00 \n      12,  5.00000e-01,  6.41421e-01,  1.20000e+00 \n      13,  3.58579e-01,  5.00000e-01,  1.00000e+00 \n      14,  5.00000e-01,  3.58579e-01,  1.00000e+00 \n      15,  5.00000e-01,  3.58579e-01,  1.20000e+00 \n      16,  3.58579e-01,  5.00000e-01,  1.20000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     9,    10,    11,    12,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of type C3D8 and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n*NSET,NSET=Ntop\n11,12,15,16\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets 'Nfix' and 'Ntop' with specified node numbers."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,1,3\nNtop,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node sets 'Nfix' and 'Ntop'."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties with the name 'EL' and specifies its elastic properties."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' using a solid section."
+    },
+    "Step 8": {
+        "Code": "*ELSET,ELSET=Emast\n1\n*ELSET,ELSET=Eslav\n2\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets 'Emast' and 'Eslav' for the master and slave surfaces, respectively."
+    },
+    "Step 9": {
+        "Code": "*SURFACE,NAME=Smast\nEmast,S5\n*SURFACE,NAME=Sslav\nEslav,S3\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines surfaces 'Smast' and 'Sslav' for the master and slave element sets."
+    },
+    "Step 10": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=SURFACE TO SURFACE\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Creates a contact pair interaction 'SI1' between the slave surface 'Sslav' and the master surface 'Smast'."
+    },
+    "Step 11": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction with the name 'SI1'."
+    },
+    "Step 12": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=TIED\n1.e9\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior with pressure-overclosure set to 'TIED' and a value of 1.e9."
+    },
+    "Step 13": {
+        "Code": "*FRICTION\n.0001,1.E3\n**\n",
+        "Keywords": [
+            "FRICTION"
+        ],
+        "Start": "*FRICTION",
+        "Description": "Defines the friction properties with a coefficient of 0.0001 and a maximum value of 1.E3."
+    },
+    "Step 14": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.,1.\n*BOUNDARY\nNtop,3,3,.1\n*NODE FILE,FREQUENCY=1\nU\n*CONTACT FILE\nCDISP,CSTRESS\n*END STEP\n**\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "BOUNDARY",
+            "NODE FILE",
+            "FREQUENCY",
+            "CONTACT FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Initiates a static step with non-linear geometry, applies boundary conditions, and requests output for displacements and contact stresses."
+    },
+    "Step 15": {
+        "Code": "*STEP\n*STATIC\n1.,1.\n*CHANGE SURFACE BEHAVIOR,INTERACTION=SI1\n*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.e9\n*END STEP\n\n",
+        "Keywords": [
+            "STATIC",
+            "CHANGE SURFACE BEHAVIOR",
+            "INTERACTION",
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*STEP",
+        "Description": "Starts a new static step, changes the surface behavior interaction 'SI1' to linear pressure-overclosure with a value of 1.e9."
+    }
+}

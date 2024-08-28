@@ -1,0 +1,110 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: hollow tube.\n**   Test objective: fluid-structure coupling in an artery\n**                   pressure on tube wall depends on fluid\n**                   pressure, fluid pressure depends on \n**                   tube cross section.\n**                   \n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a hollow tube and sets the test objective to study fluid-structure coupling in an artery, where the pressure on the tube wall depends on fluid pressure and vice versa."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1,2.,10.,0.\n2,2.,0.,0.\n3,2.3,0.,0.\n4,2.3,10.,0.\n5,2.,5.,0.\n6,2.15,0.,0.\n7,2.3,5.,0.\n8,2.15,10.,0.\n9,0.,11.,0.\n10,0.,10.,0.\n11,0.,5.,0.\n12,0.,0.,0.\n13,0.,-1.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model and assigns them to the node set 'Nall'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CAX8,ELSET=Etube\n1,1,2,3,4,5,6,7,8\n*ELEMENT,TYPE=D,ELSET=Ewater\n3,10,11,12\n*ELEMENT,TYPE=D,ELSET=EIO\n2,0,9,10\n4,12,13,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model. 'Etube' elements are of type CAX8, 'Ewater' and 'EIO' elements are of type D, each with their respective node connectivity."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n2.1,.3\n*DENSITY\n7.8E-9\n*SPECIFIC HEAT\n1.\n*CONDUCTIVITY\n1.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY",
+            "SPECIFIC HEAT",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the tube material 'EL', including its elastic properties, density, specific heat, and thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Etube,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the solid section 'Etube'."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 7": {
+        "Code": "*FLUID CONSTANTS\n4217.E6,1750.E-12\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines fluid constants for the water material, including bulk modulus and compressibility."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,ELSET=Ewater,MATERIAL=WATER,TYPE=PIPE MANNING FLEXIBLE\n5,11,0.015\n*FLUID SECTION,ELSET=EIO,MATERIAL=WATER,TYPE=PIPE INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for 'Ewater' and 'EIO' elements, specifying the material as water and the type of fluid section."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n1,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to node 1, constraining it in the second degree of freedom."
+    },
+    "Step 10": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n12,0.1287\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets initial conditions for total pressure at node 12."
+    },
+    "Step 11": {
+        "Code": "*STEP,NLGEOM\n*COUPLED TEMPERATURE-DISPLACEMENT,STEADY STATE\n1.,1.\n*BOUNDARY\n1,11,11,273.\n10,2,2,0.13\n*BOUNDARY,MASS FLOW\n11,1,1,1.1962e-5\n*DLOAD\nEwater,GRAV,9.81E3,-1.,0.,0.\n*DLOAD\n1,P1NP,12\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Etube\nS\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "COUPLED TEMPERATURE-DISPLACEMENT",
+            "STEADY STATE",
+            "BOUNDARY",
+            "MASS FLOW",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with non-linear geometry and coupled temperature-displacement in steady state. It includes boundary conditions, mass flow boundary conditions, distributed loads, and output requests for nodal displacements and element stresses."
+    }
+}

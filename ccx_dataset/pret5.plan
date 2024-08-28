@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two linear plane strain elements.\n**   Test objective: pre-tension force.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying the structure and the test objective, which is to apply a pre-tension force."
+    },
+    "Step 2": {
+        "Code": "*NODE\n1,0.,0.,0.\n2,1.,0.,0.\n3,2.,0.,0.\n4,0.,1.,0.\n5,1.,1.,0.\n6,2.,1.,0.\n7,0.,0.,0.\n",
+        "Keywords": [
+            "NODE"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model with their coordinates. Each node is identified by a unique number."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CPE4,ELSET=Eall\n1,1,2,5,4\n2,2,3,6,5\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model, specifying the type of element (CPE4) and the nodes that form each element."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,2\n3,1,2\n4,1,2\n6,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to specific nodes, constraining their degrees of freedom."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties, specifying the name of the material and its elastic properties (Young's modulus and Poisson's ratio)."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n.1\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Defines the section properties for the elements, associating them with the material defined in the previous step."
+    },
+    "Step 7": {
+        "Code": "*SURFACE,NAME=SURF1\n1,S2\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines a surface named SURF1, which is associated with a specific element face."
+    },
+    "Step 8": {
+        "Code": "*PRE-TENSION SECTION,SURFACE=SURF1,NODE=7\n1.,0.,0.\n",
+        "Keywords": [
+            "PRE-TENSION SECTION",
+            "SURFACE",
+            "NODE"
+        ],
+        "Start": "*PRE-TENSION SECTION",
+        "Description": "Defines a pre-tension section on the previously defined surface, specifying the node and the pre-tension force."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n7,1,-10.\n**2,1,10.\n**5,1,10.\n*NODE FILE,OUTPUT=3D\nU\n*EL FILE\nS,NOE\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step, specifying it as a static analysis. It also applies a concentrated load to a node and sets up the output requests for nodal displacements and element stresses."
+    }
+}

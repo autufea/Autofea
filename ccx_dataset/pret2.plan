@@ -1,0 +1,102 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two axisymmetric elements.\n**   Test objective: pre-tension force.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, indicating that it involves two axisymmetric elements and aims to test the pre-tension force."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e-01,2.000000000000e+00,0.000000000000e+00\n       2,1.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n       3,1.100000000000e+00,1.000000000000e+00,0.000000000000e+00\n       4,1.100000000000e+00,2.000000000000e+00,0.000000000000e+00\n       5,1.000000000000e-01,1.500000000000e+00,0.000000000000e+00\n       6,6.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n       7,1.100000000000e+00,1.500000000000e+00,0.000000000000e+00\n       8,6.000000000000e-01,2.000000000000e+00,0.000000000000e+00\n       9,1.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      10,1.100000000000e+00,0.000000000000e+00,0.000000000000e+00\n      11,1.000000000000e-01,5.000000000000e-01,0.000000000000e+00\n      12,6.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      13,1.100000000000e+00,5.000000000000e-01,0.000000000000e+00\n14,0.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, specifying their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      2,      9,     10,      3,     11,     12,     13,      6\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their connectivity and grouping them into an element set named 'Eall'. The element type used is CAX8."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, naming the material 'EL' and specifying its elastic properties with a Young's modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n.1\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies a section thickness of 0.1."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=Nfix \n1, \n4, \n8, \n9, \n10, \n12, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set named 'Nfix' which includes nodes that will be constrained in the boundary conditions."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\n1,1,2\n8,2,2\n4,2,2\n9,1,2\n12,2,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes in the 'Nfix' set, constraining specific degrees of freedom for these nodes."
+    },
+    "Step 8": {
+        "Code": "*SURFACE,NAME=S1\n1,S2\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "This step defines a surface named 'S1' which is associated with the element face 'S2' of element 1."
+    },
+    "Step 9": {
+        "Code": "*PRE-TENSION SECTION,SURFACE=S1,NODE=14\n**0.,-1.,0.\n",
+        "Keywords": [
+            "PRE-TENSION SECTION",
+            "SURFACE",
+            "NODE"
+        ],
+        "Start": "*PRE-TENSION SECTION",
+        "Description": "This step defines a pre-tension section on the surface 'S1' and associates it with node 14."
+    },
+    "Step 10": {
+        "Code": "*NSET,NSET=N1\n14\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set named 'N1' which includes node 14."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY\n14,1,1,.01\n*NODE PRINT,NSET=N1\nu\n*EL PRINT,ELSET=Eall\ns\n*END STEP\n\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure as a static step, applies a boundary condition to node 14, and specifies output requests for nodal displacements and element stresses."
+    }
+}

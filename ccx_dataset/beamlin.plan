@@ -1,0 +1,76 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam, two elements\n**   Test objective: linear 1D calculations.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the structure being analyzed, which is a cantilever beam with two elements, and states the objective of performing linear 1D calculations."
+    },
+    "Step 2": {
+        "Code": "*node, nset=nall\n1, 0.0, 0.0, 0.0\n2, 50.0, 0.0, 0.0\n3, 100.0, 0.0, 0.0\n4, 125.0, 0.0, 0.0\n5, 150.0, 0.0, 0.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the structure, specifying their coordinates in a 3D space. Five nodes are listed with their respective x, y, and z coordinates."
+    },
+    "Step 3": {
+        "Code": "*element, type=b32, elset=links\n1, 1,2,3\n*element, type=b32, elset=rechts\n2, 3,4,5 \n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the structure. Two elements are created: 'links' connecting nodes 1, 2, and 3, and 'rechts' connecting nodes 3, 4, and 5."
+    },
+    "Step 4": {
+        "Code": "*elset, elset=elall\nlinks, rechts\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates an element set named 'elall' that includes both 'links' and 'rechts' elements."
+    },
+    "Step 5": {
+        "Code": "*beam section, section=rect, elset=links, material=steel\n10.0, 10.0\n0.0, 1.0, 0.0\n*beam section, section=rect, elset=rechts, material=steel\n5.0, 5.0\n0.0, 1.0, 0.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam sections for the elements. The 'links' element is assigned a rectangular section with dimensions 10.0x10.0, and the 'rechts' element is assigned a rectangular section with dimensions 5.0x5.0. Both sections use the material 'steel'."
+    },
+    "Step 6": {
+        "Code": "*material, name=steel\n*elastic, type=iso\n200000.0, .3, \n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for 'steel', specifying it as an isotropic elastic material with a Young's modulus of 200000.0 and a Poisson's ratio of 0.3."
+    },
+    "Step 7": {
+        "Code": "*boundary\n1, 1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to node 1, fixing all six degrees of freedom (translations and rotations)."
+    },
+    "Step 8": {
+        "Code": "*step\n*static\n*cload\n5, 1, 5000.0\n*node print, nset=nall\nu,rf\n*el print, elset=elall\ns\n*end step\n\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the static analysis. A concentrated load of 5000.0 units is applied in the x-direction at node 5. The displacements and reaction forces at all nodes, as well as the stresses in all elements, are requested for output."
+    }
+}

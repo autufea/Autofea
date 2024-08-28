@@ -1,0 +1,98 @@
+{
+    "Step 1": {
+        "Code": "**\n**      Structure:  gas network\n**      Test Objective: test of the ge joint branch\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the structure being analyzed (a gas network) and the test objective, which is to test the ge joint branch."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET= NALL\n1 ,  1,  2, 0\n2 ,  2,  2, 0\n3 ,  3,  2, 0\n4 ,  4,  2, 0\n5 ,  5,  1, 0\n6 ,  6,  0, 0\n7 ,  7,  0, 0\n8 ,  8,  0, 0\n9 ,  9,  0, 0\n10,  1, -2, 0\n11,  2, -2, 0\n12,  3, -2, 0\n13,  4, -2, 0\n14,  5, -1, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to a node set named NALL. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=AGAS\n2,   2,  3,  4\n*ELEMENT, TYPE=D,ELSET=BGAS\t\n7,  11, 12, 13\n*ELEMENT, TYPE=D,ELSET=CGAS\n3,   4,  5,  6\n8,  13, 14,  6\n*ELEMENT, TYPE=D,ELSET=DGAS\n4,   6,  7, 8\n*ELEMENT, TYPE=D,ELSET=DIO\n1,   0,  1,  2\n6,   0, 10, 11\n5 ,  8,  9, 0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their type and the nodes that form each element. The elements are grouped into different element sets (ELSET) such as AGAS, BGAS, CGAS, DGAS, and DIO."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas, specifically its thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n 0.1002353938D+4, 0.1711000000D-04, 0.27315D+03\n 0.1002353938D+4, 0.1949281697D-04, 0.32315D+03\n 0.1002353938D+4, 0.2169996934D-04, 0.37315D+03\n 0.1002353938D+4, 0.2376071192D-04, 0.42315D+03\n 0.1002353938D+4, 0.2569766947D-04, 0.47315D+03\n 0.1002353938D+4, 0.2752859550D-04, 0.52315D+03\n 0.1002353938D+4, 0.2926763423D-04, 0.57315D+03\n 0.1002353938D+4, 0.3092621879D-04, 0.62315D+03\n 0.1002353938D+4, 0.3251371525D-04, 0.67315D+03\n 0.1002353938D+4, 0.3403789021D-04, 0.72315D+03\n 0.1002353938D+4, 0.3550525531D-04, 0.77315D+03\n 0.1002353938D+4, 0.3692132461D-04, 0.82315D+03\n 0.1002353938D+4, 0.3829080968D-04, 0.87315D+03\n 0.1002353938D+4, 0.3961776952D-04, 0.92315D+03\n 0.1002353938D+4, 0.4090572698D-04, 0.97315D+03\n 0.1002353938D+4, 0.4215776043D-04, 0.10231D+04\n 0.1002353938D+4, 0.4337657658D-04, 0.10732D+04\n 0.1002353938D+4, 0.4456456897D-04, 0.11232D+04\n 0.1002353938D+4, 0.4572386531D-04, 0.11732D+04\n 0.1002353938D+4, 0.4685636617D-04, 0.12232D+04\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step provides the fluid constants for the gas at various temperatures and pressures."
+    },
+    "Step 6": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the gas being analyzed."
+    },
+    "Step 7": {
+        "Code": "*DENSITY\n1.E-12\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step defines the density of the gas."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=AGAS,TYPE=ORIFICE\n314,19.99\n*FLUID SECTION,MATERIAL=GAS,ELSET=BGAS,TYPE=ORIFICE\n500,25.2313\n*FLUID SECTION,MATERIAL=GAS,ELSET=CGAS,TYPE=BRANCH JOINT GE\n4,3,8,1413.7,706.8,706.8,0,90,\n0,0,0\n*FLUID SECTION,MATERIAL=GAS,ELSET=DGAS,TYPE=ORIFICE\n962,34.99\n*FLUID SECTION,MATERIAL=GAS,ELSET=DIO,TYPE=INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for different element sets, specifying the material, type, and additional parameters for each section."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n2,0,0,550\n2,2,2,0.3\n11,0,0,550\n11,2,2,0.2\n8,0,0,550\n8,2,2,0.09\n6,0,0,550\n4,0,0,550\n8,0,0,550\n13,0,0,550\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step sets boundary conditions for the nodes, specifying constraints and values for different degrees of freedom."
+    },
+    "Step 10": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n6,0.909e-1\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial conditions for the total pressure at a specific node."
+    },
+    "Step 11": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT,NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis step, specifying the type of analysis (steady-state heat transfer), the number of increments, and the output requests for node results."
+    }
+}

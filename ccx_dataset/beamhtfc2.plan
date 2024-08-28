@@ -1,0 +1,27 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: forced convection\n**                   generic gas network elements\n**                   simultaneous temperature solution\n**   Before running this example, please run example beamhtfc\n**   and copy beamhtfc.rout to beamhtfc2.rin\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step sets up the structure of the simulation, specifying a cantilever beam and the test objectives, which include forced convection, generic gas network elements, and simultaneous temperature solution. It also mentions copying a file named 'beamhtfc.rout' to 'beamhtfc2.rin'."
+    },
+    "Step 2": {
+        "Code": "*RESTART,READ\n",
+        "Keywords": [
+            "RESTART",
+            "READ"
+        ],
+        "Start": "*RESTART",
+        "Description": "This step reads the restart file to continue the simulation from a previously saved state."
+    },
+    "Step 3": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation parameters, specifying a maximum of 100 increments for the step. It sets up a steady-state heat transfer analysis, with two instances of the heat transfer command, each with parameters '1.,1.'."
+    }
+}

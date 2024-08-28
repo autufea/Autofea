@@ -1,0 +1,30 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: restart capability (reading part).\n**   Before running this example, please run example beamwrite\n**   and copy beamwrite.rout to beamread.rin\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step sets up the structure as a cantilever beam and specifies the test objective, which is to test the restart capability by reading a previously saved state. It instructs the user to run a prior example and copy the output file for use in this simulation."
+    },
+    "Step 2": {
+        "Code": "*RESTART,READ\n",
+        "Keywords": [
+            "RESTART",
+            "READ"
+        ],
+        "Start": "*RESTART",
+        "Description": "This step reads the restart file, which contains the saved state of the simulation from a previous run. This allows the simulation to continue from where it left off."
+    },
+    "Step 3": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.,1.\n*DLOAD,AMPLITUDE=A1\n29, P2, -200.000000 \n30, P2, -200.000000 \n31, P2, -200.000000 \n32, P2, -200.000000\n*NODE FILE\n*EL FILE \n*END STEP\n\n\n\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "AMPLITUDE",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure. It specifies a nonlinear geometric analysis and applies a static load with a defined amplitude. The load is applied to specific nodes, and the results are requested to be written to node and element files."
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "Step 1": {
+        "Code": "",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step initializes the input file for the Calculix FEA simulation."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+01,0.000000000000e+00,0.000000000000e+00\n       2,9.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       3,9.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       4,1.000000000000e+01,1.000000000000e+00,0.000000000000e+00\n       5,9.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n       6,9.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n       7,9.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n       8,1.000000000000e+01,5.000000000000e-01,0.000000000000e+00\n       9,8.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      10,8.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      11,8.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      12,8.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      13,8.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      14,7.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      15,7.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      16,7.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      17,7.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      18,7.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      19,6.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      20,6.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      21,6.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      22,6.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      23,6.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      24,5.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      25,5.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      26,5.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      27,5.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      28,5.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      29,4.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      30,4.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      31,4.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      32,4.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      33,4.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      34,3.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      35,3.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      36,3.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      37,3.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      38,3.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      39,2.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      40,2.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      41,2.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      42,2.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      43,2.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      44,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      45,1.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      46,1.500000000000e+00,0.000000000000e+00,0.000000000000e+00\n      47,1.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      48,1.500000000000e+00,1.000000000000e+00,0.000000000000e+00\n      49,0.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n      50,0.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n      51,5.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      52,0.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      53,5.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the model, specifying their coordinates in a 3D space and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      2,      9,     10,      3,     11,     12,     13,      6\n     3,      9,     14,     15,     10,     16,     17,     18,     12\n     4,     14,     19,     20,     15,     21,     22,     23,     17\n     5,     19,     24,     25,     20,     26,     27,     28,     22\n     6,     24,     29,     30,     25,     31,     32,     33,     27\n     7,     29,     34,     35,     30,     36,     37,     38,     32\n     8,     34,     39,     40,     35,     41,     42,     43,     37\n     9,     39,     44,     45,     40,     46,     47,     48,     42\n    10,     44,     49,     50,     45,     51,     52,     53,     47\n** Names based on left\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model, specifying the nodes that form each element and grouping them into a set named 'Eall'. The element type used is S8R."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nleft \n49, \n50, \n52, \n** Names based on right\n*NSET,NSET=Nright \n1, \n4, \n8, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets named 'Nleft' and 'Nright', which group specific nodes based on their positions on the left and right sides of the model, respectively."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=COMPRESSION_ONLY\n*USER MATERIAL,CONSTANTS=2\n  1.4e10,        1.e5\n*DENSITY\n2350.\n*MATERIAL,NAME=STEEL\n*ELASTIC\n210000.e6,.3\n*DENSITY\n7800.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "USER MATERIAL",
+            "CONSTANTS",
+            "DENSITY",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines two materials: 'COMPRESSION_ONLY' with user-defined properties and 'STEEL' with elastic properties and density."
+    },
+    "Step 6": {
+        "Code": "*SHELL SECTION,ELSET=Eall,COMPOSITE\n.09,,COMPRESSION_ONLY\n.01,,STEEL\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n.1,,COMPRESSION_ONLY\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "COMPOSITE"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "Defines a composite shell section using the elements in 'Eall', specifying the thickness and material for each layer."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\nNleft,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'Nleft' set, constraining all six degrees of freedom."
+    },
+    "Step 8": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.,1.\n*DLOAD\nEall,GRAV,9.81,0.,0.,-1.\n*NODE FILE\nU\n*EL FILE\nS,NOE\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step with nonlinear geometry effects, applies gravitational load to the elements in 'Eall', and specifies output requests for nodal displacements and element stresses."
+    }
+}

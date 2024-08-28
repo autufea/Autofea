@@ -1,0 +1,73 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 CPE8 element.\n**   Test objective: combination of force and MPC\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that it involves a single CPE8 element and aims to test a combination of force and MPC (multi-point constraints)."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,1.,0.\n4,0.,1.,0.\n5,.5,0.,0.\n6,1.,.5,0.\n7,.5,1.,0.\n8,0.,.5,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to the node set 'NALL'. Each node is specified with its coordinates in a 2D plane."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=CPE8,ELSET=EALL\n1,1,2,3,4,5,6,7,8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element type as CPE8 (a 2D 8-node plane strain element) and assigns the nodes to the element set 'EALL'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the element, naming the material 'EL' and specifying its elastic properties with a Young's modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=EALL,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'EALL' and defines it as a solid section."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n1,2\n2,2\n5,2\n1,1\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing certain degrees of freedom for specified nodes."
+    },
+    "Step 7": {
+        "Code": "*EQUATION\n2\n3,2,1.,4,2,-1.\n2\n4,2,1.,7,2,-1.\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "This step defines multi-point constraints (MPC) equations, specifying relationships between the degrees of freedom of different nodes."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n3,2,1.\n*NODE FILE\nU,RF\n*EL FILE\nS,NOE\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step initiates a static analysis step, applies a load to node 3, and specifies the output requests for nodal displacements, reaction forces, and element stresses."
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring.\n**   Test objective: static calculation of a linear spring.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, specifying that it involves a static calculation of a linear spring."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model. Two nodes are created with coordinates (0,0,0) and (1,0,0), and they are grouped into a set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRINGA,ELSET=EALL\n1,1,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element in the model. A spring element of type SPRINGA is created between the two nodes (1 and 2) and is grouped into a set named EALL."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the nodes. Node 1 is fixed in all three directions, and Node 2 is fixed in the Y and Z directions."
+    },
+    "Step 5": {
+        "Code": "*SPRING,ELSET=EALL\n\n10.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET"
+        ],
+        "Start": "*SPRING",
+        "Description": "This step specifies the spring constant for the spring element defined in the previous step. The spring constant is set to 10 units."
+    },
+    "Step 6": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n2,1,1.\n*NODE PRINT,NSET=NALL\nU\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure. A static analysis is performed with a load of 1 unit applied in the X direction to Node 2. The displacements of all nodes are printed in the output."
+    }
+}

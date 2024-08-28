@@ -1,0 +1,71 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: CPE8 elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a plate and the test objective is to use CPE8 elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       2,0.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       3,0.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       5,1.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n       6,5.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n       7,0.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n       8,5.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, assigning coordinates to each node and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CPE8, ELSET=Eall\n     1,      1,      4,      3,      2,      5,      6,      7,      8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying that they are of type CPE8 and grouping them into a set named 'Eall'. It also lists the nodes that make up each element."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,2\n2,2,2\n8,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing certain degrees of freedom for specified nodes."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, specifying the material name as 'EL' and providing its elastic properties (Young's modulus and Poisson's ratio)."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL,OFFSET=0.\n0.01\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "OFFSET"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step defines the solid section properties, associating the element set 'Eall' with the material 'EL' and specifying the section thickness."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n3,2,0.16666666\n4,2,0.16666666\n6,2,0.66666666\n*NODE FILE,OUTPUT=3D\nU,RF\n*EL FILE\nE,S,NOE\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nE,S\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure, specifying a static analysis. It applies concentrated loads to certain nodes and defines the output requests for nodal displacements, reaction forces, element strains, and stresses."
+    }
+}

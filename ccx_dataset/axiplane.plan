@@ -1,0 +1,74 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: disk with plate.\n**   Test objective: combination of axisymmetric elements with\n**                   plane stress elements.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a disk with a plate and sets the test objective to combine axisymmetric elements with plane stress elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  2.00000e+00, -7.45058e-09,  0.00000e+00 \n       2,  2.00000e+00,  1.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       4,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n       5,  2.00000e+00,  5.00000e-01,  0.00000e+00 \n       6,  1.50000e+00,  1.00000e+00,  0.00000e+00 \n       7,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n       8,  1.50000e+00, -7.45058e-09,  0.00000e+00 \n       9,  3.00000e+00, -7.45058e-09,  0.00000e+00 \n      10,  3.00000e+00,  1.00000e+00,  0.00000e+00 \n      11,  3.00000e+00,  5.00000e-01,  0.00000e+00 \n      12,  2.50000e+00,  1.00000e+00,  0.00000e+00 \n      13,  2.50000e+00, -7.45058e-09,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model and assigns them to the node set 'Nall'. Each node is defined by its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8, ELSET=Eaxi\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n*ELEMENT, TYPE=CPS8, ELSET=Eplanestress\n     2,      9,     10,      2,      1,     11,     12,      5,     13\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model. 'Eaxi' is an axisymmetric element set using CAX8 elements, and 'Eplanestress' is a plane stress element set using CPS8 elements."
+    },
+    "Step 4": {
+        "Code": "*ELSET,ELSET=Eall\nEaxi,Eplanestress\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates an element set 'Eall' that includes both 'Eaxi' and 'Eplanestress' element sets."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements. The material is named 'EL' and has an elastic modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION,ELSET=Eaxi,MATERIAL=EL\n0.1\n*SOLID SECTION,ELSET=Eplanestress,MATERIAL=EL\n0.00174533\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element sets. 'Eaxi' is given a section thickness of 0.1, and 'Eplanestress' is given a section thickness of 0.00174533."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\n7,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the model. Node 7 is constrained in the 2nd degree of freedom."
+    },
+    "Step 8": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*DLOAD\n2,P1,-100.\n*EL PRINT,ELSET=Eall\nS,E\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step. It specifies a static analysis with nonlinear geometry. A distributed load of -100 is applied to element 2. The stress and strain are printed for the element set 'Eall'."
+    }
+}

@@ -1,0 +1,138 @@
+{
+    "Step 1": {
+        "Code": "**\n**    Structure: two concentric rings.\n**    Test objective: *GAP HEAT GENERATION.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two concentric rings and sets the test objective to GAP HEAT GENERATION."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,9.501000000000e-01,1.000000000000e-01,0.000000000000e+00\n       2,9.501000000000e-01,0.000000000000e+00,0.000000000000e+00\n       3,1.050100000000e+00,0.000000000000e+00,0.000000000000e+00\n       4,1.050100000000e+00,1.000000000000e-01,0.000000000000e+00\n       5,9.501000000000e-01,5.000000000000e-02,0.000000000000e+00\n       6,1.000100000000e+00,0.000000000000e+00,0.000000000000e+00\n       7,1.050100000000e+00,5.000000000000e-02,0.000000000000e+00\n       8,1.000100000000e+00,1.000000000000e-01,0.000000000000e+00\n       9,1.050000000000e+00,1.000000000000e-01,0.000000000000e+00\n      10,1.050000000000e+00,0.000000000000e+00,0.000000000000e+00\n      11,1.150000000000e+00,0.000000000000e+00,0.000000000000e+00\n      12,1.150000000000e+00,1.000000000000e-01,0.000000000000e+00\n      13,1.050000000000e+00,5.000000000000e-02,0.000000000000e+00\n      14,1.100000000000e+00,0.000000000000e+00,0.000000000000e+00\n      15,1.150000000000e+00,5.000000000000e-02,0.000000000000e+00\n      16,1.100000000000e+00,1.000000000000e-01,0.000000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the model and assigns them to the node set Nall."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX8, ELSET=Eall\n     1,1,2,3,4,5,6,7,8\n     2,9,10,11,12,13,14,15,16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model using the CAX8 element type and assigns them to the element set Eall."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=STEEL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n*EXPANSION\n0.\n*CONDUCTIVITY\n5.E-3,0.\n*SPECIFIC HEAT\n446.E6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY",
+            "EXPANSION",
+            "CONDUCTIVITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for STEEL, including elasticity, density, thermal expansion, conductivity, and specific heat."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=STEEL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material STEEL to the element set Eall in a solid section."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=UP\n9,10\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines a node set UP containing nodes 9 and 10."
+    },
+    "Step 7": {
+        "Code": "*SURFACE,NAME=slave\n2,S1\n*SURFACE,NAME=master\n1,S3\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces named slave and master for contact interaction."
+    },
+    "Step 8": {
+        "Code": "*CONTACT PAIR,INTERACTION=I1,TYPE=SURFACE TO SURFACE\nslave,master\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair interaction between the slave and master surfaces."
+    },
+    "Step 9": {
+        "Code": "*SURFACE INTERACTION,NAME=I1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines a surface interaction named I1."
+    },
+    "Step 10": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.E7\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior with a linear pressure-overclosure relationship."
+    },
+    "Step 11": {
+        "Code": "*FRICTION\n0.3,1.E5\n",
+        "Keywords": [
+            "FRICTION"
+        ],
+        "Start": "*FRICTION",
+        "Description": "Defines the friction properties for the contact interaction."
+    },
+    "Step 12": {
+        "Code": "*GAP HEAT GENERATION\n0.9,0.3,200.\n",
+        "Keywords": [
+            "GAP HEAT GENERATION"
+        ],
+        "Start": "*GAP HEAT GENERATION",
+        "Description": "Specifies the parameters for gap heat generation."
+    },
+    "Step 13": {
+        "Code": "*NSET,NSET=N1\n1,2,3,4,5,6,7,8\n*NSET,NSET=N2\n9,10,11,12,13,14,15,16\n*NSET,NSET=FIXTEMP\n2,5,1,11,15,12\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines additional node sets N1, N2, and FIXTEMP for boundary conditions."
+    },
+    "Step 14": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,293.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the node set Nall."
+    },
+    "Step 15": {
+        "Code": "*STEP,NLGEOM\n*COUPLED TEMPERATURE-DISPLACEMENT\n*BOUNDARY\n5,2,2\n15,2,2\nFIXTEMP,0,0,293.\n*NODE PRINT,NSET=Nall\nNT\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "COUPLED TEMPERATURE-DISPLACEMENT",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with non-linear geometry, coupled temperature-displacement, boundary conditions, and output requests."
+    }
+}

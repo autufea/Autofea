@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**      Structure: linear gas network\n**      Test Objective: test of relative/absolute elements,\n**                      forced vortex\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the initial comments and heading for the simulation model, describing the structure as a linear gas network and the test objective as testing relative/absolute elements and forced vortex."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET= NALL\n1,   1, 0, 0\n2,   2, 0, 0\n3,   3, 0, 0\n4,   4, 0, 0\n5,   5, 0, 0\n6,   6, 0, 0\n7,   7, 0, 0\n8,   8, 0, 0\n9,   9, 0, 0\n10, 10, 0, 0\n11, 11, 0, 0\n12, 12, 0, 0\n13, 13, 0 ,0\n14, 14, 0, 0\n15,15, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, assigning coordinates to each node and grouping them into a set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=ENTRANCE\n1, 0, 1, 2\n*ELEMENT, TYPE=D,ELSET=ORIFICE1\n2, 2, 3, 4\n*ELEMENT, TYPE=D,ELSET=SYSCHNG1\n3, 4, 5, 6\n*ELEMENT, TYPE=D,ELSET=VORTEX1\n4, 6, 7, 8\n*ELEMENT, TYPE=D,ELSET=SYSCHNG2\n5, 8, 9, 10\n*ELEMENT, TYPE=D,ELSET=ORIFICE3\n6, 10,11,12\n*ELEMENT, TYPE=D,ELSET=VORTEX2\n7, 12,13,14\n*ELEMENT, TYPE=D,ELSET=EXIT\n8, 14,15,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying the type and element set for each element and the nodes that each element connects."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas, specifically its thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n1.0019E3,0.6871074193D-05,100\n1.0022E3,0.1322528067D-04,200\n1.0045E3,0.1841348837D-04,300\n1.0131E3,0.2282321720D-04,400\n1.0292E3,0.2669308525D-04,500\n1.0506E3,0.3016765739D-04,600\n1.0745E3,0.3333962847D-04,700\n1.0982E3,0.3627174457D-04,800\n1.1204E3,0.3900843799D-04,900\n1.1405E3,0.4158235455D-04,1000\n1.1583E3,0.4401821915D-04,1100\n1.1739E3,0.4633523654D-04,1200\n1.1976E3,0.4854864443D-04,1300\n1.1997E3,0.5067075402D-04,1400\n1.2104E3,0.5271166842D-04,1500\n1.2199E3,0.5467979182D-04,1600\n1.2284E3,0.5658219869D-04,1700\n1.2361E3,0.5842490691D-04,1800\n1.2431E3,0.6021308351D-04,1900\n1.2495E3,0.6195120211D-04,2000\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step provides the fluid constants for the gas at various conditions, including viscosity and density at different temperatures."
+    },
+    "Step 6": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material."
+    },
+    "Step 7": {
+        "Code": "*DENSITY\n1.\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step defines the density of the gas."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=ENTRANCE,TYPE=INOUT\n*FLUID SECTION,MATERIAL=GAS,ELSET=ORIFICE1,TYPE=PRESWIRLNOZZLE\n500.e-6,45,0.5,0\n*FLUID SECTION,MATERIAL=GAS,ELSET=SYSCHNG1,TYPE=ABSOLUTE TO RELATIVE\n500000.e-3,100000.e-3\n*FLUID SECTION,MATERIAL=GAS,ELSET=VORTEX1,TYPE=VORTEX FORCED\n300.e-6,80.e-3,1,1,1047.1975512,-1,2\n*FLUID SECTION,MATERIAL=GAS,ELSET=SYSCHNG2,TYPE=RELATIVE TO ABSOLUTE\n500000.e-3,315000.e-3\n*FLUID SECTION,MATERIAL=GAS,ELSET=ORIFICE3,TYPE=ORIFICE\n500.e-6,25.2313e-3\n*FLUID SECTION,MATERIAL=GAS,ELSET=VORTEX2,TYPE=VORTEX FORCED\n250.e-3,20.e-3,1,1,2094.3951,1,2\n*FLUID SECTION,MATERIAL=GAS,ELSET=EXIT,TYPE=INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step assigns fluid sections to the elements, specifying the material, element set, and type of each section, along with relevant parameters for each type."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n2,0,0,550\n2,2,2,1.e6\n14,2,2,0.7e6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, specifying constraints and pressures at certain nodes."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT,NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure, specifying the type of analysis (steady-state heat transfer), the number of increments, and the output requests for nodal displacements and temperatures."
+    }
+}

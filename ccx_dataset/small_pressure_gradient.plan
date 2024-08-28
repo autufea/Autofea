@@ -1,0 +1,93 @@
+{
+    "Step 1": {
+        "Code": "**\n**      Structure: linear gas network\n**      Test Objective: test of 8 pipe elements in series \n**         entrance pressure and mass flow given (bc)\n**         exit pressure given (initial condition)\n**         default initial pressure gradient calculated\n**         in preinitialnet is too strong; test of the\n**         recalculation of the initial pressure in a\n**         single branch (also in preinitialnet)\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "Defines the structure and objective of the simulation, which is to test a linear gas network with 8 pipe elements in series. It specifies the entrance pressure, mass flow, and exit pressure conditions."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET= NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n6, 6, 0, 0\n7, 7, 0, 0\n8, 8, 0, 0\n9, 9, 0, 0\n10,10,0, 0\n11,11,0, 0\n12,12,0, 0\n13,13,0, 0\n14,14,0, 0\n15,15,0, 0\n16,16,0, 0\n17,17,0,0\n18,18,0,0\n19,19,0,0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the model, assigning coordinates to each node. The nodes are listed with their respective IDs and coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=GASPIPE\n1, 0, 1, 2\n2,  2,  3,  4\n3,  4,  5,  6\n4,  6,  7,  8\n5,  8,  9,  10\n6, 10, 11, 12\n7, 12, 13, 14\n8, 14, 15, 16\n9, 16, 17, 18\n10,18,19,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model, specifying the type and connectivity of each element. Each element connects two nodes, forming the gas pipe network."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the gas used in the simulation. The conductivity of the gas is specified."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n1.0022E9,1.69532E-11,270\n1.0045E9,1.84135E-11,300\n1.0131E9,2.28232E-11,400\n1.0292E9,2.66931E-11,500\n1.0506E9,3.01677E-11,600\n1.0745E9,3.33396E-11,700\n1.0982E9,3.62717E-11,800\n1.1204E9,3.90084E-11,900\n1.1405E9,4.15824E-11,1000\n1.1583E9,4.40182E-11,1100\n1.1739E9,4.63352E-11,1200\n1.1976E9,4.85486E-11,1300\n1.1997E9,5.06708E-11,1400\n1.2104E9,5.27117E-11,1500\n1.2199E9,5.46798E-11,1600\n1.2284E9,5.65822E-11,1700\n1.2361E9,5.84249E-11,1800\n1.2431E9,6.02131E-11,1900\n1.2495E9,6.19512E-11,2000\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Specifies the fluid constants for the gas at different conditions, including pressure, viscosity, and temperature."
+    },
+    "Step 6": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287E6\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Defines the specific gas constant used in the simulation."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=GASPIPE,TYPE=GAS PIPE FANNO ADIABATIC\n1E6,1E3,1E3,0,1.5,0,0\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines the fluid section properties for the gas pipe elements, including material, element set, and type. Additional parameters for the gas pipe are also specified."
+    },
+    "Step 8": {
+        "Code": "*BOUNDARY\n2,0,0,293\n4,0,0,293\n6,0,0,293\n8,0,0,293\n10,0,0,293\n12,0,0,293\n14,0,0,293\n16,0,0,293\n18,0,0,293\n2,2,2,0.1\n*BOUNDARY,MASS FLOW\n1,1,1,1.000623E-1\n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Specifies the boundary conditions for the nodes, including temperature and mass flow. The entrance and exit conditions for the gas flow are defined."
+    },
+    "Step 9": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n18,0.099678\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial conditions for the total pressure at a specific node in the model."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT,NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step, including the number of increments and the type of analysis (steady-state heat transfer). It also specifies the output requests for node displacements and temperatures."
+    }
+}

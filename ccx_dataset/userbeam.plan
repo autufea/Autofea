@@ -1,0 +1,79 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: user beam element U1\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step defines the structure as a cantilever beam and sets the test objective to use the user-defined beam element U1."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n1,0.,0.,0.\n2,10.,0.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model. Node 1 is at the origin (0,0,0) and Node 2 is at (10,0,0)."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=U1, ELSET=Eall\n     1,      1,      2,\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element of type U1 and assigns it to the element set Eall. The element connects Node 1 and Node 2."
+    },
+    "Step 4": {
+        "Code": "*USER ELEMENT,TYPE=U1,NODES=2,INTEGRATION POINTS=2,MAXDOF=6\n",
+        "Keywords": [
+            "USER ELEMENT",
+            "NODES",
+            "INTEGRATION POINTS",
+            "MAXDOF"
+        ],
+        "Start": "*USER ELEMENT",
+        "Description": "This step specifies the user-defined element U1 with 2 nodes, 2 integration points, and a maximum of 6 degrees of freedom."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\n1,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to Node 1, constraining all 6 degrees of freedom."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n1.e7,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the element. The material named EL is defined with an elastic modulus of 1.e7 and a Poisson's ratio of 0.3."
+    },
+    "Step 7": {
+        "Code": "*BEAM SECTION,ELSET=Eall,MATERIAL=EL,SECTION=GENERAL\n0.0625,3.2552e-4,0.,3.2552e-4,0.8333\n0.,1.,0.\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties for the element set Eall using the material EL. The section properties include area, moments of inertia, and orientation."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n2,2,1.\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall\nS\n*END STEP\n\n\n\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure. A static load of 1 unit is applied in the Y-direction at Node 2. The displacements at all nodes and stresses in all elements are requested for output."
+    }
+}

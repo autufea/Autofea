@@ -1,0 +1,72 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam, one element\n**   Test objective: B32R elements.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation setup, specifying that it involves a cantilever beam with one element and aims to test B32R elements."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=Nall\n1, 0, 0, 0\n2, 0, 0, 5\n3, 0, 0, 10\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model. Three nodes are specified with their coordinates: Node 1 at (0,0,0), Node 2 at (0,0,5), and Node 3 at (0,0,10)."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=B32R,ELSET=EAll\n1,1,2,3\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the element of the model. A single B32R element is created connecting nodes 1, 2, and 3, and is assigned to the element set EAll."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n3,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. Node 3 is constrained in all six degrees of freedom."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=ALUM\n*ELASTIC\n1E7,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model. The material named ALUM is specified with an elastic modulus of 1E7 and a Poisson's ratio of 0.3."
+    },
+    "Step 6": {
+        "Code": "*BEAM SECTION,ELSET=EAll,MATERIAL=ALUM,SECTION=RECT\n.25,.25\n1.d0,0.d0,0.d0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties. The section is rectangular with dimensions 0.25x0.25, and it is assigned to the element set EAll using the material ALUM."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n1,1,1.\n*EL PRINT,ELSET=Eall,FREQUENCY=100\nS\n*NODE FILE,OUTPUT=2D\nU\n*EL FILE,SECTION FORCES\nS,NOE\n*EL PRINT,ELSET=EAll,TOTALS=YES\nEVOL\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "EL PRINT",
+            "ELSET",
+            "FREQUENCY",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE",
+            "SECTION FORCES",
+            "TOTALS"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure. A static analysis is defined, with a load of 1 unit applied in the x-direction at Node 1. Various output requests are specified, including element stresses, nodal displacements, and section forces."
+    }
+}

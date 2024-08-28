@@ -1,0 +1,85 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: shell roof.\n**   Test objective: *NORMAL\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a shell roof and sets the test objective to NORMAL."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e-01,  0.00000e+00 \n       2, -1.49012e-08,  1.86265e-09,  0.00000e+00 \n       3, -1.49012e-08,  1.86265e-09,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e-01,  1.00000e+00 \n       5,  5.00000e-01,  5.00000e-02,  0.00000e+00 \n       6, -1.49012e-08,  1.86265e-09,  5.00000e-01 \n       7,  5.00000e-01,  5.00000e-02,  1.00000e+00 \n       8,  1.00000e+00,  1.00000e-01,  5.00000e-01 \n       9,  2.00000e+00,  1.86265e-09,  0.00000e+00 \n      10,  2.00000e+00,  1.86265e-09,  1.00000e+00 \n      11,  1.50000e+00,  5.00000e-02,  0.00000e+00 \n      12,  1.50000e+00,  5.00000e-02,  1.00000e+00 \n      13,  2.00000e+00,  1.86265e-09,  5.00000e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model and assigns them to the node set 'Nall'. Each node is defined by its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      9,      1,      4,     10,     11,      8,     12,     13\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model using the S8R element type and assigns them to the element set 'Eall'. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n2,3,6,9,10,13\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'FIX' that includes specific nodes which will be constrained."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nFIX,1,6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'FIX' set, constraining degrees of freedom 1 through 6."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n21000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', specifying its elastic modulus and Poisson's ratio."
+    },
+    "Step 7": {
+        "Code": "*SHELL SECTION,ELSET=Eall,MATERIAL=EL\n0.05\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "Defines the shell section properties for the elements in the 'Eall' set, assigning the material 'EL' and specifying the shell thickness."
+    },
+    "Step 8": {
+        "Code": "*NORMAL\n1,1,-0.1,1.,0.\n1,4,-0.1,1.,0.\n1,8,-0.1,1.,0.\n2,1,0.1,1.,0.\n2,4,0.1,1.,0.\n2,8,0.1,1.,0.\n",
+        "Keywords": [
+            "NORMAL"
+        ],
+        "Start": "*NORMAL",
+        "Description": "Defines normal directions for specific nodes and elements, specifying the direction vectors."
+    },
+    "Step 9": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*CLOAD\n8,2,-.1\n*NODE PRINT,NSET=Nall\nU\n*EL PRINT,ELSET=Eall,GLOBAL=YES\nS\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET",
+            "GLOBAL"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with nonlinear geometry considerations. Specifies a static analysis, applies a concentrated load, and sets up output requests for nodal displacements and element stresses."
+    }
+}

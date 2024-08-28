@@ -1,0 +1,124 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: contact between beams and bricks.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to examine the contact between beams and bricks."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00, -1.49012e-08 \n       2,  1.00000e+00,  0.00000e+00, -1.49012e-08 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5, -7.45058e-09,  1.00000e+00, -1.49012e-08 \n       6, -7.45058e-09,  0.00000e+00, -1.49012e-08 \n       7, -7.45058e-09,  0.00000e+00,  1.00000e+00 \n       8, -7.45058e-09,  1.00000e+00,  1.00000e+00 \n      12,  0.570711, 0.429289, 1.000000\n      16,  0.429289, 0.570711, 1.000000\n      17,  0.5,0.5,1.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=EVOL\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n*ELEMENT, TYPE=B32R, ELSET=EBEAM\n     2,16,17,12\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the model. The first element is a solid element (C3D8) and the second is a beam element (B32R)."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n*NSET,NSET=Nfixxy\n12,16,17,\n3,4,7,8\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines node sets 'Nfix' and 'Nfixxy' for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,1,3\nNfixxy,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node sets 'Nfix' and 'Nfixxy'."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties with the name 'EL' and specifies its elastic properties."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=EVOL,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the solid elements in the element set 'EVOL'."
+    },
+    "Step 8": {
+        "Code": "*BEAM SECTION,ELSET=EBEAM,MATERIAL=EL,OFFSET1=0.5,SECTION=RECT\n.2,.2\n0.,0.,-1.\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "OFFSET1",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Defines the beam section properties for the elements in the element set 'EBEAM'."
+    },
+    "Step 9": {
+        "Code": "*SURFACE,NAME=Smast\n1,S5\n*SURFACE,NAME=Sslav\n2,S2\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces, 'Smast' and 'Sslav', for contact interaction."
+    },
+    "Step 10": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=SURFACE TO SURFACE\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Specifies a contact pair interaction between the surfaces 'Sslav' and 'Smast'."
+    },
+    "Step 11": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction with the name 'SI1'."
+    },
+    "Step 12": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.E7,3.\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior for the contact interaction, including pressure-overclosure properties."
+    },
+    "Step 13": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*DLOAD\n2,P1,100.\n*NODE FILE,CONTACT ELEMENT,FREQUENCY=10\nU\n*EL FILE\nS,NOE\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "CONTACT ELEMENT",
+            "FREQUENCY",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step with non-linear geometry. Applies a distributed load and specifies output requests for node and element data."
+    }
+}

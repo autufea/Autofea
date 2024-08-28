@@ -1,0 +1,29 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: restart capability (reading part).\n**                   defining an extra amplitude\n**   Before running this example, please run example beamwrite\n**   and copy beamwrite.rout to beamread4.rin\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step sets up the structure as a cantilever beam and outlines the test objective, which is to test the restart capability by reading a previous run and defining an extra amplitude. It also instructs to run a previous example and copy its output file for use in this simulation."
+    },
+    "Step 2": {
+        "Code": "*RESTART,READ\n",
+        "Keywords": [
+            "RESTART",
+            "READ"
+        ],
+        "Start": "*RESTART",
+        "Description": "This step reads the restart data from a previous analysis. It uses the *RESTART,READ command to import the state of the model from a previous run."
+    },
+    "Step 3": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n1.,1.\n*AMPLITUDE,NAME=A2\n0.,0.,1.,.5\n*DLOAD,AMPLITUDE=A1\n29, P2, -200.000000 \n30, P2, -200.000000 \n*DLOAD,AMPLITUDE=A2\n31, P2, -200.000000 \n32, P2, -200.000000\n*END STEP\n\n\n\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "AMPLITUDE",
+            "NAME",
+            "DLOAD"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines a new analysis step with non-linear geometry effects enabled. It specifies a static analysis with a time period of 1.0. An amplitude named A2 is defined, followed by distributed loads (DLOAD) applied to specific nodes with different amplitudes."
+    }
+}

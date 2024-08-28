@@ -1,0 +1,87 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: channel connecting two reservoirs.\n**   Test objective: inflow along the channel;\n**                   thermal calculation included.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure of the simulation, which is a channel connecting two reservoirs. The objective is to test the inflow along the channel and include thermal calculations."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,-0.05,0.,0.\n2,0.,0.,0.\n4,.05,0.,0.\n6,.1,0.,0.\n7,12.05,0.,-0.05975\n8,24.,0.,-0.1195\n9,26.5,0.,-0.1195\n10,29.,0.,-0.1195\n11,31.,0.,-0.1295\n12,33.,0.,-0.1395\n13,35.5,0.,-0.1395\n14,38.,0.,-0.1395\n15,49.95,0.,-0.19925\n16,61.9,0.,-0.259\n17,61.95,0.,-0.259\n18,62.,0.,-0.259\n19,62.05,0.,-0.259\n20,24.,5.,-0.1195\n21,29.,-5.,-0.1195\n22,33.,5.,-0.1395\n23,38.,-5.,-0.1395\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the simulation with their coordinates and assigns them to a node set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=EALL\n1,0,1,2\n2,2,4,6\n4,6,7,8\n5,8,9,10\n6,10,11,12\n7,12,13,14\n8,14,15,16\n9,16,17,18\n10,18,19,0\n11,0,20,8\n12,0,21,10\n13,0,22,12\n14,0,23,14\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the simulation, specifies their type, and assigns them to an element set named EALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1000.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n4217.,1750.E-6,273.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines fluid constants such as specific heat, viscosity, and reference temperature."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n1,10,11,12,13,14\n*ELSET,ELSET=E2\n2\n*ELSET,ELSET=E4\n4,5,6,7,8\n*ELSET,ELSET=E9\n9\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets (E1, E2, E4, E9) and assigns specific elements to each set."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,ELSET=E1,TYPE=CHANNEL INOUT,MATERIAL=WATER\n*FLUID SECTION,ELSET=E2,TYPE=CHANNEL SLUICE GATE,MANNING,MATERIAL=WATER\n10.,0.,0.1,0.005,0.01,0.8\n*FLUID SECTION,ELSET=E4,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n10.,0.,-1.,0.005,0.01\n*FLUID SECTION,ELSET=E9,TYPE=CHANNEL RESERVOIR,MANNING,MATERIAL=WATER\n10.,0.,0.1,0.005,0.01\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "MANNING"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for different parts of the channel, specifying their type, material, and other parameters like Manning's coefficient."
+    },
+    "Step 8": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=-273.15,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "Defines physical constants such as absolute zero temperature and the Stefan-Boltzmann constant."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*HEAT TRANSFER,STEADY STATE\n*DLOAD\nEALL,GRAV,9.81,0.,0.,-1.\n*BOUNDARY\n2,0,0,20.\n20,0,0,100.\n21,0,0,20.\n22,0,0,20.\n23,0,0,100.\n18,2,2,0.5\n*BOUNDARY,MASS FLOW\n1,1,1,60000.\n20,1,1,20000.\n21,1,1,20000.\n22,1,1,20000.\n23,1,1,20000.\n*NODE PRINT,NSET=NALL\nU,MF,PN,NT\n*END STEP\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "DLOAD",
+            "BOUNDARY",
+            "MASS FLOW",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step for steady-state heat transfer, applies loads and boundary conditions, and specifies output requests for node data."
+    }
+}

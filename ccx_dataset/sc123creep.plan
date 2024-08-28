@@ -1,0 +1,82 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 element under tension.\n**   Test objective: single crystal creep material user routine.\n**\n*HEADING\nModel: beam     Date: 10-Mar-1998\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the heading for the simulation, including a brief description of the model and the test objective."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n      10,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      11,  7.50000e-01,  0.00000e+00,  0.00000e+00 \n      12,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      13,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      33,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      34,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n      93,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n      95,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n      96,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n     103,  5.00000e-01,  0.00000e+00,  5.00000e-01 \n     105,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n     106,  7.50000e-01,  0.00000e+00,  1.00000e+00 \n     132,  1.00000e+00,  5.00000e-01,  5.00000e-01 \n     133,  1.00000e+00,  2.50000e-01,  1.00000e+00 \n     134,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n     219,  5.00000e-01,  5.00000e-01,  5.00000e-01 \n     220,  5.00000e-01,  2.50000e-01,  1.00000e+00 \n     222,  5.00000e-01,  5.00000e-01,  1.00000e+00 \n     223,  7.50000e-01,  5.00000e-01,  1.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to a node set named 'Nall'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20, ELSET=Eall\n     1,    10,     2,    13,    95,   105,    34,   134,   222,    11,    12,\n          96,    93,   106,   133,   223,   220,   103,    33,   132,   219\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying the type of element (C3D20) and assigning them to an element set named 'Eall'. The connectivity of each element is also provided."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixz \n2, \n10, \n11, \n12, \n13, \n93, \n95, \n96, \n*NSET,NSET=END\n34,105,106,133,134,220,222,223\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines two node sets: 'Nfixz' and 'END'. 'Nfixz' includes nodes that will have boundary conditions applied, while 'END' includes nodes at the end of the model."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixz,3,3\n2,1,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the node sets. 'Nfixz' nodes are fixed in the z-direction, and specific nodes have constraints in the x and y directions."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=SINGLE_CRYSTAL_CREEP\n*USER MATERIAL,CONSTANTS=7\n135468.,68655.,201207.,1550.,3.89,980.,3.89,400.\n*DEPVAR\n24\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "USER MATERIAL",
+            "CONSTANTS",
+            "DEPVAR"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the simulation. A user-defined material named 'SINGLE_CRYSTAL_CREEP' is specified with its constants, and 24 dependent variables are declared."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=SINGLE_CRYSTAL_CREEP\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'SINGLE_CRYSTAL_CREEP' to the element set 'Eall' and defines it as a solid section."
+    },
+    "Step 8": {
+        "Code": "*STEP,INC=100,NLGEOM\n*STATIC\n0.72,72.\n*BOUNDARY\nEND,3,3,.012\n*NODE PRINT,NSET=Nall,FREQUENCY=100\nU\n*EL PRINT,ELSET=Eall,FREQUENCY=100\nS,SDV\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "NLGEOM",
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis parameters. It defines a static step with non-linear geometry, applies a boundary condition to the 'END' node set, and specifies output requests for node displacements and element stresses and state variables."
+    }
+}

@@ -1,0 +1,93 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: linear gas network\n**   Test objective: Test of subcritical flow \n**   in a single diverging not-rotating adiabatic pipe (kg,m,s,K)\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "Defines the structure and objective of the simulation, which is to test subcritical flow in a single diverging non-rotating adiabatic pipe."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model, assigning coordinates to each node."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EINOUT\n1, 0, 1, 2\n3, 4, 5, 0\t\n*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model, categorizing them into different element sets (EINOUT and EGAS) and specifying their connectivity."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Begins the definition of the material properties for the gas used in the simulation."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287.\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Specifies the specific gas constant for the material named 'GAS'."
+    },
+    "Step 6": {
+        "Code": "*FLUID CONSTANTS\n1.E3,1.69532E-05\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines the fluid constants, including properties like viscosity and thermal conductivity."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=EINOUT,TYPE=INOUT\n*FLUID SECTION,MATERIAL=GAS,ELSET=EGAS,TYPE=ROTATING GAS PIPE\n706.8583E-6,780.E-6,50.E-3,0,1,,,10.E-3,60.E-3,0.\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for the element sets EINOUT and EGAS, specifying their material properties and geometric parameters."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n4,0.5442E6\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial conditions for total pressure at a specific node."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY,MASS FLOW\n1,1,1,0.5033\n3,1,1,0.5033\n5,1,1,0.5033\n*BOUNDARY\n2,0,0,819\n4,0,0,819\n2,2,2,0.5443E6\n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Defines boundary conditions, including mass flow rates at specific nodes and other constraints."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=10000\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL,FREQUENCY=100\nU,NT\n*END STEP\n\n\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "Specifies the simulation step, including the type of analysis (steady-state heat transfer) and output requests for node data."
+    }
+}

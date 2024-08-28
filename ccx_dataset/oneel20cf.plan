@@ -1,0 +1,88 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube subject to concentrated flux;\n**   Test objective: *CFLUX\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation, indicating that it involves a cube structure subjected to a concentrated flux. The test objective is specified as *CFLUX."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5,  0.00000e+00,  1.00000e+00,  0.00000e+00 \n       6,  0.00000e+00,  0.00000e+00,  0.00000e+00 \n       7,  0.00000e+00,  0.00000e+00,  1.00000e+00 \n       8,  0.00000e+00,  1.00000e+00,  1.00000e+00 \n       9,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      10,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      11,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n      12,  1.00000e+00,  1.00000e+00,  5.00000e-01 \n      13,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      14,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      15,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n      16,  5.00000e-01,  1.00000e+00,  1.00000e+00 \n      17,  0.00000e+00,  5.00000e-01,  0.00000e+00 \n      18,  0.00000e+00,  0.00000e+00,  5.00000e-01 \n      19,  0.00000e+00,  5.00000e-01,  1.00000e+00 \n      20,  0.00000e+00,  1.00000e+00,  5.00000e-01 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, specifying their coordinates in a 3D space. The nodes are grouped into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,     9,    10,\n          11,    12,    17,    18,    19,    20,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying the type as C3D20R (a 20-node brick element) and grouping them into a set named 'Eall'. The connectivity of the nodes for each element is also provided."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=FIX\n5,6,7,8,17,18,19,20\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set named 'FIX', which includes specific nodes that will be used later for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,0.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for all nodes in the set 'Nall' to 0 degrees."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, naming the material 'EL' and specifying its thermal conductivity."
+    },
+    "Step 7": {
+        "Code": "*PHYSICAL CONSTANTS,ABSOLUTE ZERO=-273.15,STEFAN BOLTZMANN=5.669E-8\n",
+        "Keywords": [
+            "PHYSICAL CONSTANTS",
+            "ABSOLUTE ZERO",
+            "STEFAN BOLTZMANN"
+        ],
+        "Start": "*PHYSICAL CONSTANTS",
+        "Description": "This step sets the physical constants for the simulation, including the absolute zero temperature and the Stefan-Boltzmann constant."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n**\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step defines the solid section properties, associating the element set 'Eall' with the material 'EL'."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*BOUNDARY\nFIX,11,11,0.\n*CFLUX\n1,0,10.\n2,0,10.\n3,0,10.\n4,0,10.\n9,0,-40.\n10,0,-40.\n11,0,-40.\n12,0,-40.\n*NODE PRINT,NSET=Nall\nNT,RFL\n*EL PRINT,ELSET=Eall\nHFL\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "CFLUX",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure, specifying a steady-state heat transfer analysis with 100 increments. Boundary conditions and concentrated fluxes are applied, and output requests for nodal temperatures, reaction fluxes, and element heat fluxes are specified."
+    }
+}

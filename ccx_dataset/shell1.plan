@@ -1,0 +1,108 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever shell.\n**   Test objective: S8R elements, nodal thickness,\n**                   temperature gradient.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a cantilever shell and sets the test objective to evaluate S8R elements, nodal thickness, and temperature gradient."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1, -7.45058e-09, -7.45058e-09,  0.00000e+00 \n       2,  5.00000e-01, -7.45058e-09,  0.00000e+00 \n       3,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n       4, -7.45058e-09,  5.00000e-01,  0.00000e+00 \n       5,  2.50000e-01, -7.45058e-09,  0.00000e+00 \n       6,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n       7,  2.50000e-01,  5.00000e-01,  0.00000e+00 \n       8, -7.45058e-09,  2.50000e-01,  0.00000e+00 \n       9,  5.00000e-01,  1.00000e+00,  0.00000e+00 \n      10, -7.45058e-09,  1.00000e+00,  0.00000e+00 \n      11,  5.00000e-01,  7.50000e-01,  0.00000e+00 \n      12,  2.50000e-01,  1.00000e+00,  0.00000e+00 \n      13, -7.45058e-09,  7.50000e-01,  0.00000e+00 \n      14,  1.00000e+00, -7.45058e-09,  0.00000e+00 \n      15,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      16,  7.50000e-01, -7.45058e-09,  0.00000e+00 \n      17,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      18,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n      19,  1.00000e+00,  1.00000e+00,  0.00000e+00 \n      20,  1.00000e+00,  7.50000e-01,  0.00000e+00 \n      21,  7.50000e-01,  1.00000e+00,  0.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Lists the nodes with their coordinates and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=S8R, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6,      7,      8\n     2,      4,      3,      9,     10,      7,     11,     12,     13\n     3,      2,     14,     15,      3,     16,     17,     18,      6\n     4,      3,     15,     19,      9,     18,     20,     21,     11\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements using S8R type and assigns them to the element set 'Eall'. Each element is defined by its node connectivity."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx \n1, \n4, \n8, \n10, \n13, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'Nfixx' that includes specific nodes for boundary conditions."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixx,1,6\nNfixx,3,6\n4,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in 'Nfixx' and additional constraints to node 4."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n*EXPANSION\n12.E-6\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "EXPANSION"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for 'EL', including elastic modulus, Poisson's ratio, and thermal expansion coefficient."
+    },
+    "Step 7": {
+        "Code": "*SHELL SECTION,ELSET=Eall,MATERIAL=EL,OFFSET=0.,NODAL THICKNESS\n0.01\n",
+        "Keywords": [
+            "SHELL SECTION",
+            "ELSET",
+            "MATERIAL",
+            "OFFSET",
+            "NODAL THICKNESS"
+        ],
+        "Start": "*SHELL SECTION",
+        "Description": "Specifies the shell section properties for elements in 'Eall', using the material 'EL' and nodal thickness."
+    },
+    "Step 8": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,273.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in 'Nall' to 273 K."
+    },
+    "Step 9": {
+        "Code": "*NSET,NSET=Nsetm \n2, \n3, \n6, \n9, \n11,\n*NSET,NSET=Nsete \n14, \n15, \n17, \n19, \n20, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates additional node sets 'Nsetm' and 'Nsete' for further use in the simulation."
+    },
+    "Step 10": {
+        "Code": "*NODAL THICKNESS\n1,0.01\n4,0.01\n8,0.01\n10,0.01\n13,0.01\nNsetm,0.03\nNsete,0.02\n5,0.02\n7,0.02\n12,0.02\n16,0.025\n18,0.025\n21,0.025\n",
+        "Keywords": [
+            "NODAL THICKNESS"
+        ],
+        "Start": "*NODAL THICKNESS",
+        "Description": "Assigns nodal thickness values to specific nodes."
+    },
+    "Step 11": {
+        "Code": "*STEP,NLGEOM\n*STATIC\n*DLOAD\n3,P,-.1\n4,P,-.1\n*TEMPERATURE\nNall,373.,1000.\n*CLOAD\n15,1,1.\n*NODE PRINT,NSET=Nall\nU,NT,RF\n*EL PRINT,ELSET=Eall\nS\n*NODE FILE,OUTPUT=3D\nU,NT,RF\n*EL FILE\nS,NOE\n*END STEP\n\n\n\n\n\n\n\n\n\n\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DLOAD",
+            "TEMPERATURE",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET",
+            "NODE FILE",
+            "OUTPUT",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the analysis step with non-linear geometry, applies static loads, temperature gradient, and concentrated loads. Specifies output requests for nodal and element results."
+    }
+}

@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 element under tension.\n**   Test objective: elastically anisotropic material with \n**                   isotropic viscoplastic behavior:\n**                   user routine umat_aniso_plas.f\n**\n*HEADING\nModel: beam     Date: 10-Mar-1998\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the heading for the simulation, providing a brief description of the model and the test objective, which involves an elastically anisotropic material with isotropic viscoplastic behavior."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n      10,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      11,  7.50000e-01,  0.00000e+00,  0.00000e+00 \n      12,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      13,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      33,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      34,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n      93,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n      95,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n      96,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n     103,  5.00000e-01,  0.00000e+00,  5.00000e-01 \n     105,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n     106,  7.50000e-01,  0.00000e+00,  1.00000e+00 \n     132,  1.00000e+00,  5.00000e-01,  5.00000e-01 \n     133,  1.00000e+00,  2.50000e-01,  1.00000e+00 \n     134,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n     219,  5.00000e-01,  5.00000e-01,  5.00000e-01 \n     220,  5.00000e-01,  2.50000e-01,  1.00000e+00 \n     222,  5.00000e-01,  5.00000e-01,  1.00000e+00 \n     223,  7.50000e-01,  5.00000e-01,  1.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, specifying their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20, ELSET=Eall\n     1,    10,     2,    13,    95,   105,    34,   134,   222,    11,    12,\n          96,    93,   106,   133,   223,   220,   103,    33,   132,   219\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their connectivity and grouping them into an element set named 'Eall'. The element type used is C3D20."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixz \n2, \n10, \n11, \n12, \n13, \n93, \n95, \n96, \n*NSET,NSET=END\n34,105,106,133,134,220,222,223\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines node sets for boundary conditions. 'Nfixz' includes nodes that will have boundary conditions applied, and 'END' includes additional nodes for other purposes."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixz,3,3\n2,1,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the node sets. 'Nfixz' is constrained in the z-direction, and specific nodes are constrained in the x and y directions."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=ANISO_PLAS\n*USER MATERIAL,CONSTANTS=15\n500000.,157200.,500000.,157200.,157200.,500000.,126200.,126200.,\n126200.,0.,0.,0.,1.E-10,5,0.\n*DEPVAR\n14\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "USER MATERIAL",
+            "CONSTANTS",
+            "DEPVAR"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the simulation. The material named 'ANISO_PLAS' uses a user-defined material model with specified constants and dependent variables."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=ANISO_PLAS\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'ANISO_PLAS' to the element set 'Eall' and defines it as a solid section."
+    },
+    "Step 8": {
+        "Code": "*AMPLITUDE,NAME=A1\n0.,1.,1.,1.\n",
+        "Keywords": [
+            "AMPLITUDE",
+            "NAME"
+        ],
+        "Start": "*AMPLITUDE",
+        "Description": "This step defines an amplitude curve named 'A1' to be used in the simulation, specifying time and amplitude values."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100,NLGEOM\n*VISCO,CETOL=1.\n0.1,1.\n*DLOAD,AMPLITUDE=A1\n1,P2,-20.\n*NODE PRINT,NSET=NALL\nU,RF\n*EL PRINT,ELSET=EALL\nS\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "NLGEOM",
+            "VISCO",
+            "CETOL",
+            "DLOAD",
+            "AMPLITUDE",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis step, specifying the number of increments and non-linear geometry. It also defines the loading conditions, output requests for nodal displacements and reaction forces, and stress outputs for the elements."
+    }
+}

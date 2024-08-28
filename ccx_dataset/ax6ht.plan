@@ -1,0 +1,69 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: disk.\n**   Test objective: heat transfer with CAX6 elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a disk and the test objective is to analyze heat transfer using CAX6 elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  0.00000e+00   ,  1.00000e+00,0.00000e+00\n       2,  0.00000e+00   ,  5.00000e-01,0.00000e+00\n       3,  1.00000e+00   ,  1.00000e+00,0.00000e+00\n       4,  0.00000e+00   ,  7.50000e-01,0.00000e+00\n       5,  5.00000e-01   ,  7.50000e-01,0.00000e+00\n       6,  5.00000e-01   ,  1.00000e+00,0.00000e+00\n       7,  1.00000e+00   ,  5.00000e-01,0.00000e+00\n       8,  5.00000e-01   ,  5.00000e-01,0.00000e+00\n       9,  1.00000e+00   ,  7.50000e-01,0.00000e+00\n      10,  2.00000e+00   ,  1.00000e+00,0.00000e+00\n      11,  1.50000e+00   ,  7.50000e-01,0.00000e+00\n      12,  1.50000e+00   ,  1.00000e+00,0.00000e+00\n      13,  2.00000e+00   ,  5.00000e-01,0.00000e+00\n      14,  1.50000e+00   ,  5.00000e-01,0.00000e+00\n      15,  2.00000e+00   ,  7.50000e-01,0.00000e+00\n      16,  3.00000e+00   ,  1.00000e+00,0.00000e+00\n      17,  2.50000e+00   ,  7.50000e-01,0.00000e+00\n      18,  2.50000e+00   ,  1.00000e+00,0.00000e+00\n      19,  3.00000e+00   ,  5.00000e-01,0.00000e+00\n      20,  2.50000e+00   ,  5.00000e-01,0.00000e+00\n      21,  3.00000e+00   ,  7.50000e-01,0.00000e+00\n      22,  4.00000e+00   ,  1.00000e+00,0.00000e+00\n      23,  3.50000e+00   ,  7.50000e-01,0.00000e+00\n      24,  3.50000e+00   ,  1.00000e+00,0.00000e+00\n      25,  4.00000e+00   ,  5.00000e-01,0.00000e+00\n      26,  3.50000e+00   ,  5.00000e-01,0.00000e+00\n      27,  4.00000e+00   ,  7.50000e-01,0.00000e+00\n      28,  5.00000e+00   ,  1.00000e+00,0.00000e+00\n      29,  4.50000e+00   ,  7.50000e-01,0.00000e+00\n      30,  4.50000e+00   ,  1.00000e+00,0.00000e+00\n      31,  5.00000e+00   ,  5.00000e-01,0.00000e+00\n      32,  4.50000e+00   ,  5.00000e-01,0.00000e+00\n      33,  5.00000e+00   ,  7.50000e-01,0.00000e+00\n      34,  6.00000e+00   ,  1.00000e+00,0.00000e+00\n      35,  5.50000e+00   ,  7.50000e-01,0.00000e+00\n      36,  5.50000e+00   ,  1.00000e+00,0.00000e+00\n      37,  6.00000e+00   ,  5.00000e-01,0.00000e+00\n      38,  5.50000e+00   ,  5.00000e-01,0.00000e+00\n      39,  6.00000e+00   ,  7.50000e-01,0.00000e+00\n      40,  7.00000e+00   ,  1.00000e+00,0.00000e+00\n      41,  6.50000e+00   ,  7.50000e-01,0.00000e+00\n      42,  6.50000e+00   ,  1.00000e+00,0.00000e+00\n      43,  7.00000e+00   ,  5.00000e-01,0.00000e+00\n      44,  6.50000e+00   ,  5.00000e-01,0.00000e+00\n      45,  7.00000e+00   ,  7.50000e-01,0.00000e+00\n      46,  8.00000e+00   ,  1.00000e+00,0.00000e+00\n      47,  7.50000e+00   ,  7.50000e-01,0.00000e+00\n      48,  7.50000e+00   ,  1.00000e+00,0.00000e+00\n      49,  8.00000e+00   ,  5.00000e-01,0.00000e+00\n      50,  7.50000e+00   ,  5.00000e-01,0.00000e+00\n      51,  8.00000e+00   ,  7.50000e-01,0.00000e+00\n      52,  0.00000e+00   ,  0.00000e+00,0.00000e+00\n      53,  0.00000e+00   ,  2.50000e-01,0.00000e+00\n      54,  5.00000e-01   ,  2.50000e-01,0.00000e+00\n      55,  1.00000e+00   ,  0.00000e+00,0.00000e+00\n      56,  5.00000e-01   ,  0.00000e+00,0.00000e+00\n      57,  1.00000e+00   ,  2.50000e-01,0.00000e+00\n      58,  1.50000e+00   ,  2.50000e-01,0.00000e+00\n      59,  2.00000e+00   ,  0.00000e+00,0.00000e+00\n      60,  1.50000e+00   ,  0.00000e+00,0.00000e+00\n      61,  2.00000e+00   ,  2.50000e-01,0.00000e+00\n      62,  2.50000e+00   ,  2.50000e-01,0.00000e+00\n      63,  3.00000e+00   ,  0.00000e+00,0.00000e+00\n      64,  2.50000e+00   ,  0.00000e+00,0.00000e+00\n      65,  3.00000e+00   ,  2.50000e-01,0.00000e+00\n      66,  3.50000e+00   ,  2.50000e-01,0.00000e+00\n      67,  4.00000e+00   ,  0.00000e+00,0.00000e+00\n      68,  3.50000e+00   ,  0.00000e+00,0.00000e+00\n      69,  4.00000e+00   ,  2.50000e-01,0.00000e+00\n      70,  4.50000e+00   ,  2.50000e-01,0.00000e+00\n      71,  5.00000e+00   ,  0.00000e+00,0.00000e+00\n      72,  4.50000e+00   ,  0.00000e+00,0.00000e+00\n      73,  5.00000e+00   ,  2.50000e-01,0.00000e+00\n      74,  5.50000e+00   ,  2.50000e-01,0.00000e+00\n      75,  6.00000e+00   ,  0.00000e+00,0.00000e+00\n      76,  5.50000e+00   ,  0.00000e+00,0.00000e+00\n      77,  6.00000e+00   ,  2.50000e-01,0.00000e+00\n      78,  6.50000e+00   ,  2.50000e-01,0.00000e+00\n      79,  7.00000e+00   ,  0.00000e+00,0.00000e+00\n      80,  6.50000e+00   ,  0.00000e+00,0.00000e+00\n      81,  7.00000e+00   ,  2.50000e-01,0.00000e+00\n      82,  7.50000e+00   ,  2.50000e-01,0.00000e+00\n      83,  8.00000e+00   ,  0.00000e+00,0.00000e+00\n      84,  7.50000e+00   ,  0.00000e+00,0.00000e+00\n      85,  8.00000e+00   ,  2.50000e-01,0.00000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, assigning coordinates to each node and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=CAX6, ELSET=Eall\n     1,      1,      2,      3,      4,      5,      6\n     2,      3,      2,      7,      5,      8,      9\n     3,      3,      7,     10,      9,     11,     12\n     4,     10,      7,     13,     11,     14,     15\n     5,     10,     13,     16,     15,     17,     18\n     6,     16,     13,     19,     17,     20,     21\n     7,     16,     19,     22,     21,     23,     24\n     8,     22,     19,     25,     23,     26,     27\n     9,     22,     25,     28,     27,     29,     30\n    10,     28,     25,     31,     29,     32,     33\n    11,     28,     31,     34,     33,     35,     36\n    12,     34,     31,     37,     35,     38,     39\n    13,     34,     37,     40,     39,     41,     42\n    14,     40,     37,     43,     41,     44,     45\n    15,     40,     43,     46,     45,     47,     48\n    16,     46,     43,     49,     47,     50,     51\n    17,      2,     52,      7,     53,     54,      8\n    18,      7,     52,     55,     54,     56,     57\n    19,      7,     55,     13,     57,     58,     14\n    20,     13,     55,     59,     58,     60,     61\n    21,     13,     59,     19,     61,     62,     20\n    22,     19,     59,     63,     62,     64,     65\n    23,     19,     63,     25,     65,     66,     26\n    24,     25,     63,     67,     66,     68,     69\n    25,     25,     67,     31,     69,     70,     32\n    26,     31,     67,     71,     70,     72,     73\n    27,     31,     71,     37,     73,     74,     38\n    28,     37,     71,     75,     74,     76,     77\n    29,     37,     75,     43,     77,     78,     44\n    30,     43,     75,     79,     78,     80,     81\n    31,     43,     79,     49,     81,     82,     50\n    32,     49,     79,     83,     82,     84,     85\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying the type as CAX6 and grouping them into a set named 'Eall'. Each element is defined by its connecting nodes."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=EL\n*DENSITY\n7800.\n*CONDUCTIVITY\n50.\n*SPECIFIC HEAT\n446.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY",
+            "CONDUCTIVITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements, including density, thermal conductivity, and specific heat, under the material name 'EL'."
+    },
+    "Step 5": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n0.01\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies the thickness of the solid section."
+    },
+    "Step 6": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,20.\n**\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial temperature conditions for all nodes in the set 'Nall' to 20 degrees."
+    },
+    "Step 7": {
+        "Code": "*STEP,NLGEOM\n*HEAT TRANSFER,STEADY STATE\n*BOUNDARY\n1,11,11,0.\n46,11,11,100.\n*EL PRINT,ELSET=Eall\nHFL\n*END STEP\n",
+        "Keywords": [
+            "NLGEOM",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure, specifying a steady-state heat transfer analysis. It also sets boundary conditions for temperature at specific nodes and requests heat flux output for the element set 'Eall'."
+    }
+}

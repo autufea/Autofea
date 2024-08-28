@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: C3D8 elements\n**                   strain energy sensitivity\n**                   cf. planestresssens and planestressquadsens\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that it involves a plate structure using C3D8 elements to analyze strain energy sensitivity."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n      22,-7.450579986301e-09,-7.450579986301e-09,-5.000000000000e-03\n      24,-7.450579986301e-09,-7.450579986301e-09,5.000000000000e-03\n      25,5.000000000000e-01,-7.450579986301e-09,-5.000000000000e-03\n      27,5.000000000000e-01,-7.450579986301e-09,5.000000000000e-03\n      28,5.000000000000e-01,5.000000000000e-01,-5.000000000000e-03\n      30,5.000000000000e-01,5.000000000000e-01,5.000000000000e-03\n      31,-7.450579986301e-09,5.000000000000e-01,-5.000000000000e-03\n      33,-7.450579986301e-09,5.000000000000e-01,5.000000000000e-03\n      34,5.000000000000e-01,1.000000000000e+00,-5.000000000000e-03\n      36,5.000000000000e-01,1.000000000000e+00,5.000000000000e-03\n      37,-7.450579986301e-09,1.000000000000e+00,-5.000000000000e-03\n      39,-7.450579986301e-09,1.000000000000e+00,5.000000000000e-03\n      40,1.000000000000e+00,-7.450579986301e-09,-5.000000000000e-03\n      42,1.000000000000e+00,-7.450579986301e-09,5.000000000000e-03\n      43,1.000000000000e+00,5.000000000000e-01,-5.000000000000e-03\n      45,1.000000000000e+00,5.000000000000e-01,5.000000000000e-03\n      46,1.000000000000e+00,1.000000000000e+00,-5.000000000000e-03\n      48,1.000000000000e+00,1.000000000000e+00,5.000000000000e-03\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model, listing their coordinates and grouping them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,    22,    25,    28,    31,    24,    27,    30,    33\n     2,    31,    28,    34,    37,    33,    30,    36,    39\n     3,    25,    40,    43,    28,    27,    42,    45,    30\n     4,    28,    43,    46,    34,    30,    45,    48,    36\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model, specifying their type (C3D8) and the nodes that form each element, grouping them into a set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixx\n22,24,31,33,37,39\n*NSET,NSET=Nfixz\n22,31,37,34,46,43,40,25\n*NSET,NSET=DESIGNNODES\n25\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates node sets for boundary conditions and design variables, including sets for fixed nodes in the x and z directions and a set for design nodes."
+    },
+    "Step 5": {
+        "Code": "*DESIGNVARIABLES,TYPE=COORDINATE\nDESIGNNODES\n",
+        "Keywords": [
+            "DESIGNVARIABLES"
+        ],
+        "Start": "*DESIGNVARIABLES",
+        "Description": "This step defines the design variables, specifying that the coordinates of the nodes in the 'DESIGNNODES' set are the variables to be optimized."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\nNfixx,1,1\n4,2,2\n31,2,2\n33,2,2\nNfixz,3,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model, fixing nodes in the x and z directions as specified in the node sets 'Nfixx' and 'Nfixz'."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model, specifying an elastic material with a Young's modulus of 210000 and a Poisson's ratio of 0.3."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material properties to the elements in the 'Eall' set, defining them as a solid section."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*DLOAD\n3,P4,-100.\n4,P4,-100.\n*NODE FILE\nU\n*EL FILE\nS\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "DLOAD",
+            "NODE FILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up a static analysis, applying distributed loads to elements and specifying output requests for nodal displacements and element stresses."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*SENSITIVITY\n*DESIGN RESPONSE, NAME=ENER_OBJ\nSTRAIN ENERGY,EALL\n*NODE FILE\nSEN\n*END STEP\n",
+        "Keywords": [
+            "SENSITIVITY",
+            "DESIGN RESPONSE",
+            "NAME",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up a sensitivity analysis, defining a design response for strain energy and specifying output requests for sensitivity results."
+    }
+}

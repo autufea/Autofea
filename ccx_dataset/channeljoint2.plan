@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two joining channels.\n**   Test objective: frontwater curve in one channel,\n**                   backwater curve in the other channel\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure of the simulation, which consists of two joining channels. The test objective is to analyze the frontwater curve in one channel and the backwater curve in the other channel."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,0.,0.,0.\n3,0.05,0.,0.\n4,.1,0.,0.\n5,12.45,0.,-0.06175\n6,25.,0.,-0.1245\n7,25.05,0.,-0.12475\n8,25.1,0.,-0.125\n9,25.1,-25.1,0.\n10,25.1,-25.1,0.\n11,25.1,-25.05,0.\n12,25.1,-25.,0.\n13,25.1,-12.65,-0.06175\n14,25.1,-0.1,-0.1245\n15,25.1,-0.05,-0.12475\n16,25.15,0.,-0.12525\n17,25.2,0.,-0.1255\n18,37.65,0.,-0.18775\n19,50.1,0.,-0.25\n20,50.15,0.,-0.25\n21,50.2,0.,-0.25\n22,50.2,0.,-0.25\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the simulation and assigns them to a node set named NALL. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=EALL\n1,0,1,2\n2,2,3,4\n3,4,5,6\n4,6,7,8\n5,0,9,10\n6,10,11,12\n7,12,13,14\n8,14,15,8\n9,8,16,17\n10,17,18,19\n11,19,20,21\n12,21,22,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the simulation, specifying their type and the nodes that form each element. The elements are assigned to an element set named EALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1000.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n4217.,1750.E-6,273.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines the fluid constants, including specific heat, viscosity, and reference temperature."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n1,5,12\n*ELSET,ELSET=E2\n2,6\n*ELSET,ELSET=E3\n4,8\n*ELSET,ELSET=E4\n3\n*ELSET,ELSET=E5\n11\n*ELSET,ELSET=E6\n9\n*ELSET,ELSET=E7\n10\n*ELSET,ELSET=E8\n7\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets (E1 to E8) and assigns specific elements to each set."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,ELSET=E1,TYPE=CHANNEL INOUT,MATERIAL=WATER\n*FLUID SECTION,ELSET=E2,TYPE=CHANNEL SLUICE GATE,MANNING,MATERIAL=WATER\n5.,0.,0.1,0.005,0.01,0.8\n*FLUID SECTION,ELSET=E3,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E4,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.,0.,24.9,0.005,0.03\n*FLUID SECTION,ELSET=E5,TYPE=CHANNEL RESERVOIR,MANNING,MATERIAL=WATER\n5.5,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E6,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.5,0.,0.1,0.005,0.01\n*FLUID SECTION,ELSET=E7,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.5,0.,24.9,0.005,0.01\n*FLUID SECTION,ELSET=E8,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n5.,0.,24.9,0.005,0.01\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "MANNING"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for each element set, specifying the type of channel, material, and other parameters such as Manning's coefficient and dimensions."
+    },
+    "Step 8": {
+        "Code": "*BOUNDARY\n21,2,2,0.5\n*BOUNDARY,MASS FLOW\n1,1,1,30000.\n9,1,1,3000.\n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes. This includes setting specific displacements and mass flow rates at certain nodes."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*HEAT TRANSFER,STEADY STATE\n*DLOAD\nEALL,GRAV,9.81,0.,0.,-1.\n*NODE PRINT,NSET=NALL\nU,MF,PN\n*END STEP\n\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step, specifying it as a steady-state heat transfer analysis. It also applies gravitational loads and sets up output requests for node displacements, mass flow, and pressure."
+    }
+}

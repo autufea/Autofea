@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step initializes the simulation setup, typically including any necessary preamble or comments."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,2.,0.,0.\n3,4.,-2.,0.\n4,4.,2.,0.\n5,6.,0.,0.\n1000,-1.,0.,0.\n1001,1.,0.,0.\n2001,3.,1.,0.\n3001,5.,1.,0.\n4001,3.,-1.,0.\n5000,7.,0.,0.\n5001,5.,-1.,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the model and assigns them to the node set 'NALL'. Each node is specified by its ID and coordinates (x, y, z)."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=ORIFICE1\n1,1,1001,2\n*ELEMENT,TYPE=D,ELSET=INLET1\n2,0,1000,1\n*ELEMENT,TYPE=D,ELSET=MASSFLOWPERCENT1\n3,2,2001,4\n*ELEMENT,TYPE=D,ELSET=ORIFICE3\n4,4,3001,5\n*ELEMENT,TYPE=D,ELSET=OUTLET1\n5,5,5000,0\n*ELEMENT,TYPE=D,ELSET=ORIFICE4\n6,2,4001,3\n*ELEMENT,TYPE=D,ELSET=ORIFICE5\n7,3,5001,5\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model, specifying their type and the node connectivity. Each element is assigned to an element set (ELSET) and given a unique ID."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the simulation, in this case, a material named 'GAS'."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287.\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "Specifies the specific gas constant for the material 'GAS'."
+    },
+    "Step 6": {
+        "Code": "*FLUID CONSTANTS\n1002.353938,18.21e-6\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines the fluid constants, including specific heat capacity and dynamic viscosity."
+    },
+    "Step 7": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,500.\n*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n1,300000.\n2,200000.\n3,150000.\n4,150000.\n5,100000.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial conditions for the simulation, including temperature and total pressure at various nodes."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTIONS,MATERIAL=GAS,ELSET=ORIFICE1,TYPE=ORIFICE\n1.E-4,1.1284E-2,0\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=INLET1,TYPE=INOUT\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=MASSFLOWPERCENT1,TYPE=MASSFLOWPERCENT\n0.5,1,0,0,0,0,0,0,\n0,0,0,\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=ORIFICE3,TYPE=ORIFICE\n1.E-4,1.1284E-2,0\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=OUTLET1,TYPE=INOUT\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=ORIFICE4,TYPE=ORIFICE\n1.E-4,1.1284E-2,0\n*FLUID SECTIONS,MATERIAL=GAS,ELSET=ORIFICE5,TYPE=ORIFICE\n1.E-4,1.1284E-2,0\n",
+        "Keywords": [
+            "FLUID SECTIONS",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTIONS",
+        "Description": "Defines the fluid sections for different element sets, specifying the material, type, and additional parameters for each section."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*BOUNDARY\n1,2,2,300000.\n5,2,2,100000.\nNall,0,0,500.\n*CONTROLS,PARAMETERS=TIME INCREMENTATION\n100,100,9,100,100,10,5,,\n.25,.5,.75,.85,,,1.5,\n*NODE PRINT,NSET=Nall\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "BOUNDARY",
+            "CONTROLS",
+            "PARAMETERS",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Specifies the simulation step, including the type of analysis (steady-state heat transfer), boundary conditions, control parameters, and output requests."
+    }
+}

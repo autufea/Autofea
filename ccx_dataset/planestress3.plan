@@ -1,0 +1,74 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: plate.\n**   Test objective: CPS4 elements\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the structure and the test objective. The structure is a plate, and the test objective is to use CPS4 elements."
+    },
+    "Step 2": {
+        "Code": "*MATERIAL, NAME=EL\n*ELASTIC\n9.1e3, 0.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties. The material is named 'EL' and has an elastic modulus of 9.1e3 and a Poisson's ratio of 0.3."
+    },
+    "Step 3": {
+        "Code": "*NODE, NSET=NALL\n1\n2 ,10,0.\n3, 20,0.\n4, 0.,5\n5, 10,5\n6, 20,5\n7, 0.,10\n8, 10,10\n9, 20,10\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to a node set named 'NALL'. Each node is specified with its coordinates."
+    },
+    "Step 4": {
+        "Code": "*NSET, NSET=NRAND\n1,2,3,4,6,7,8,9\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'NRAND' that includes specific nodes from the previously defined node set 'NALL'."
+    },
+    "Step 5": {
+        "Code": "*ELEMENT, TYPE=CPS4, ELSET=EALL\n1, 1,2,5,4\n2, 2,3,6,5\n3, 5,6,9,8\n4, 4,5,8,7\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model. The elements are of type CPS4 and are assigned to an element set named 'EALL'. Each element is defined by its node connectivity."
+    },
+    "Step 6": {
+        "Code": "*SOLID SECTION, ELSET=EALL, MATERIAL=EL\n0.1\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns a solid section to the elements in the element set 'EALL' and specifies the material 'EL' with a thickness of 0.1."
+    },
+    "Step 7": {
+        "Code": "*BOUNDARY\nNRAND,1,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the node set 'NRAND'. The nodes in this set are constrained in the first and second degrees of freedom."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n5,1,86.60254038\n5,2,50\n*NODE PRINT,NSET=NALL\nU\n*NODE FILE\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET",
+            "NODE FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis procedure. A static analysis is performed, and loads are applied to node 5. The displacements are requested to be printed and written to a file for all nodes in the node set 'NALL'."
+    }
+}

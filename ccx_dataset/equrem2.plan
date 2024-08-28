@@ -1,0 +1,105 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other\n**   Test objective: removal of some MPC's in the second step\n**                   selection of single nodes\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to remove some MPCs in the second step and select single nodes."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,1.000000000000e+00,-1.490120005165e-08\n       2,1.000000000000e+00,0.000000000000e+00,-1.490120005165e-08\n       3,1.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       5,-7.450579986301e-09,1.000000000000e+00,-1.490120005165e-08\n       6,-7.450579986301e-09,0.000000000000e+00,-1.490120005165e-08\n       7,-7.450579986301e-09,0.000000000000e+00,1.000000000000e+00\n       8,-7.450579986301e-09,1.000000000000e+00,1.000000000000e+00\n       9,5.000000000000e-01,6.414210000000e-01,1.000000000000e+00\n      10,6.414210000000e-01,5.000000000000e-01,1.000000000000e+00\n      11,6.414210000000e-01,5.000000000000e-01,1.200000000000e+00\n      12,5.000000000000e-01,6.414210000000e-01,1.200000000000e+00\n      13,3.585790000000e-01,5.000000000000e-01,1.000000000000e+00\n      14,5.000000000000e-01,3.585790000000e-01,1.000000000000e+00\n      15,5.000000000000e-01,3.585790000000e-01,1.200000000000e+00\n      16,3.585790000000e-01,5.000000000000e-01,1.200000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and groups them into a set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     9,    10,    11,    12,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure using 8-node brick elements (C3D8) and groups them into a set named 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*EQUATION\n5\n9,3,-1.000000000000\n3,3,0.179289489250\n4,3,0.320710510750\n8,3,0.320710510750\n7,3,0.179289489250\n*EQUATION\n5\n10,3,-1.000000000000\n3,3,0.320710510750\n4,3,0.320710510750\n8,3,0.179289489250\n7,3,0.179289489250\n*EQUATION\n5\n13,3,-1.000000000000\n3,3,0.179289514250\n4,3,0.179289514250\n8,3,0.320710485750\n7,3,0.320710485750\n*EQUATION\n5\n14,3,-1.000000000000\n3,3,0.320710510750\n4,3,0.179289489250\n8,3,0.179289489250\n7,3,0.320710510750\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "Defines multiple multi-point constraints (MPCs) using equations to relate the degrees of freedom of different nodes."
+    },
+    "Step 5": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines a node set named 'Nfix' which includes nodes 1, 2, 5, and 6."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\nNfix,3,3\n6,1,2\n2,2,2\n13,1,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in the 'Nfix' set and other specified nodes, constraining their degrees of freedom."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements, including elasticity and density, and names the material 'EL'."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the elements in the 'Eall' set and defines them as solid sections."
+    },
+    "Step 9": {
+        "Code": "*NSET,NSET=N1\n9,10\n*NSET,NSET=N2\n11\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Defines additional node sets 'N1' and 'N2' for specific nodes (9, 10 for N1 and 11 for N2)."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*DYNAMIC,DIRECT\n1.E-8,2.E-7\n*DLOAD\n2, P5, -1.000000\n*NODE PRINT,NSET=N2\nU\n*EL FILE,NSET=N2\nENER\n*END STEP\n",
+        "Keywords": [
+            "DYNAMIC",
+            "DIRECT",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the first dynamic analysis step, applies a load to element 2, and specifies output requests for displacements and energy for nodes in set 'N2'."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*DYNAMIC,DIRECT\n1.E-8,2.E-7\n*EQUATION,REMOVE\n9,3\n10,3\n*NODE PRINT,NSET=N2\nU\n*END STEP\n",
+        "Keywords": [
+            "DYNAMIC",
+            "DIRECT",
+            "EQUATION",
+            "REMOVE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the second dynamic analysis step, removes specific MPCs, and specifies output requests for displacements for nodes in set 'N2'."
+    }
+}

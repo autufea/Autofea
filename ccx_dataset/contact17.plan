@@ -1,0 +1,141 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: massless dynamic contact.\n**                   friction; = contact16.inp but\n**                   no energy statistics.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to massless dynamic contact with friction, similar to contact16.inp but without energy statistics."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,1.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       2,1.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       3,1.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       4,1.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       5,0.000000000000e+00,1.000000000000e+00,0.000000000000e+00\n       6,0.000000000000e+00,0.000000000000e+00,0.000000000000e+00\n       7,0.000000000000e+00,0.000000000000e+00,1.000000000000e+00\n       8,0.000000000000e+00,1.000000000000e+00,1.000000000000e+00\n       9,1.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      10,1.000000000000e+00,0.000000000000e+00,5.000000000000e-01\n      11,1.000000000000e+00,5.000000000000e-01,1.000000000000e+00\n      12,1.000000000000e+00,1.000000000000e+00,5.000000000000e-01\n      13,5.000000000000e-01,1.000000000000e+00,0.000000000000e+00\n      14,5.000000000000e-01,0.000000000000e+00,0.000000000000e+00\n      15,5.000000000000e-01,0.000000000000e+00,1.000000000000e+00\n      16,5.000000000000e-01,1.000000000000e+00,1.000000000000e+00\n      17,0.000000000000e+00,5.000000000000e-01,0.000000000000e+00\n      18,0.000000000000e+00,0.000000000000e+00,5.000000000000e-01\n      19,0.000000000000e+00,5.000000000000e-01,1.000000000000e+00\n      20,0.000000000000e+00,1.000000000000e+00,5.000000000000e-01\n      21,7.500000000000e-01,7.500000000000e-01,1.000000000000e+00\n      22,7.500000000000e-01,2.500000000000e-01,1.000000000000e+00\n      23,7.500000000000e-01,2.500000000000e-01,1.500000000000e+00\n      24,7.500000000000e-01,7.500000000000e-01,1.500000000000e+00\n      25,2.500000000000e-01,7.500000000000e-01,1.000000000000e+00\n      26,2.500000000000e-01,2.500000000000e-01,1.000000000000e+00\n      27,2.500000000000e-01,2.500000000000e-01,1.500000000000e+00\n      28,2.500000000000e-01,7.500000000000e-01,1.500000000000e+00\n      29,7.500000000000e-01,5.000000000000e-01,1.000000000000e+00\n      30,7.500000000000e-01,2.500000000000e-01,1.250000000000e+00\n      31,7.500000000000e-01,5.000000000000e-01,1.500000000000e+00\n      32,7.500000000000e-01,7.500000000000e-01,1.250000000000e+00\n      33,5.000000000000e-01,7.500000000000e-01,1.000000000000e+00\n      34,5.000000000000e-01,2.500000000000e-01,1.000000000000e+00\n      35,5.000000000000e-01,2.500000000000e-01,1.500000000000e+00\n      36,5.000000000000e-01,7.500000000000e-01,1.500000000000e+00\n      37,2.500000000000e-01,5.000000000000e-01,1.000000000000e+00\n      38,2.500000000000e-01,2.500000000000e-01,1.250000000000e+00\n      39,2.500000000000e-01,5.000000000000e-01,1.500000000000e+00\n      40,2.500000000000e-01,7.500000000000e-01,1.250000000000e+00\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8,\n     2,    21,    22,    23,    24,    25,    26,    27,    28,\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of type C3D8 (3D continuum elements) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix \n1, \n2, \n5, \n6, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'Nfix' that includes nodes 1, 2, 5, and 6."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix,1,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node set 'Nfix', fixing all three translational degrees of freedom."
+    },
+    "Step 6": {
+        "Code": "*SURFACE,NAME=Sslav\n2, S3 \n*SURFACE,NAME=Smast\n1, S5\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines two surfaces, 'Sslav' and 'Smast', which will be used in the contact pair definition."
+    },
+    "Step 7": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=MASSLESS\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair between the surfaces 'Sslav' and 'Smast' with a massless interaction type named 'SI1'."
+    },
+    "Step 8": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines a surface interaction named 'SI1'."
+    },
+    "Step 9": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=HARD\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior with a hard pressure-overclosure relationship."
+    },
+    "Step 10": {
+        "Code": "*FRICTION\n0.2\n",
+        "Keywords": [
+            "FRICTION"
+        ],
+        "Start": "*FRICTION",
+        "Description": "Defines the friction coefficient as 0.2 for the contact interaction."
+    },
+    "Step 11": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.0\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines a material named 'EL' with elastic properties and density."
+    },
+    "Step 12": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' as a solid section."
+    },
+    "Step 13": {
+        "Code": "*NSET,NSET=N1\n23\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'N1' that includes node 23."
+    },
+    "Step 14": {
+        "Code": "*AMPLITUDE,NAME=A1\n0.,0.,5.E-6,1.\n",
+        "Keywords": [
+            "AMPLITUDE",
+            "NAME"
+        ],
+        "Start": "*AMPLITUDE",
+        "Description": "Defines an amplitude curve named 'A1' with specified time and amplitude values."
+    },
+    "Step 15": {
+        "Code": "*STEP,INC=1000,NLGEOM\n*DYNAMIC,EXPLICIT\n1.E-8,5.E-6,,2.5E-8\n*DLOAD\n2, P5, 100.000000 \n*CLOAD,AMPLITUDE=A1\n27,1,1.\n28,1,1.\n*NODE PRINT,NSET=N1,FREQUENCY=1\nU\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "NLGEOM",
+            "DYNAMIC",
+            "EXPLICIT",
+            "DLOAD",
+            "CLOAD",
+            "AMPLITUDE",
+            "NODE PRINT",
+            "NSET",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a dynamic explicit step with non-linear geometry, applies loads and boundary conditions, and specifies output requests for node set 'N1'."
+    }
+}

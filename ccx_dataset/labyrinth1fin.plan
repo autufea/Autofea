@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: linear gas network\n**   Test objective: straight labyrinth, 1 fin.\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the heading and initial comments for the simulation. It describes the model as a linear gas network with three elements and specifies the test objective."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to the node set 'NALL'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n*ELEMENT, TYPE=D,ELSET=EIO\n1, 0, 1, 2\n3, 4, 5, 0\t\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model. Elements are assigned to different element sets ('EGAS' and 'EIO') and are specified with their node connectivity."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas. Specifically, it sets the thermal conductivity of the gas."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287E6\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material named 'GAS'."
+    },
+    "Step 6": {
+        "Code": "*FLUID CONSTANTS\n1.002353938E9,3.6803E-11,819.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step defines additional fluid constants, including dynamic viscosity, thermal expansion coefficient, and specific heat capacity."
+    },
+    "Step 7": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step sets the density of the gas material."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,ELSET=EGAS,TYPE=LABYRINTHSINGLE,MATERIAL=GAS\n0.000,0.7990,, 532.6, 1, 0.5, 3.4, 0.000e+00,\n 0.000e+00,0.000e+00, 0.000e+00 \n*FLUID SECTION,ELSET=EIO,TYPE=INOUT,MATERIAL=GAS\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for the elements. It specifies the type of fluid section, the element set it applies to, and the material properties."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n2,0,0,819\n2,2,2,0.5443\n4,2,2,0.4663 \n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. It specifies constraints and values for certain nodes."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL\nU,NT\n*END STEP\n\n\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis step. It specifies the type of analysis (steady-state heat transfer), the number of increments, and the output requests for node temperatures."
+    }
+}

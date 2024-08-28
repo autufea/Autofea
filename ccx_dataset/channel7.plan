@@ -1,0 +1,84 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: channel connecting two reservoirs.\n**   Test objective: weir\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure of the simulation, which is a channel connecting two reservoirs, and sets the test objective to analyze a weir."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,0.,0.,0.\n3,0.05,0.,0.\n4,0.1,0.,0.\n5,0.6,0.,-0.5\n6,1.1,0.,-1.\n7,25.,0.,-1.1245\n8,50.9,0.,-1.249\n9,50.95,0.,-1.249\n10,51.,0.,-1.249\n11,51.,0.,-1.249\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the simulation and assigns them to the node set 'NALL'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=D,ELSET=EALL\n1,0,1,2\n2,2,3,4\n3,4,5,6\n4,6,7,8\n5,8,9,10\n6,10,11,0\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the simulation, specifies their type, and assigns them to the element set 'EALL'. Each element is defined by its connecting nodes."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=WATER\n*DENSITY\n1000.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for water, specifically its density."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n4217.,1750.E-6,273.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "Defines the fluid constants, including specific heat capacity, dynamic viscosity, and reference temperature."
+    },
+    "Step 6": {
+        "Code": "*ELSET,ELSET=E1\n1,6\n*ELSET,ELSET=E2\n2\n*ELSET,ELSET=E3\n3\n*ELSET,ELSET=E4\n4\n*ELSET,ELSET=E5\n5\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates element sets (E1 to E5) and assigns specific elements to each set."
+    },
+    "Step 7": {
+        "Code": "*FLUID SECTION,ELSET=E1,TYPE=CHANNEL INOUT,MATERIAL=WATER\n*FLUID SECTION,ELSET=E2,TYPE=CHANNEL WEIR,MANNING,MATERIAL=WATER\n10.,0.,1.414,0.707,0.01,1.,1.837\n*FLUID SECTION,ELSET=E3,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n10.,0.,1.414,0.707,0.01\n*FLUID SECTION,ELSET=E4,TYPE=CHANNEL STRAIGHT,MANNING,MATERIAL=WATER\n10.,0.,49.8,0.005,0.01\n*FLUID SECTION,ELSET=E5,TYPE=CHANNEL RESERVOIR,MANNING,MATERIAL=WATER\n10.,0.,0.1,0.005,0.01\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "MANNING"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "Defines fluid sections for each element set, specifying the type of channel (inlet/outlet, weir, straight, reservoir) and material properties."
+    },
+    "Step 8": {
+        "Code": "*BOUNDARY\n10,2,2,0.5\n*BOUNDARY,MASS FLOW\n1,1,1,60000.\n",
+        "Keywords": [
+            "BOUNDARY",
+            "MASS FLOW"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions, including a fixed boundary condition on node 10 and a mass flow boundary condition on node 1."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*HEAT TRANSFER,STEADY STATE\n*DLOAD\nEALL,GRAV,9.81,0.,0.,-1.\n*NODE PRINT,NSET=NALL\nU,MF,PN\n*END STEP\n\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "DLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines the simulation step for a steady-state heat transfer analysis, applies gravitational load, and specifies output requests for node displacements, mass flow, and pressure."
+    }
+}

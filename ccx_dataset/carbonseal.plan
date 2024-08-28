@@ -1,0 +1,92 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: linear gas network\n**   Test Objective: test of a carbon seal element\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the initial comments and heading for the simulation, describing the structure as a linear gas network and the test objective as testing a carbon seal element."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET= NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, assigning coordinates to each node and grouping them into a set named NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n*ELEMENT, TYPE=D,ELSET=EIO\n1, 0, 1, 2\n3, 4, 5, 0\t\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their type and grouping them into element sets named EGAS and EIO."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas, specifically its thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*FLUID CONSTANTS\n1.002353938E9,6.75125E-12,100.\n1.002353938E9,1.01229E-11,150.\n1.002353938E9,1.31652E-11,200.\n1.002353938E9,1.59259E-11,250.\n1.002353938E9,1.84547E-11,300.\n1.002353938E9,2.07921E-11,350.\n1.002353938E9,2.29698E-11,400.\n1.002353938E9,2.50127E-11,450.\n1.002353938E9,2.69403E-11,500.\n1.002353938E9,2.87682E-11,550.\n1.002353938E9,3.05089E-11,600.\n1.002353938E9,3.21729E-11,650.\n1.002353938E9,3.37686E-11,700.\n1.002353938E9,3.53031E-11,750.\n1.002353938E9,3.67825E-11,800.\n1.002353938E9,3.6805E-11,819.\n1.002353938E9,3.82120E-11,850.\n1.002353938E9,3.95959E-11,900.\n1.002353938E9,4.09381E-11,950.\n1.002353938E9,4.22420E-11,1000.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step provides the fluid constants for the gas at various temperatures, which are essential for the simulation."
+    },
+    "Step 6": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287E6\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant, which is a property of the gas being used in the simulation."
+    },
+    "Step 7": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step defines the density of the gas."
+    },
+    "Step 8": {
+        "Code": "*FLUID SECTION,MATERIAL=GAS,ELSET=EGAS,TYPE=CARBONSEAL\n434,0.05,5\n*FLUID SECTION,MATERIAL=GAS,ELSET=EIO,TYPE=INOUT\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections, specifying the material, element set, and type for both the carbon seal and in/out sections."
+    },
+    "Step 9": {
+        "Code": "*BOUNDARY\n2,0,0,819\n2,2,2,0.5443\n4,0,0,819\n4,2,2,0.4\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step sets the boundary conditions for the nodes, specifying constraints and values for certain degrees of freedom."
+    },
+    "Step 10": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT,NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the simulation step, specifying the type of analysis (steady-state heat transfer), the number of increments, and the output requests for node displacements and temperatures."
+    }
+}

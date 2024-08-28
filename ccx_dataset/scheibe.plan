@@ -1,0 +1,79 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: rectangular plate.\n**   Test objective: rigid body motion of plane strain elements.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the structure and the test objective. The structure is a rectangular plate, and the test objective is to analyze the rigid body motion of plane strain elements."
+    },
+    "Step 2": {
+        "Code": "*NODE, nset=nall\n1, 0.0, 0.0, 0.0\n2, 1.0, 0.0, 0.0\n3, 1.0, 1.0, 0.0\n4, 0.0, 1.0, 0.0\n5, 0.5, 0.0, 0.0\n6, 1.0, 0.5, 0.0\n7, 0.5, 1.0, 0.0\n8, 0.0, 0.5, 0.0\n*node, nset=center\n9, 0.0, 0.0, 0.0\n10, 0.0, 0.0, 0.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model. Nodes are specified with their coordinates, and they are grouped into sets 'nall' and 'center'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=cpe8r, ELSET=Eall\n1, 1, 2, 3, 4, 5, 6, 7, 8\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model. The elements are of type 'cpe8r' and are grouped into the set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL, NAME=EL\n*ELASTIC\n210000.0, .3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the elements. The material named 'EL' has elastic properties with a Young's modulus of 210000.0 and a Poisson's ratio of 0.3, along with a density of 7.8E-9."
+    },
+    "Step 5": {
+        "Code": "*SOLIDSECTION, ELSET=Eall, MATERIAL=EL\n0.1\n",
+        "Keywords": [
+            "SOLIDSECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLIDSECTION",
+        "Description": "This step assigns the material 'EL' to the element set 'Eall' and specifies a section thickness of 0.1."
+    },
+    "Step 6": {
+        "Code": "*RIGIDBODY, NSET=nall, REFNODE=9, ROTNODE=10\n",
+        "Keywords": [
+            "RIGIDBODY",
+            "NSET",
+            "REFNODE",
+            "ROTNODE"
+        ],
+        "Start": "*RIGIDBODY",
+        "Description": "This step defines a rigid body constraint for the node set 'nall', with reference node 9 and rotation node 10."
+    },
+    "Step 7": {
+        "Code": "*NSET,NSET=N1\n4,29,10\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines a node set 'N1' which includes nodes 4, 29, and 10."
+    },
+    "Step 8": {
+        "Code": "*STEP, nlgeom\n*STATIC, DIRECT\n0.01,1.\n*BOUNDARY\n9, 1, 3\n10, 3, 3, 3.1415927\n10, 1, 2\n*NODE PRINT,NSET=N1\nU\n*END STEP\n\n",
+        "Keywords": [
+            "NLGEOM",
+            "STATIC",
+            "DIRECT",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis step. It specifies a static analysis with nonlinear geometry, applies boundary conditions, and requests output of displacements for node set 'N1'."
+    }
+}

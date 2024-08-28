@@ -1,0 +1,85 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cube.\n**   Test objective: prescribed displacements.\n**\n*HEADING\nModel: balk    \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the initial model parameters, including the structure type (cube) and the test objective (prescribed displacements). It also includes a heading for the model named 'balk'."
+    },
+    "Step 2": {
+        "Code": "*NODE\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,1.,0.\n4,0.,1.,0.\n5,0.,0.,1.\n6,1.,0.,1.\n7,1.,1.,1.\n8,0.,1.,1.\n9,.25,0.,0.\n10,.5,0.,0.\n11,.75,0.,0.\n12,1.,.25,0.\n13,1.,.5,0.\n14,1.,.75,0.\n15,.75,1.,0.\n16,.5,1.,0.\n17,.25,1.,0.\n18,0.,.75,0.\n19,0.,.5,0.\n20,0.,.25,0.\n21,.25,0.,1.\n22,.5,0.,1.\n23,.75,0.,1.\n24,1.,.25,1.\n25,1.,.5,1.\n26,1.,.75,1.\n27,.75,1.,1.\n28,.5,1.,1.\n29,.25,1.,1.\n30,0.,.75,1.\n31,0.,.5,1.\n32,0.,.25,1.\n33,1.,0.,.25\n34,1.,0.,.5\n35,1.,0.,.75\n36,0.,0.,.75\n37,0.,0.,.5\n38,0.,0.,.25\n39,1.,1.,.25\n40,1.,1.,.5\n41,1.,1.,.75\n42,0.,1.,.25\n43,0.,1.,.5\n44,0.,1.,.75\n45,.5,.25,0.\n46,.25,.5,0.\n47,.5,.5,0.\n48,.75,.5,0.\n49,.5,.75,0.\n50,.5,.25,1.\n51,.25,.5,1.\n52,.5,.5,1.\n53,.75,.5,1.\n54,.5,.75,1.\n55,.5,0.,.25\n56,.25,0.,.5\n57,.5,0.,.5\n58,.75,0.,.5\n59,.5,0.,.75\n60,1.,.5,.25\n61,1.,.25,.5\n62,1.,.5,.5\n63,1.,.75,.5\n64,1.,.5,.75\n65,.5,1.,.25\n66,.75,1.,.5\n67,.5,1.,.5\n68,.25,1.,.5\n69,.5,1.,.75\n70,0.,.5,.25\n71,0.,.75,.5\n72,0.,.5,.5\n73,0.,.25,.5\n74,0.,.5,.75\n75,.5,.5,.25\n76,.5,.25,.5\n77,.25,.5,.5\n78,.5,.5,.5\n79,.75,.5,.5\n80,.5,.75,.5\n81,.5,.5,.75\n",
+        "Keywords": [
+            "NODE"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the model. Each node is specified by an ID and its coordinates in 3D space."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20R   \n1,1,10,47,19,37,57,78,72,9,45,\n46,20,56,76,77,73,38,55,75,70\n2,10,2,13,47,57,34,62,78,11,12,\n48,45,58,61,79,76,55,33,60,75\n3,19,47,16,4,72,78,67,43,46,49,\n17,18,77,80,68,71,70,75,65,42\n4,47,13,3,16,78,62,40,67,48,14,\n15,49,79,63,66,80,75,60,39,65\n5,37,57,78,72,5,22,52,31,56,76,\n77,73,21,50,51,32,36,59,81,74\n6,57,34,62,78,22,6,25,52,58,61,\n79,76,23,24,53,50,59,35,64,81\n7,72,78,67,43,31,52,28,8,77,80,\n68,71,51,54,29,30,74,81,69,44\n8,78,62,40,67,52,25,7,28,79,63,\n66,80,53,26,27,54,81,64,41,69\n",
+        "Keywords": [
+            "ELEMENT"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the model using the C3D20R element type. Each element is specified by an ID and the nodes that form the element."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1\n1,2\n1,3\n2,2\n2,3\n4,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the model. Specific degrees of freedom are constrained for certain nodes."
+    },
+    "Step 5": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the model. The material named 'EL' is specified with its elastic properties, including Young's modulus and Poisson's ratio."
+    },
+    "Step 6": {
+        "Code": "*NSET,NSET=SET1,GENERATE\n1,81\n",
+        "Keywords": [
+            "NSET",
+            "GENERATE"
+        ],
+        "Start": "*NSET",
+        "Description": "This step creates a node set named 'SET1' that includes all nodes from 1 to 81."
+    },
+    "Step 7": {
+        "Code": "*ELSET,ELSET=EALL,GENERATE\n1,8\n",
+        "Keywords": [
+            "ELSET",
+            "GENERATE"
+        ],
+        "Start": "*ELSET",
+        "Description": "This step creates an element set named 'EALL' that includes all elements from 1 to 8."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,MATERIAL=EL,ELSET=EALL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "MATERIAL",
+            "ELSET"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step defines a solid section for the model, associating the material 'EL' with the element set 'EALL'."
+    },
+    "Step 9": {
+        "Code": "*STEP\n*STATIC\n*BOUNDARY\n7,3,3,1.\n*NODE PRINT,NSET=SET1\nU\n*EL PRINT,ELSET=EALL\nS\n*END STEP\n\n",
+        "Keywords": [
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure. It specifies a static analysis, applies additional boundary conditions, and requests output for nodal displacements and element stresses."
+    }
+}

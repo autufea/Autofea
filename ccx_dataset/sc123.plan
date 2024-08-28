@@ -1,0 +1,95 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 element under tension.\n**   Test objective: single crystal material user routine.\n**                   one of the axis is along <123>\n**\n*HEADING\nModel: beam     Date: 10-Mar-1998\n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step sets up the heading for the simulation, providing a brief description of the model and the test objective, which involves a single crystal material under tension with one axis aligned along <123>."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       2,  1.00000e+00,  0.00000e+00,  0.00000e+00 \n      10,  5.00000e-01,  0.00000e+00,  0.00000e+00 \n      11,  7.50000e-01,  0.00000e+00,  0.00000e+00 \n      12,  1.00000e+00,  2.50000e-01,  0.00000e+00 \n      13,  1.00000e+00,  5.00000e-01,  0.00000e+00 \n      33,  1.00000e+00,  0.00000e+00,  5.00000e-01 \n      34,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n      93,  5.00000e-01,  2.50000e-01,  0.00000e+00 \n      95,  5.00000e-01,  5.00000e-01,  0.00000e+00 \n      96,  7.50000e-01,  5.00000e-01,  0.00000e+00 \n     103,  5.00000e-01,  0.00000e+00,  5.00000e-01 \n     105,  5.00000e-01,  0.00000e+00,  1.00000e+00 \n     106,  7.50000e-01,  0.00000e+00,  1.00000e+00 \n     132,  1.00000e+00,  5.00000e-01,  5.00000e-01 \n     133,  1.00000e+00,  2.50000e-01,  1.00000e+00 \n     134,  1.00000e+00,  5.00000e-01,  1.00000e+00 \n     219,  5.00000e-01,  5.00000e-01,  5.00000e-01 \n     220,  5.00000e-01,  2.50000e-01,  1.00000e+00 \n     222,  5.00000e-01,  5.00000e-01,  1.00000e+00 \n     223,  7.50000e-01,  5.00000e-01,  1.00000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model, specifying their coordinates and grouping them into a node set named 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D20, ELSET=Eall\n     1,    10,     2,    13,    95,   105,    34,   134,   222,    11,    12,\n          96,    93,   106,   133,   223,   220,   103,    33,   132,   219\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their connectivity and grouping them into an element set named 'Eall'. The element type used is C3D20."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfixz \n2, \n10, \n11, \n12, \n13, \n93, \n95, \n96, \n*NSET,NSET=END\n34,105,106,133,134,220,222,223\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "This step defines two node sets: 'Nfixz' for nodes that will have boundary conditions applied, and 'END' for nodes at the end of the model."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfixz,3,3\n2,1,2\n10,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the node sets. 'Nfixz' is constrained in the z-direction, and specific nodes are constrained in the x and y directions."
+    },
+    "Step 6": {
+        "Code": "*ORIENTATION,NAME=OR1\n-3.,0.,1.,-2.,10.,-6.\n",
+        "Keywords": [
+            "ORIENTATION",
+            "NAME"
+        ],
+        "Start": "*ORIENTATION",
+        "Description": "This step defines the orientation of the material using a specified coordinate system."
+    },
+    "Step 7": {
+        "Code": "*MATERIAL,NAME=SINGLE_CRYSTAL\n*USER MATERIAL,CONSTANTS=21\n135468.,68655.,201207.,1550.,3.89,18.E4,1500.,1.5,\n100.,80.,-80.,500.,980.,3.89,9.E4,1500.,\n2.,100.,70.,-50.,400.\n*DEPVAR\n60\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "USER MATERIAL",
+            "CONSTANTS",
+            "DEPVAR"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for a single crystal material, including user-defined constants and dependent variables."
+    },
+    "Step 8": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=SINGLE_CRYSTAL,ORIENTATION=OR1\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL",
+            "ORIENTATION"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "This step assigns the material and orientation to the element set 'Eall' using a solid section definition."
+    },
+    "Step 9": {
+        "Code": "*STEP,INC=100,NLGEOM\n*STATIC\n0.72,72.\n*BOUNDARY\nEND,3,3,.012\n*NODE PRINT,NSET=NALL\nU,RF\n*EL PRINT,ELSET=EALL,GLOBAL=YES\nS\n*NODE FILE\nU\n*EL FILE,POSITION=AVERAGED AT NODES,GLOBAL=YES\nS,SDV,NOE\n*END STEP\n\n",
+        "Keywords": [
+            "INC",
+            "NLGEOM",
+            "STATIC",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET",
+            "EL PRINT",
+            "ELSET",
+            "GLOBAL",
+            "NODE FILE",
+            "EL FILE",
+            "POSITION"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the analysis procedure, specifying a static analysis with non-linear geometry. It also defines additional boundary conditions, output requests for node and element data, and the number of increments."
+    }
+}

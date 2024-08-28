@@ -1,0 +1,108 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: 1 charactersitic flow element \n**   Test Objective: test of a characteristic element\n**\n*HEADING\nModel: linear net 3 elements Dtype \n",
+        "Keywords": [
+            "HEADING"
+        ],
+        "Start": "*HEADING",
+        "Description": "This step provides the heading and general description of the model, which is a linear net with 3 elements of type D."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1, 1, 0, 0\n2, 2, 0, 0\n3, 3, 0, 0\n4, 4, 0, 0\n5, 5, 0, 0\n6, 6, 0, 0,\n7, 7, 0, 0,\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes in the model and assigns them to the node set NALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=D,ELSET=EGAS\n2, 2, 3, 4\n3, 4, 5, 6\n*ELEMENT, TYPE=D,ELSET=EIO\n1, 0, 1, 2\n4, 6, 7, 0\t\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements in the model, specifying their type and the node connectivity for each element set (EGAS and EIO)."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=GAS\n*CONDUCTIVITY\n50.,0.\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "CONDUCTIVITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the gas, specifically its thermal conductivity."
+    },
+    "Step 5": {
+        "Code": "*SPECIFIC GAS CONSTANT\n287E6\n",
+        "Keywords": [
+            "SPECIFIC GAS CONSTANT"
+        ],
+        "Start": "*SPECIFIC GAS CONSTANT",
+        "Description": "This step specifies the specific gas constant for the material named GAS."
+    },
+    "Step 6": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step defines the density of the material."
+    },
+    "Step 7": {
+        "Code": "*FLUID CONSTANTS\n1.002353938E9,3.6803E-11,819.\n",
+        "Keywords": [
+            "FLUID CONSTANTS"
+        ],
+        "Start": "*FLUID CONSTANTS",
+        "Description": "This step specifies additional fluid constants for the material."
+    },
+    "Step 8": {
+        "Code": "*DENSITY\n1.E-9\n",
+        "Keywords": [
+            "DENSITY"
+        ],
+        "Start": "*DENSITY",
+        "Description": "This step repeats the definition of the material density."
+    },
+    "Step 9": {
+        "Code": "*FLUID SECTION,ELSET=EGAS,TYPE=CHARACTERISTIC,MATERIAL=GAS\n1,,,,0.1,0.003162,0.2,0.004472,\n0.3,0.005477,0.4,0.006324,0.5,0.007071,\n0.6,0.007745,0.7,0.008366\n*FLUID SECTION,ELSET=EIO,TYPE=INOUT,MATERIAL=GAS\n",
+        "Keywords": [
+            "FLUID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*FLUID SECTION",
+        "Description": "This step defines the fluid sections for the element sets EGAS and EIO, specifying the type, material, and various parameters."
+    },
+    "Step 10": {
+        "Code": "*BOUNDARY\n2,0,0,819\n2,2,2,0.5443\n4,0,0,819\n4,2,2,0.507875\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to specific nodes, defining constraints and values for different degrees of freedom."
+    },
+    "Step 11": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TOTAL PRESSURE\n6,0.4825\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "This step sets the initial conditions for total pressure at a specific node."
+    },
+    "Step 12": {
+        "Code": "*STEP,INC=100\n*HEAT TRANSFER,STEADY STATE\n1.,1.\n*NODE PRINT, NSET=NALL\nU,NT\n*END STEP\n",
+        "Keywords": [
+            "INC",
+            "HEAT TRANSFER",
+            "STEADY STATE",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the analysis step, specifying it as a steady-state heat transfer analysis with 100 increments, and sets up output requests for nodal temperatures."
+    }
+}

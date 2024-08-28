@@ -1,0 +1,105 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: pendulum.\n**   Test objective: dynamic calculation with large rotations.\n**                   for complete calculation change\n**                   step time from 1.0 to 10.00\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a pendulum and sets the test objective for dynamic calculation with large rotations. It also mentions that for a complete calculation, the step time should be changed from 1.0 to 10.00."
+    },
+    "Step 2": {
+        "Code": "*node,nset=nall\n1, 0.0, 0.0, 0.0\n2, 0.0, 0.0, -15.0\n3, 0.0, 0.0, -30.0\n4, 0.0, 0.0, -30.0\n5, 0.0, 0.0, -180.0\n6, 0.0, 0.0, -330.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes of the structure and assigns them to a node set named 'nall'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*element, type=B32, elset=elall\n1, 1,2,3\n2, 4,5,6\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of the structure using a B32 element type and assigns them to an element set named 'elall'. Each element is specified by its connecting nodes."
+    },
+    "Step 4": {
+        "Code": "*beam section, material=steel, elset=elall, section=rectangular\n10,10\n0.0, 1.0, 0.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "MATERIAL",
+            "ELSET",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "Specifies the beam section properties for the elements in 'elall', using a rectangular section with dimensions 10x10. The orientation of the section is also defined."
+    },
+    "Step 5": {
+        "Code": "*equation\n2, \n3, 1, -1.0, 4, 1, 1.0\n2,\n3, 3, -1.0, 4, 3, 1.0\n**\n** ebene Bewegung in (x,z)\n",
+        "Keywords": [
+            "EQUATION"
+        ],
+        "Start": "*EQUATION",
+        "Description": "Defines equations to constrain the degrees of freedom between nodes. This step ensures certain nodes move together in a specified manner."
+    },
+    "Step 6": {
+        "Code": "*boundary\nnall, 2,2\nnall, 4,4\nnall, 6,6\n1, 1,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes in 'nall'. It constrains specific degrees of freedom for all nodes and fully constrains node 1."
+    },
+    "Step 7": {
+        "Code": "*material, name=steel\n*elastic\n200000.0, 0.3\n*density\n7.8e-09, \n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for 'steel', including its elastic modulus, Poisson's ratio, and density."
+    },
+    "Step 8": {
+        "Code": "*initial conditions, type=displacement\nnall, 1, 0.0\nnall, 3, 0.0\n*initial conditions, type=velocity\nnall, 1, 0.0\nnall, 3, 0.0\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets initial conditions for displacement and velocity for all nodes in 'nall', initializing them to zero."
+    },
+    "Step 9": {
+        "Code": "*nset,nset=n1\n6\n**\n** in 1000 sec 1000 mal drehen\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'n1' containing node 6. This step is likely preparing for specific operations or boundary conditions on this node."
+    },
+    "Step 10": {
+        "Code": "*amplitude, name=ramp\n0.0, 0.0, 1000.0, 6280.0 \n",
+        "Keywords": [
+            "AMPLITUDE",
+            "NAME"
+        ],
+        "Start": "*AMPLITUDE",
+        "Description": "Defines an amplitude curve named 'ramp' that specifies a linear increase in value over time, from 0.0 at time 0.0 to 6280.0 at time 1000.0."
+    },
+    "Step 11": {
+        "Code": "*step, nlgeom, inc=1000000\n*dynamic, alpha=-0.30\n0.00001, 1.0, 0.000000001\n*boundary, amplitude=ramp\n1, 5,5, 1.000\n*dload\nelall, grav, 9810.0, 0.0, 0.0, -1.0\n*nodefile\nu\n*EL FILE\nENER\n*end step\n",
+        "Keywords": [
+            "NLGEOM",
+            "INC",
+            "DYNAMIC",
+            "ALPHA",
+            "BOUNDARY",
+            "AMPLITUDE",
+            "DLOAD",
+            "NODEFILE",
+            "EL FILE"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a dynamic analysis step with non-linear geometry considerations and a large number of increments. It applies boundary conditions with the 'ramp' amplitude, a gravitational load, and requests output for nodal displacements and element energy."
+    }
+}

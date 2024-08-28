@@ -1,0 +1,78 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: cantilever beam.\n**   Test objective: New moments in second step\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides an overview of the simulation, specifying that the structure is a cantilever beam and the objective is to analyze new moments in the second step."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=NS_ALL\n10, 0.0, 0.0, 0.0\n20, 0.2, 0.0, 0.0\n30, 0.4, 0.0, 0.0\n4,  0.6, 0.0, 0.0\n5,  0.8, 0.0, 0.0\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the cantilever beam, assigning coordinates to each node and grouping them into a node set named NS_ALL."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=B32, ELSET=ES_ALL\n3, 10, 20, 30\n5, 30, 4,  5\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the elements of the cantilever beam, specifying the type of element (B32) and grouping them into an element set named ES_ALL."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL, NAME=M_EL\n*ELASTIC\n210000.0, 0.3\n*DENSITY\n7850.0\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the beam, including its elastic modulus, Poisson's ratio, and density, under the material name M_EL."
+    },
+    "Step 5": {
+        "Code": "*BEAM SECTION, MATERIAL=M_EL, ELSET=ES_ALL, SECTION=RECT\n0.03, 0.015\n0.0, 0.0, 1.0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "MATERIAL",
+            "ELSET",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step specifies the beam section properties, including the dimensions of the rectangular section and the orientation vector, and associates it with the material M_EL and element set ES_ALL."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\n10, 1, 6\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "This step applies boundary conditions to the beam, fixing all degrees of freedom (1 to 6) at node 10."
+    },
+    "Step 7": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n5,6,1.e-3\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the first static analysis step, applying a concentrated load of 1.e-3 in the 6th degree of freedom at node 5, and requests the displacement results for all nodes."
+    },
+    "Step 8": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n30,6,-1.e-3\n*NODE PRINT,NSET=NS_ALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "This step defines the second static analysis step, applying a concentrated load of -1.e-3 in the 6th degree of freedom at node 30, and requests the displacement results for all nodes twice."
+    }
+}

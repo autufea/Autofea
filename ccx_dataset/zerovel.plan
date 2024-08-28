@@ -1,0 +1,60 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: beam.\n**   Test objective: velocity for OUTPUT=2D.\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "This step provides a brief description of the simulation setup, specifying that the structure is a beam and the test objective is to measure velocity for 2D output."
+    },
+    "Step 2": {
+        "Code": "*NODE\n1,0,0,0\n2,0.1,0,0\n",
+        "Keywords": [
+            "NODE"
+        ],
+        "Start": "*NODE",
+        "Description": "This step defines the nodes of the beam structure. Node 1 is located at coordinates (0,0,0) and Node 2 at (0.1,0,0)."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=B31,ELSET=Default\n1,2,1\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "This step defines the beam element connecting the nodes. It specifies that the element type is B31 and assigns it to the element set 'Default'."
+    },
+    "Step 4": {
+        "Code": "*MATERIAL,NAME=Material\n*ELASTIC,TYPE=ISOTROPIC\n10000000000,0\n*DENSITY\n1000\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "This step defines the material properties for the beam. The material is named 'Material' and has isotropic elastic properties with a Young's modulus of 10,000,000,000 and a Poisson's ratio of 0. The density of the material is set to 1000."
+    },
+    "Step 5": {
+        "Code": "*BEAM SECTION,ELSET=Default,MATERIAL=Material,SECTION=RECT\n0.01,0.01\n0,-1,0\n",
+        "Keywords": [
+            "BEAM SECTION",
+            "ELSET",
+            "MATERIAL",
+            "SECTION"
+        ],
+        "Start": "*BEAM SECTION",
+        "Description": "This step defines the beam section properties. The section is rectangular with dimensions 0.01 by 0.01, and it is assigned to the element set 'Default' using the material 'Material'. The orientation vector is specified as (0,-1,0)."
+    },
+    "Step 6": {
+        "Code": "*STEP\n*DYNAMIC\n0.01,0.1,0,0\n*CLOAD\n1,1,0.01\n*NODE FILE,GLOBAL=YES,OUTPUT=2D,FREQUENCY=10\nU,V\n*END STEP\n",
+        "Keywords": [
+            "DYNAMIC",
+            "CLOAD",
+            "NODE FILE",
+            "GLOBAL",
+            "OUTPUT",
+            "FREQUENCY"
+        ],
+        "Start": "*STEP",
+        "Description": "This step sets up the dynamic analysis. It specifies the time step and total time for the analysis, applies a concentrated load of 0.01 in the x-direction at Node 1, and requests output of displacement and velocity in 2D at a frequency of 10."
+    }
+}

@@ -1,0 +1,147 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: two cubes on top of each other.\n**   Test objective: gap conductance; heat transfer\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as two cubes on top of each other and sets the test objective to evaluate gap conductance and heat transfer."
+    },
+    "Step 2": {
+        "Code": "*NODE, NSET=Nall\n       1,  1.00000e+00,  1.00000e+00, -1.49012e-08 \n       2,  1.00000e+00,  0.00000e+00, -1.49012e-08 \n       3,  1.00000e+00,  0.00000e+00,  1.00000e+00 \n       4,  1.00000e+00,  1.00000e+00,  1.00000e+00 \n       5, -7.45058e-09,  1.00000e+00, -1.49012e-08 \n       6, -7.45058e-09,  0.00000e+00, -1.49012e-08 \n       7, -7.45058e-09,  0.00000e+00,  1.00000e+00 \n       8, -7.45058e-09,  1.00000e+00,  1.00000e+00 \n       9,  5.00000e-01,  6.41421e-01,  1.00000e+00 \n      10,  6.41421e-01,  5.00000e-01,  1.00000e+00 \n      11,  6.41421e-01,  5.00000e-01,  1.20000e+00 \n      12,  5.00000e-01,  6.41421e-01,  1.20000e+00 \n      13,  3.58579e-01,  5.00000e-01,  1.00000e+00 \n      14,  5.00000e-01,  3.58579e-01,  1.00000e+00 \n      15,  5.00000e-01,  3.58579e-01,  1.20000e+00 \n      16,  3.58579e-01,  5.00000e-01,  1.20000e+00 \n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Specifies the nodes in the model and assigns them to the node set 'Nall'."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT, TYPE=C3D8I, ELSET=Eall\n     1,     1,     2,     3,     4,     5,     6,     7,     8\n     2,     9,    10,    11,    12,    13,    14,    15,    16\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements of type C3D8I (8-node linear brick, incompatible modes) and assigns them to the element set 'Eall'."
+    },
+    "Step 4": {
+        "Code": "*NSET,NSET=Nfix1 \n1, \n2, \n5, \n6, \n*NSET,NSET=Nfix2 \n11, \n12, \n15, \n16, \n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates node sets 'Nfix1' and 'Nfix2' for boundary conditions, listing specific nodes in each set."
+    },
+    "Step 5": {
+        "Code": "*BOUNDARY\nNfix1,1,3\nNfix2,1,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the node sets 'Nfix1' and 'Nfix2', fixing all three translational degrees of freedom."
+    },
+    "Step 6": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n*EXPANSION\n60.E-6\n*CONDUCTIVITY\n1.E-2\n*SPECIFIC HEAT\n1.E+3\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY",
+            "EXPANSION",
+            "CONDUCTIVITY",
+            "SPECIFIC HEAT"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the material named 'EL', including elastic modulus, Poisson's ratio, density, thermal expansion coefficient, thermal conductivity, and specific heat."
+    },
+    "Step 7": {
+        "Code": "*SOLID SECTION,ELSET=Eall,MATERIAL=EL\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Assigns the material 'EL' to the element set 'Eall' using a solid section definition."
+    },
+    "Step 8": {
+        "Code": "*ELSET,ELSET=Emast\n1\n",
+        "Keywords": [
+            "ELSET"
+        ],
+        "Start": "*ELSET",
+        "Description": "Creates an element set 'Emast' containing element 1, which will be used as the master surface in the contact definition."
+    },
+    "Step 9": {
+        "Code": "*NSET,NSET=Nslav\n9,10,13,14\n",
+        "Keywords": [
+            "NSET"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'Nslav' containing nodes 9, 10, 13, and 14, which will be used as the slave surface in the contact definition."
+    },
+    "Step 10": {
+        "Code": "*SURFACE,NAME=Smast\nEmast,S5\n*SURFACE,NAME=Sslav,TYPE=NODE\nNslav\n",
+        "Keywords": [
+            "SURFACE",
+            "NAME"
+        ],
+        "Start": "*SURFACE",
+        "Description": "Defines the master surface 'Smast' using the element set 'Emast' and the slave surface 'Sslav' using the node set 'Nslav'."
+    },
+    "Step 11": {
+        "Code": "*CONTACT PAIR,INTERACTION=SI1,TYPE=NODE TO SURFACE\nSslav,Smast\n",
+        "Keywords": [
+            "CONTACT PAIR",
+            "INTERACTION"
+        ],
+        "Start": "*CONTACT PAIR",
+        "Description": "Defines a contact pair 'SI1' with a node-to-surface interaction between 'Sslav' and 'Smast'."
+    },
+    "Step 12": {
+        "Code": "*SURFACE INTERACTION,NAME=SI1\n",
+        "Keywords": [
+            "SURFACE INTERACTION",
+            "NAME"
+        ],
+        "Start": "*SURFACE INTERACTION",
+        "Description": "Defines the surface interaction properties for the contact pair 'SI1'."
+    },
+    "Step 13": {
+        "Code": "*SURFACE BEHAVIOR,PRESSURE-OVERCLOSURE=LINEAR\n1.E7,3.\n",
+        "Keywords": [
+            "SURFACE BEHAVIOR",
+            "PRESSURE-OVERCLOSURE"
+        ],
+        "Start": "*SURFACE BEHAVIOR",
+        "Description": "Specifies the surface behavior for the contact interaction, using a linear pressure-overclosure relationship."
+    },
+    "Step 14": {
+        "Code": "*GAP CONDUCTANCE\n1.\n",
+        "Keywords": [
+            "GAP CONDUCTANCE"
+        ],
+        "Start": "*GAP CONDUCTANCE",
+        "Description": "Defines the gap conductance value for the contact interaction."
+    },
+    "Step 15": {
+        "Code": "*INITIAL CONDITIONS,TYPE=TEMPERATURE\nNall,0.\n",
+        "Keywords": [
+            "INITIAL CONDITIONS"
+        ],
+        "Start": "*INITIAL CONDITIONS",
+        "Description": "Sets the initial temperature conditions for all nodes in the node set 'Nall' to 0 degrees."
+    },
+    "Step 16": {
+        "Code": "*STEP\n*HEAT TRANSFER\n.0001,.006\n*CONTROLS,PARAMETERS=TIME INCREMENTATION\n100,100,9,100,10,4,,5\n.25,.5,.75,.85,,,1.5,,\n*BOUNDARY\nNfix1,11,11,0.\nNfix2,11,11,1000.\n*NODE PRINT,NSET=Nall\nNT\n*END STEP\n",
+        "Keywords": [
+            "HEAT TRANSFER",
+            "CONTROLS",
+            "PARAMETERS",
+            "BOUNDARY",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a heat transfer analysis step with specific time increment controls and applies temperature boundary conditions to 'Nfix1' and 'Nfix2'. Also, requests nodal temperature output for all nodes in 'Nall'."
+    }
+}

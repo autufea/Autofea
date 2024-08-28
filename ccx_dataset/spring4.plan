@@ -1,0 +1,102 @@
+{
+    "Step 1": {
+        "Code": "**\n**   Structure: spring + mass.\n**   Test objective: static and frequency calculation of\n**                   a spring - plane strain element\n**                   combination\n**\n",
+        "Keywords": [],
+        "Start": "*HEADING",
+        "Description": "Defines the structure as a combination of a spring and a mass. The objective is to perform static and frequency calculations on this combination."
+    },
+    "Step 2": {
+        "Code": "*NODE,NSET=NALL\n1,0.,0.,0.\n2,1.,0.,0.\n3,1.,-.1,0.\n4,1.2,-.1,0.\n5,1.2,.1,0.\n6,1.,.1,0.\n7,1.1,-.1,0.\n8,1.2,0.,0.\n9,1.1,.1,0.\n",
+        "Keywords": [
+            "NODE",
+            "NSET"
+        ],
+        "Start": "*NODE",
+        "Description": "Defines the nodes in the model and assigns them to the node set 'NALL'. Each node is specified with its coordinates."
+    },
+    "Step 3": {
+        "Code": "*ELEMENT,TYPE=SPRINGA,ELSET=ESPRING\n1,1,2\n*ELEMENT,TYPE=CPE8,ELSET=EMASSA\n2,3,4,5,6,7,8,9,2\n",
+        "Keywords": [
+            "ELEMENT",
+            "ELSET"
+        ],
+        "Start": "*ELEMENT",
+        "Description": "Defines the elements in the model. A spring element is defined between nodes 1 and 2, and a plane strain element is defined with nodes 3 to 9."
+    },
+    "Step 4": {
+        "Code": "*BOUNDARY\n1,1,3\n2,2,3\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies boundary conditions to the nodes. Node 1 is fixed in all directions, and node 2 is fixed in the y and z directions."
+    },
+    "Step 5": {
+        "Code": "*NSET,NSET=NMASSA,GENERATE\n3,9\n",
+        "Keywords": [
+            "NSET",
+            "GENERATE"
+        ],
+        "Start": "*NSET",
+        "Description": "Creates a node set 'NMASSA' that includes nodes 3 to 9."
+    },
+    "Step 6": {
+        "Code": "*BOUNDARY\nNMASSA,2,2\n",
+        "Keywords": [
+            "BOUNDARY"
+        ],
+        "Start": "*BOUNDARY",
+        "Description": "Applies a boundary condition to the node set 'NMASSA', fixing the nodes in the y direction."
+    },
+    "Step 7": {
+        "Code": "*SPRING,ELSET=ESPRING\n\n10.\n",
+        "Keywords": [
+            "SPRING",
+            "ELSET"
+        ],
+        "Start": "*SPRING",
+        "Description": "Defines the spring element properties, assigning a stiffness value of 10 to the spring element set 'ESPRING'."
+    },
+    "Step 8": {
+        "Code": "*MATERIAL,NAME=EL\n*ELASTIC\n210000.,.3\n*DENSITY\n7.8E-9\n",
+        "Keywords": [
+            "MATERIAL",
+            "NAME",
+            "ELASTIC",
+            "DENSITY"
+        ],
+        "Start": "*MATERIAL",
+        "Description": "Defines the material properties for the elements. The material 'EL' is given an elastic modulus of 210000, a Poisson's ratio of 0.3, and a density of 7.8E-9."
+    },
+    "Step 9": {
+        "Code": "*SOLID SECTION,ELSET=EMASSA,MATERIAL=EL\n.2\n",
+        "Keywords": [
+            "SOLID SECTION",
+            "ELSET",
+            "MATERIAL"
+        ],
+        "Start": "*SOLID SECTION",
+        "Description": "Defines the solid section properties for the element set 'EMASSA', assigning the material 'EL' and a thickness of 0.2."
+    },
+    "Step 10": {
+        "Code": "*STEP\n*STATIC\n*CLOAD\n4,1,0.333\n5,1,0.333\n8,1,1.333\n*NODE PRINT,NSET=NALL\nU\n*END STEP\n",
+        "Keywords": [
+            "STATIC",
+            "CLOAD",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a static analysis step. Loads are applied to nodes 4, 5, and 8 in the x direction. The displacements of all nodes are printed."
+    },
+    "Step 11": {
+        "Code": "*STEP\n*FREQUENCY\n1\n*NODE PRINT,NSET=NALL\n*END STEP\n",
+        "Keywords": [
+            "FREQUENCY",
+            "NODE PRINT",
+            "NSET"
+        ],
+        "Start": "*STEP",
+        "Description": "Defines a frequency analysis step to calculate the first natural frequency. The results are printed for all nodes."
+    }
+}
